@@ -1,0 +1,19 @@
+.login-form{
+    margin: 0 auto;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 50%;
+    left: 40%;
+    min-width: 100%;
+    
+    h2{
+        float: block;
+    }
+    
+    &__login-inputs{
+        float: left;
+        padding: 1rem;
+    }
+
+}
