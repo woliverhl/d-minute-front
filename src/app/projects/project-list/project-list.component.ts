@@ -10,7 +10,7 @@ import { UsersService } from "app/user/service/users.service";
 })
 export class ProjectListComponent implements OnInit {
 
-  private listArray:Object; 
+  public listArray:Object; 
 
   constructor(private projectsService: ProjectsService, private dialog: MatDialog) { }
 

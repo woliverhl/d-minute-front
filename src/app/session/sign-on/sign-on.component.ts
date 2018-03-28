@@ -13,11 +13,11 @@ import { Router } from "@angular/router";
 export class SignOnComponent implements OnInit {
 
 
-  private loginForm : FormGroup;
+  public loginForm : FormGroup;
   private token:  string;
 
 
-  constructor(private SessionService: SessionService, private User: User, private fb: FormBuilder, private route: Router) { 
+  constructor(private SessionService: SessionService, public User: User, private fb: FormBuilder, private route: Router) { 
     this.createLoginForm();
     this.User.userName = "ohidalgoleal@gmail.com";
     this.User.userPass = "dinero123";
