@@ -1,21 +1,23 @@
-<div class="row">
-  <div class="container">
-    <div class="col-md-12">
-      <form action="">
+<div class="container">
+  <div class="row">
+      <form action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="login-form">
-          <div class="container">
-            <h2>Bienvenido</h2>
-          </div>
-          <div class="login-form__login-inputs">
-            <mat-form-field>
-              <input matInput placeholder="Email">
+          <div class="row login-form__login-inputs">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input matInput placeholder="Correo Electronico" type="email" [(ngModel)]="User.userName" formControlName="userName">
               </mat-form-field>
-            <div class="container">
-              <button mat-button>Entrar</button>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="">
+                <input matInput placeholder="Contraseña" type="password" [(ngModel)]="User.userPass" formControlName="userPass">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <button mat-button type="submit" [disabled]="!loginForm.valid">Entrar</button>
             </div>
           </div>
         </div>
       </form>
-    </div>
   </div>
 </div>

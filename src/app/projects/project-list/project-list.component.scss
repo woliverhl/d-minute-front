@@ -1,0 +1,30 @@
+$border-bottom: 1px solid gray ;
+
+mat-toolbar{
+    background-color:#21B3D8;
+    color:#FFFFFF;
+}
+
+mat-card{
+    margin-top: 2em;
+}
+
+mat-card-title{
+    font-size: 17px!important;
+}
+
+mat-card-header{
+    border-bottom: $border-bottom;
+}
+
+mat-nav-list :any-link{
+    border-bottom: $border-bottom;
+}
+
+button{
+    margin-left: 70%;
+    height: 10%;
+    width: 10%;
+    color: white;
+    background-color: #21B3D8;
+}

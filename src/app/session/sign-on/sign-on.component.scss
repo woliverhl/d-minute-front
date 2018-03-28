@@ -1,19 +1,36 @@
 .login-form{
     margin: 0 auto;
     position: fixed;
-    display: flex;
     align-items: center;
-    top: 50%;
-    left: 40%;
-    min-width: 100%;
-    
-    h2{
-        float: block;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    top: 15%;
+    left: 30%;
+    padding: 5%;
+    display: inline-block;
+    width: 40%;
+    &__welcome-message{
+        text-align: center;
+        margin-top: 10%;
     }
-    
     &__login-inputs{
+        margin-top: 35%;
+        width: 100%;
         float: left;
         padding: 1rem;
+    }
+    mat-form-field{
+        width: 100%;
+    }
+    button{
+        margin-left: 30%;
+        width: 30%;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+        border-radius: 5px;
+        color: black
+    }
+    button:disabled{
+        color: gray;
     }
 
 }
