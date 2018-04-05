@@ -5,15 +5,15 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/do';
 import { HttpObserve } from '@angular/common/http/src/client';
 import { HttpResponse } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private auth: SessionService) { }
+  constructor(private auth: SessionService, private route: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-    console.log('this is working');
   if (!request.url.match('/token/generate-token')){
       request = request.clone({
         setHeaders: {
@@ -29,11 +29,11 @@ export class AuthInterceptorService implements HttpInterceptor {
       }
     }, (err: any) => {
       //You fuck up
-      if(err instanceof HttpResponse){
         if(err['status'] === 401){
-          console.log('Unauthorized!!');
+          console.log('You are banished from the app');
+          this.route.navigate(['sign-on'])
         }
-      }
+      
     })
   }
 

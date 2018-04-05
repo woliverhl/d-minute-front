@@ -6,7 +6,6 @@ import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-on',
-  providers: [SessionService,User],
   templateUrl: './sign-on.component.html',
   styleUrls: ['./sign-on.component.scss']
 })

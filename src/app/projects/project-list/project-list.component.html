@@ -8,14 +8,14 @@
       <mat-card>
         <mat-card-header>
           <div mat-card-avatar></div>
-          <mat-card-title>Proyectos Activos</mat-card-title>
-          <mat-card-subtitle>Proyectos Activos</mat-card-subtitle>
-          <button mat-button (click)="openProyectDialog()">add</button>
+          <mat-card-title>Projectos Activos</mat-card-title>
+          <mat-card-subtitle>Projectos Activos</mat-card-subtitle>
+          <button mat-raised-button (click)="openProyectDialog()">add</button>
         </mat-card-header>
         <mat-card-content>
 
           <mat-nav-list dense>
-            <a mat-list-item href="..." *ngFor = "let project of listArray"> {{project.nombre}} </a>
+            <a mat-list-item href="project/:id" *ngFor = "let project of listArray"> {{project.nombre}} </a>
           </mat-nav-list>
 
         </mat-card-content>
