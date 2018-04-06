@@ -1,7 +1,4 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-  </mat-toolbar-row>
-</mat-toolbar>
+<app-session></app-session>
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
@@ -15,7 +12,7 @@
         <mat-card-content>
 
           <mat-nav-list dense>
-            <a mat-list-item href="project/:id" *ngFor = "let project of listArray"> {{project.nombre}} </a>
+            <a mat-list-item [routerLink]="['/project', project.proyectoId]" *ngFor = "let project of listArray"> {{project.nombre}} </a>
           </mat-nav-list>
 
         </mat-card-content>

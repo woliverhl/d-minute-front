@@ -14,12 +14,6 @@ export class ProjectsService {
   constructor(private sessionService: SessionService, private http: HttpClient,private restPath:restPath) {}
 
   listProjects(): Observable<Object>{
-    // this.httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${this.sessionService.getToken()}`
-    //   })
-    // };
     return this.http.get(`${this.restPath.APP}${this.restPath.listProyects}`)
   }
 

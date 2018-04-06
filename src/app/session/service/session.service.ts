@@ -22,16 +22,21 @@ export class SessionService {
     throw Observable.throw(message);
   }
 
-  setToken(token: string){
+  setToken(token: string):void{
     localStorage['token'] = token;
     this.token = localStorage['token'];
+  }
+
+  resetToken():void{
+    delete localStorage['token'];
+    this.token = undefined;
   }
 
   getToken():string{
     return this.token;
   }
 
-  isAuthenticate(){
+  isAuthenticate():boolean{
     return this.getToken() != undefined;
   }
 

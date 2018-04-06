@@ -18,11 +18,15 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectsService: ProjectsService, private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.listAllProjects();
+  }
+
+  public listAllProjects(){
     this.projectsService.listProjects().subscribe(
       (response) => {
         this.listArray = response;
-      },(err)=>{
-        //Error
+      }, (err) => {
+        console.log(err);
       });
   }
 
@@ -32,10 +36,12 @@ export class ProjectListComponent implements OnInit {
       height: '60%',
       data: {}
     });
+
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-  onPostProyect(isPushed: boolean = false) {
-    isPushed ? this.ngOnInit() : undefined;
+  reloadList(isPosted:boolean):void{
+    isPosted ? this.listAllProjects(): undefined;
   }
 
 }
@@ -51,7 +57,7 @@ export class AddProjectDialog implements OnInit {
   public listOfUsers: any;
   public addProjectForm: FormGroup;
   public selectedMember: Object;
-  @Output() onPostProyect = new EventEmitter<boolean>();
+  public saved: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectDialog>, private UsersService: UsersService, 
@@ -59,7 +65,6 @@ export class AddProjectDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,) { 
       this.createProjectForm();
       this.Project.usuariosNuevoProyecto = [];
-      console.log(this.Project.usuariosNuevoProyecto.length)
     }
 
 
@@ -106,16 +111,6 @@ export class AddProjectDialog implements OnInit {
     index > -1 ? this.Project.usuariosNuevoProyecto.splice(index, 1) : console.log('Member Not Found');
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('does it ever get trigger?');
-    for (let propName in changes) {
-      let chng = changes[propName];
-      let cur = JSON.stringify(chng.currentValue);
-      let prev = JSON.stringify(chng.previousValue);
-      console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
-    }
-  }
-
   postProject(){
     if(this.addProjectForm.valid){
       let postObject = Object.assign({}, this.Project);
@@ -123,8 +118,8 @@ export class AddProjectDialog implements OnInit {
         return {username: cv['username']};
       });
       this.projectsService.addProject(this.Project).subscribe((response) => {
-        this.onPostProyect.emit(true);
         this.onNoClick();
+        this.saved.emit(true);
         console.log(response);
       }, (err) => {
         console.log(err);

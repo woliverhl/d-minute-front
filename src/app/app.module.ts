@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ViewContainerRef } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatIconRegistry } from "@angular/material";
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -19,9 +18,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 //Components
 import { AppComponent } from 'app/app.component';
-import { SessionComponent } from 'app/session/session.component';
+import { SessionComponent } from 'app/session/toolbar/session.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent } from 'app/projects/project-list/project-list.component';
@@ -37,12 +38,14 @@ import { User } from "app/models/user";
 import { SessionService } from "app/session/service/session.service";
 import { ProjectsService } from "app/projects/service/projects-service.service";
 import { UsersService } from "app/user/service/users.service";
+import { SpinnerService } from "app/share/spinner/spinner.service";
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
 
 //Guards
 import { authGuard } from "app/share/guards/authenticate-guard";
+import { SpinnerComponent } from './share/spinner/spinner.component';
 
 const appRoutes: Routes = [
   { path: 'sign-in', component: SignInComponent },
@@ -54,7 +57,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  entryComponents: [AddProjectDialog],
+  entryComponents: [AddProjectDialog, SpinnerComponent],
   declarations: [
     AppComponent,
     SessionComponent,
@@ -62,16 +65,17 @@ const appRoutes: Routes = [
     SignInComponent,
     ProjectListComponent,
     AddProjectDialog,
-    ProjectByIdComponent
+    ProjectByIdComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false }),
     MatInputModule,
     MatButtonModule,
-    BrowserAnimationsModule,
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
@@ -96,7 +100,8 @@ const appRoutes: Routes = [
           User,
           ProjectsService,
           UsersService,
-          authGuard
+          authGuard,
+          SpinnerService
       ],
   bootstrap: [AppComponent]
 })
