@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const history = require('connect-history-api-fallback');
-const cors = require('cors')
 
 const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
