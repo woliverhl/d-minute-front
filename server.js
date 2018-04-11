@@ -1,14 +1,27 @@
 //Install express server
-var express = require('express');
-var path = require('path');
-var cors = require('cors')
+const express = require('express'),
+    app = express(),
+    cors = require('cors');
 
-var app = express();
-app.use(cors());
-app.set('views', path.join(__dirname, 'src'));
-app.use(express.static(__dirname + '/dist'));
+const configUndefined = function (req, res, next) {
+    if (!req.headers.origin) {
+        express.static(__dirname + '/dist')
+    } else {
+        next();
+    }
+}
 
-var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-    });
+const configCors = {
+    // origin handler
+    origin: function (origin, cb) {
+        cb(null, true);
+        optionsSuccessStatus: 200
+    }
+}
+
+// Serve only the static files form the dist directory
+app.use(configUndefined, cors(configCors));
+
+app.listen(process.env.PORT || 8080, (port) => {
+    console.log(`we are running on port ${process.env.PORT}`);
+});
