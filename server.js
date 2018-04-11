@@ -1,16 +1,25 @@
-//Install express server
-const express = require('express'),
-     path = require('path'),
-     cors = require('cors');
-
+const express = require('express');
 const app = express();
+const history = require('connect-history-api-fallback');
 
-app.options('*', cors());
-app.use(cors());
-app.set('views', path.join(__dirname, 'src'));
+const allowCrossDomain = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  // intercept OPTIONS method
+  if (req.method === 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
+};
+app.use(allowCrossDomain);
+app.use(history());
+
 app.use(express.static(__dirname + '/dist'));
 
-var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-    });
+app.set('port', (process.env.PORT || 8080));
+
+app.listen(app.get('port'), () => {
+  console.log(`Server launched on ${process.env.port || 8080}`);
+});
