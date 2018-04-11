@@ -10,26 +10,6 @@ conf = {
     // else use hard coded value for port 8080
     port: process.env.PORT || process.argv[2] || 8080,
  
-    // origin undefined handler
-    // see https://github.com/expressjs/cors/issues/71
-    originUndefined: function (req, res, next) {
- 
-        if (!req.headers.origin) {
- 
-            res.json({
- 
-                mess: 'Hi you are visiting the service locally. If this was a CORS the origin header should not be undefined'
- 
-            });
- 
-        } else {
- 
-            next();
- 
-        }
- 
-    },
- 
     // Cross Origin Resource Sharing Options
     cors: {
  
