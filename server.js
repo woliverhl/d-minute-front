@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const history = require('connect-history-api-fallback');
+const cors = require('cors')
 
 const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -15,7 +16,8 @@ const allowCrossDomain = (req, res, next) => {
 };
 app.use(allowCrossDomain);
 app.use(history());
-
+app.options('*', cors());
+app.use(cors());
 app.use(express.static(__dirname + '/dist'));
 
 app.set('port', (process.env.PORT || 8080));
