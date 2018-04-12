@@ -16,16 +16,25 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   }
 
+  goodByeDude():void{
+    this.auth.resetToken();
+    this.route.navigate(['/sign-on'])
+  }
+
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-    this.spinner.show();
-    console.log('are you ffing kidding me');
-  if (!request.url.match('/token/generate-token')){
+    if (!request.url.match('/token/generate-token')){
+      this.auth.getToken() === undefined || this.auth.getToken() === "undefined"  ? this.goodByeDude() : undefined;
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.auth.getToken()}`
         }
     });
-  }
+    if (request instanceof HttpRequest) {
+      //console.log(request);
+      this.spinner.show();
+    }
+      
+    }
 
     return next.handle(request).do((event: HttpEvent<any>) => {
       this.spinner.hide();
@@ -37,8 +46,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       //You fuck up
         if(err['status'] === 401){
           console.log('You are banished from the app');
-          this.auth.resetToken();
-          this.route.navigate(['/sign-on'])
+          this.goodByeDude();
         }
       
     })

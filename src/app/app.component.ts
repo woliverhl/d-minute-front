@@ -8,13 +8,14 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
 
   public constructor(
     private domSanitizer: DomSanitizer,
     public matIconRegistry: MatIconRegistry) {
     //add custom material icons
-    matIconRegistry.addSvgIcon('delete', domSanitizer.bypassSecurityTrustResourceUrl('assets/img/delete-empty.svg'));
+    matIconRegistry.addSvgIcon('delete', domSanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/delete-empty.svg'));
+    matIconRegistry.addSvgIcon('email', domSanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/email.svg'));
+    matIconRegistry.addSvgIcon('password', domSanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/lock-question.svg'));
   }
 }
 
