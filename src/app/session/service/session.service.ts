@@ -15,7 +15,7 @@ export class SessionService {
 
   logIn(user: string, pass: string):Observable<Object>{
     let param = { 'username': user, 'password': pass}
-    return this.HttpClient.post(`${this.restPath.APP}/${this.restPath.logIn}`, param);
+    return this.HttpClient.post(`${this.restPath.APP}${this.restPath.logIn}`, param);
   }
 
   throwError(message: string){
