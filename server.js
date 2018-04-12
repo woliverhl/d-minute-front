@@ -1,59 +1,60 @@
-let express = require('express'),
-cors = require('cors'),
-os = require('os'),
-app = express(),
- 
-// hard coded configuration object
-conf = {
-    // look for PORT environment variable,
-    // else look for CLI argument,
-    // else use hard coded value for port 8080
-    port: process.env.PORT || process.argv[2] || 8080,
- 
-    // Cross Origin Resource Sharing Options
-    cors: {
- 
-        // origin handler
-        origin: function (origin, cb) {
- 
-            // setup a white list
-            let wl = ['https://dminutems.herokuapp.com'];
- 
-            if (wl.indexOf(origin) != -1) {
- 
-                cb(null, true);
- 
-            } else {
- 
-                cb(new Error('invalid origin: ' + origin), false);
- 
-            }
- 
-        },
- 
-        optionsSuccessStatus: 200
- 
-    }
- 
+'use strict';
+
+var express = require('express'),
+    cors = require('cors'),
+    port = process.env.PORT || 3000,
+    app = express();
+
+/* -------------------------------------------------------------------------- */
+
+app.get('/no-cors', function(req, res){
+  res.json({
+    text: 'You should not see this via a CORS request.'
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+
+app.get('/simple-cors', cors(), function(req, res){
+  res.json({
+    text: 'Simple CORS requests are working. [GET]'
+  });
+});
+app.head('/simple-cors', cors(), function(req, res){
+  res.send(204);
+});
+app.post('/simple-cors', cors(), function(req, res){
+  res.json({
+    text: 'Simple CORS requests are working. [POST]'
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+
+app.options('/complex-cors', cors());
+app.del('/complex-cors', cors(), function(req, res){
+  res.json({
+    text: 'Complex CORS requests are working. [DELETE]'
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+
+var issue2options = {
+  origin: true,
+  methods: ['POST'],
+  credentials: true,
+  maxAge: 3600
 };
- 
-// use origin undefined handler, then cors for all paths
-app.use(conf.originUndefined, cors(conf.cors));
- 
-// get at root
-app.get('/', function (req, res, next) {
- 
-    res.json({
-        mess: 'hello it looks like you are on the whitelist',
-        origin: req.headers.origin,
-        os_hostname: os.hostname(),
-        os_cpus: os.cpus()
-    });
- 
+app.options('/issue-2', cors(issue2options));
+app.post('/issue-2', cors(issue2options), function(req, res){
+  res.json({
+    text: 'Issue #2 is fixed.'
+  });
 });
- 
-app.listen(conf.port, function () {
- 
-    console.log('CORS-enabled JSON service is live on port: ' + conf.port);
- 
-});
+
+if(!module.parent){
+  app.listen(port, function(){
+    console.log('Express server listening on port ' + port + '.');
+  });
+}
