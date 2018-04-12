@@ -1,60 +1,23 @@
-'use strict';
+const express = require('express');
+const app = express();
+const cors = require('cors')
+const history = require('connect-history-api-fallback');
 
-var express = require('express'),
-    cors = require('cors'),
-    port = process.env.PORT || 3000,
-    app = express();
-
-/* -------------------------------------------------------------------------- */
-
-app.get('/no-cors', function(req, res){
-  res.json({
-    text: 'You should not see this via a CORS request.'
-  });
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
+    next();
 });
 
-/* -------------------------------------------------------------------------- */
+app.use(allowCrossDomain);
+app.use(history());
+app.options('*', cors());
+app.use(cors());
+app.use(express.static(__dirname + '/dist'));
 
-app.get('/simple-cors', cors(), function(req, res){
-  res.json({
-    text: 'Simple CORS requests are working. [GET]'
-  });
+app.set('port', (process.env.PORT || 8080));
+
+app.listen(app.get('port'), () => {
+  console.log(`Server launched on ${process.env.port || 8080}`);
 });
-app.head('/simple-cors', cors(), function(req, res){
-  res.send(204);
-});
-app.post('/simple-cors', cors(), function(req, res){
-  res.json({
-    text: 'Simple CORS requests are working. [POST]'
-  });
-});
-
-/* -------------------------------------------------------------------------- */
-
-app.options('/complex-cors', cors());
-app.del('/complex-cors', cors(), function(req, res){
-  res.json({
-    text: 'Complex CORS requests are working. [DELETE]'
-  });
-});
-
-/* -------------------------------------------------------------------------- */
-
-var issue2options = {
-  origin: true,
-  methods: ['POST'],
-  credentials: true,
-  maxAge: 3600
-};
-app.options('/issue-2', cors(issue2options));
-app.post('/issue-2', cors(issue2options), function(req, res){
-  res.json({
-    text: 'Issue #2 is fixed.'
-  });
-});
-
-if(!module.parent){
-  app.listen(port, function(){
-    console.log('Express server listening on port ' + port + '.');
-  });
-}
