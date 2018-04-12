@@ -71,10 +71,9 @@ export class AddProjectDialog implements OnInit {
   ngOnInit() {
     this.UsersService.getListUsers().subscribe(
       (response:Array<Object>) =>{
-        response.map((cv) => {
-          return Object.assign({fullName: `${cv['nombre']} ${cv['apellido']}`}, cv);
+        this.listOfUsers = response.map((cv) => {
+          return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}` }, cv);
         });
-        this.listOfUsers = response;
       },
       (err) => {
 

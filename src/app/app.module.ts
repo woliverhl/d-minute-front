@@ -18,6 +18,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+//CDK
+import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
@@ -83,16 +88,19 @@ const appRoutes: Routes = [
     MatListModule,
     MatDialogModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    OverlayModule,
+    PortalModule
   ],
   providers: [
         {
           provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: { float: 'always' } 
-        },
-        {
+        },{ 
+          provide: OverlayContainer, useClass: FullscreenOverlayContainer 
+        },{
           provide: HTTP_INTERCEPTORS,
           useClass: AuthInterceptorService,
-           multi: true
+          multi: true
         },
           SessionService,
           restPath,

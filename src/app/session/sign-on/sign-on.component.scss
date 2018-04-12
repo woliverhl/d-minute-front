@@ -7,10 +7,10 @@
     top: 18em;
     left: 30%;
     background-color: #FFFFFF;
-    padding: 5%;
     display: inline-block;
     width: 40%;
     z-index: 1000;
+    padding: 2em 1em 2em;
     &__welcome-message{
         text-align: center;
         margin-top: 10%;
@@ -21,10 +21,13 @@
         padding: 1rem;
     }
     mat-form-field{
-        width: 100%;
+        width: 80%;
+    }
+    mat-icon{
+        margin: 1em;
     }
     button{
-        margin-left: 30%;
+        margin-left: 33%;
         width: 30%;
         box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
         border-radius: 5px;

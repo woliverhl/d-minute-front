@@ -3,9 +3,7 @@
         <form action="" [formGroup]="addProjectForm" (ngSubmit)="postProject()">
             <div class="col-md-12">
                 <h4>Agregar Proyecto</h4>
-                <button mat-icon-button type="button" class="closeModalButton" (click)="onNoClick()">
-                    <mat-icon aria-label="close">close</mat-icon>
-                </button>
+                    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
                 <mat-form-field>
                     <input matInput placeholder="Nombre del Proyecto" [(ngModel)]="Project.nombre" formControlName="name"  type="text">
                 </mat-form-field>
@@ -29,7 +27,7 @@
                         <mat-form-field>
                             <mat-select placeholder="Miembros del Equipo" [(ngModel)]="selectedMember" formControlName="selectedMember">
                                 <mat-option *ngFor="let user of listOfUsers" [value]="user">
-                                    {{ user.nombre }}
+                                    {{ user.fullName }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
