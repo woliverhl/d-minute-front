@@ -1,23 +1,27 @@
-const express = require('express');
-const app = express();
-const cors = require('cors')
-const history = require('connect-history-api-fallback');
+//Install express server
+const express = require('express'),
+    app = express(),
+    cors = require('cors');
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
-    next();
-});
+const configUndefined = function (req, res, next) {
+    if (!req.headers.origin) {
+        express.static(__dirname + '/dist')
+    } else {
+        next();
+    }
+}
 
-app.use(allowCrossDomain);
-app.use(history());
-app.options('*', cors());
-app.use(cors());
-app.use(express.static(__dirname + '/dist'));
+const configCors = {
+    // origin handler
+    origin: function (origin, cb) {
+        cb(null, true);
+        optionsSuccessStatus: 200
+    }
+}
 
-app.set('port', (process.env.PORT || 8080));
+// Serve only the static files form the dist directory
+app.use(configUndefined, cors(configCors));
 
-app.listen(app.get('port'), () => {
-  console.log(`Server launched on ${process.env.port || 8080}`);
+app.listen(process.env.PORT || 8080, (port) => {
+    console.log(`we are running on port ${process.env.PORT}`);
 });
