@@ -6,10 +6,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'src'));
 app.use(express.static(__dirname + '/dist'));
 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin: *');
-  res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://dminutems.herokuapp.com');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 
