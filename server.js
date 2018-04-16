@@ -1,27 +1,32 @@
-//Install express server
-const express = require('express'),
-    app = express(),
-    cors = require('cors');
+var express = require('express');
 
-const configUndefined = function (req, res, next) {
-    if (!req.headers.origin) {
-        express.static(__dirname + '/dist')
-    } else {
-        next();
-    }
-}
+var app = express();
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-const configCors = {
-    // origin handler
-    origin: function (origin, cb) {
-        cb(null, true);
-        optionsSuccessStatus: 200
-    }
-}
+app.get('/', function (req, res) {
+  var data = {
+    "bestAnimals": [
+      "wombat",
+      "corgi",
+      "puffer fish",
+      "owl",
+      "crow"
+    ]
+  };
 
-// Serve only the static files form the dist directory
-app.use(configUndefined, cors(configCors));
+  res.json(data);
+});
 
-app.listen(process.env.PORT || 8080, (port) => {
-    console.log(`we are running on port ${process.env.PORT}`);
+
+var server = app.listen(3000, function () {
+
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+
 });
