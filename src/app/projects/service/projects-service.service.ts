@@ -21,4 +21,8 @@ export class ProjectsService {
     return this.http.post(`${this.restPath.APP}${this.restPath.addProyect}`,project);
   }
 
+  getProjectById(projectId: String){
+    return this.http.get(`${this.restPath.APP}${this.restPath.projectById}${projectId}`);
+  }
+
 }

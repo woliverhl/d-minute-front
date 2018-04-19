@@ -22,25 +22,23 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-    if (!request.url.match('/token/generate-token')){
+    if (!request.url.match('/token/generate-token') && request['responseType'] === 'json'){
       this.auth.getToken() === undefined || this.auth.getToken() === "undefined"  ? this.goodByeDude() : undefined;
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.auth.getToken()}`
         }
     });
-    if (request instanceof HttpRequest) {
-      //console.log(request);
-      this.spinner.show();
     }
-      
+
+    if (request instanceof HttpRequest && request['responseType'] === 'json') {
+      this.spinner.show();
     }
 
     return next.handle(request).do((event: HttpEvent<any>) => {
-      this.spinner.hide();
       //Everything is cool
       if(event instanceof HttpResponse){
-
+        this.spinner.hide();
       }
     }, (err: any) => {
       //You fuck up

@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 
 //CDK
 import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
@@ -32,7 +33,7 @@ import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent } from 'app/projects/project-list/project-list.component';
 import { AddProjectDialog } from 'app/projects/project-list/project-list.component';
-import { ProjectByIdComponent } from './projects/project-by-id/project-by-id.component';
+import { ProjectDetailsComponent } from 'app/projects/project-details/project-details.component';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -52,12 +53,13 @@ import { AuthInterceptorService } from "app/interceptors/auth-interceptor.servic
 import { authGuard } from "app/share/guards/authenticate-guard";
 import { SpinnerComponent } from './share/spinner/spinner.component';
 
+
 const appRoutes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-on', component: SignOnComponent },
   { path: '', redirectTo: '/sign-on', pathMatch: 'full' },
   { path: 'project-list', component: ProjectListComponent, canActivate: [authGuard] },
-  { path: 'project/:id', component: ProjectByIdComponent, canActivate: [authGuard] }
+  { path: 'project/:id', component: ProjectDetailsComponent, canActivate: [authGuard] }
 ];
 
 
@@ -70,8 +72,8 @@ const appRoutes: Routes = [
     SignInComponent,
     ProjectListComponent,
     AddProjectDialog,
-    ProjectByIdComponent,
     SpinnerComponent,
+    ProjectDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatProgressSpinnerModule,
     OverlayModule,
-    PortalModule
+    PortalModule,
+    MatTabsModule
   ],
   providers: [
         {

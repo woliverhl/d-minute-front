@@ -1,0 +1,43 @@
+.details-container{
+    display: block;
+    margin: 1em auto;
+    border-radius: 5px;
+    width: 80%;
+    h2{
+        text-align: center;
+    }
+    .addMeetingButton{
+        background-color:#1EAAF1;
+        color: #FFFFFF;
+        display: block;
+        margin: 1em auto;
+    }
+    &-mettings{
+        width: 100%;
+        .meeting-list{
+            border: 1px solid rgba(0,0,0,.12);
+            border-radius: 5px;
+            .meeting-item{
+                padding: 10px;
+                white-space: nowrap;
+                border-bottom: 1px solid rgba(0,0,0,.12);
+            }
+        }
+        .meeting-menu{
+            float: left;
+            margin: 1em 1em 1em;
+        }
+        .meeting-detail{
+            font-family: Roboto, sanserif;
+            float: left;
+            width: 69%;
+            padding: 1em;
+            border-left: 1px solid rgba(0,0,0,.12);
+            &-options{
+                position: relative;
+                float: right;
+                left: 20%;
+            }
+        }
+    }
+}
