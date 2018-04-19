@@ -41,6 +41,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         this.spinner.hide();
       }
     }, (err: any) => {
+        this.spinner.hide();
       //You fuck up
         if(err['status'] === 401){
           console.log('You are banished from the app');
