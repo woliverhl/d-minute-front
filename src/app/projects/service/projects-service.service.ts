@@ -4,6 +4,7 @@ import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { restPath } from "app/share/constants/restPath";
 import { Project } from "app/models/project";
+import { Reunion } from "app/models/reunion";
 
 
 @Injectable()
@@ -23,6 +24,14 @@ export class ProjectsService {
 
   getProjectById(projectId: String){
     return this.http.get(`${this.restPath.APP}${this.restPath.projectById}${projectId}`);
+  }
+
+  postReunion(projectId: Number, reunion: Reunion){
+    return this.http.post(`${this.restPath.APP}${this.restPath.addProyect}`,reunion);
+  }
+
+  listReunion(projectId: Number){
+    return this.http.get(`${this.restPath.APP}${this.restPath.listarReuniones}${projectId}`);
   }
 
 }

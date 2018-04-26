@@ -39,7 +39,6 @@ export class SpinnerComponent implements AfterContentChecked {
     this.subscription = this.loaderService.loaderState.subscribe((state: LoaderState) =>{
       if (state['show'] != undefined &&  this.show !== state['show']){
         this.show = state.show;
-        console.log(this.show);
         setTimeout(() => {
           this.show ? this.openSpinner() : this.detachSpinner();
         },0);

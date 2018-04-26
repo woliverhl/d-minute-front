@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SessionService } from 'app/session/service/session.service';
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SessionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sessionService: SessionService) { }
+
+  userName : String 
 
   ngOnInit() {
+    this.sessionService.getUserProfile().subscribe(
+      (response: String) => {
+        this.userName = `${response['nombre']} ${response['apellido']}`;
+      }, (err) => {
+        console.log(err);
+      });
   }
 
 }

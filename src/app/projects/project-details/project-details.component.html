@@ -7,21 +7,12 @@
         <mat-tab label="Reuniones">
           <div class="details-container-mettings">
             <div class="meeting-menu">
-              <button mat-raised-button class="addMeetingButton" type="button">
+              <button mat-raised-button class="addMeetingButton" (click)="switchPostMeeting()" type="button">
                 Nueva Reunion
               </button>
               <div class="meeting-list">
-                <div class="meeting-item"> 
-                  <a href="">Reunion 27/04/2017</a>
-                </div>
-                <div class="meeting-item">
-                  <a href="">Reunion 27/04/2017</a>
-                </div>
-                <div class="meeting-item">
-                  <a href="">Reunion 27/04/2017</a>
-                </div>
-                <div class="meeting-item">
-                  <a href="">Reunion 27/04/2017</a>
+                <div class="meeting-item" *ngFor="let reu of reuniones"> 
+                  <a href="">{{reu.resumen}}</a>
                 </div>
               </div>
             </div>
@@ -37,19 +28,30 @@
                   <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
                 </button>
               </div>
-              <p>REUNIÓN 27/04/2017</p>
-              <p><b>OBJETIVO:</b> RETOMAR LOS TEMAS ASOCIADOS A LA TESIS.</p>
-              <div>
-                <h5>Memoria sección Investigación</h5>
-                <p>Se conversa sobre los pasos a seguir en la tesis y que es lo que debemos abordar de forma inicial. El marco teórico sera
-                lo primero que debemos abordar del cual se define que: no es un conjunto de definiciones, mas bien una elaboración de un
-                cuento donde estén representados los conceptos es decir crear una narrativa del problema.</p>
-                <mat-list>
-                  <h3 mat-subheader>Elementos de Diálogo</h3>
-                  <mat-list-item>
-                    <p mat-line><a>Nuevos elementos de dialogo</a></p>
-                  </mat-list-item>
-                </mat-list>
+              <div class="meeting-detail-titulo">
+                <p>REUNIÓN 27/04/2017</p>
+                <p><b>OBJETIVO:</b> RETOMAR LOS TEMAS ASOCIADOS A LA TESIS.</p>
+              </div>
+              <div [ngSwitch]="saving">
+                <div *ngSwitchCase="true">
+                    <mat-form-field>
+                      <input matInput placeholder="Titulo" type="text">
+                    </mat-form-field>
+                </div>
+                <div *ngSwitchCase="false">
+                  <h5>Memoria sección Investigación</h5>
+                  <p>Se conversa sobre los pasos a seguir en la tesis y que es lo que debemos abordar de forma inicial. El marco teórico sera
+                    lo primero que debemos abordar del cual se define que: no es un conjunto de definiciones, mas bien una elaboración de
+                    un cuento donde estén representados los conceptos es decir crear una narrativa del problema.</p>
+                  <mat-list>
+                    <h3 mat-subheader>Elementos de Diálogo</h3>
+                    <mat-list-item>
+                      <p mat-line>
+                        <a>Nuevos elementos de dialogo</a>
+                      </p>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
               </div>
             </div>
           </div>

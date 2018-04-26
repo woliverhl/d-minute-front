@@ -5,5 +5,8 @@ export class restPath {
     public listProyects = '/proyecto/listarProyectoUsuario';
     public listUsers = '/usuario/listaUsuarios';
     public addProyect = '/proyecto/nuevoProyecto';
-    public projectById = '/proyecto/proyectoid/'
+    public projectById = '/proyecto/proyectoid/';
+    public guardarReunion = '/acta/guardarActa';
+    public listarReuniones = '/acta/listarActaProyecto/';
+    public getUser = '/usuario/user?username='
 }

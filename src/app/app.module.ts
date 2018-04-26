@@ -31,14 +31,15 @@ import { AppComponent } from 'app/app.component';
 import { SessionComponent } from 'app/session/toolbar/session.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
-import { ProjectListComponent } from 'app/projects/project-list/project-list.component';
-import { AddProjectDialog } from 'app/projects/project-list/project-list.component';
+import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
 import { ProjectDetailsComponent } from 'app/projects/project-details/project-details.component';
+import { SpinnerComponent } from './share/spinner/spinner.component';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
 import { Project } from "app/models/project";
 import { User } from "app/models/user";
+import { Reunion } from "app/models/reunion";
 
 //Services
 import { SessionService } from "app/session/service/session.service";
@@ -51,7 +52,6 @@ import { AuthInterceptorService } from "app/interceptors/auth-interceptor.servic
 
 //Guards
 import { authGuard } from "app/share/guards/authenticate-guard";
-import { SpinnerComponent } from './share/spinner/spinner.component';
 
 
 const appRoutes: Routes = [
@@ -73,7 +73,7 @@ const appRoutes: Routes = [
     ProjectListComponent,
     AddProjectDialog,
     SpinnerComponent,
-    ProjectDetailsComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -109,6 +109,7 @@ const appRoutes: Routes = [
           restPath,
           Project,
           User,
+          Reunion,
           ProjectsService,
           UsersService,
           authGuard,

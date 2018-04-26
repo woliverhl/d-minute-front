@@ -4,4 +4,5 @@ export class Project {
     public fechaInicio: Date;
     public fechaFin: Date;
     public usuariosNuevoProyecto: Array<Object>;
+    public proyectoId?: Number;
 }

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 export class SessionService {
 
   private token : string;
+  private username : String;
 
   constructor(private HttpClient: HttpClient, private restPath: restPath) {
     this.setToken(localStorage['token']);
@@ -14,6 +15,7 @@ export class SessionService {
 
 
   logIn(user: string, pass: string):Observable<Object>{
+    this.setUsername(user);
     let param = { 'username': user, 'password': pass}
     return this.HttpClient.post(`${this.restPath.APP}${this.restPath.logIn}`, param);
   }
@@ -27,6 +29,11 @@ export class SessionService {
     this.token = localStorage['token'];
   }
 
+  setUsername(user: string): void {
+    localStorage['username'] = user;
+    this.username = localStorage['username'];
+  }
+
   resetToken():void{
     delete localStorage['token'];
     this.token = undefined;
@@ -36,19 +43,11 @@ export class SessionService {
     return this.token;
   }
 
+  getUserProfile(){
+    return this.HttpClient.get(`${this.restPath.APP}${this.restPath.getUser}${this.username}`);
+  }
+
   isAuthenticate():boolean{
     return this.getToken() != undefined;
   }
-
-
-
-  // logIn(user:string, pass:string) : string{
-  //   this.getToken().subscribe( (response) => {
-  //     response['token'] ? this.token = response['token'] : this.throwError('We did not get a token');
-      
-  //   },(error) => {
-  //     console.log("We messed up");
-  //   });
-  //   return this.token;
-  // }
 }
