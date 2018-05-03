@@ -12,12 +12,20 @@ export class SessionComponent implements OnInit {
   userName : String 
 
   ngOnInit() {
+    this.getUserData();
+  }
+
+  getUserData(){
     this.sessionService.getUserProfile().subscribe(
       (response: String) => {
         this.userName = `${response['nombre']} ${response['apellido']}`;
       }, (err) => {
         console.log(err);
       });
+  }
+
+  closeSession(){
+    this.sessionService.logOut();
   }
 
 }
