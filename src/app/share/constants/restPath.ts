@@ -1,6 +1,6 @@
 export class restPath {
     //public APP: string = '/api';
-    public APP: string = 'https://dminutems.herokuapp.com';
+    public APP: string = 'https://dminutezuul.herokuapp.com/api/dminutems';
     public logIn: string = '/token/generate-token';
     public listProyects = '/proyecto/listarProyectoUsuario';
     public listUsers = '/usuario/listaUsuarios';
