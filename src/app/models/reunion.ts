@@ -5,4 +5,6 @@ export class Reunion {
     public estado?: any;
     public proyectoId? : Number;
     public usuarioActa? : Array<any>;
+    public temaActa?: Object[];
+    public actaId?: any;
 }

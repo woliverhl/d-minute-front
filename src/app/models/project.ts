@@ -1,3 +1,4 @@
+import { TemaActa } from "./tema";
 export class Project {
     public nombre: string;
     public descripcion: string;
@@ -5,4 +6,5 @@ export class Project {
     public fechaFin: Date;
     public usuariosNuevoProyecto: Array<Object>;
     public proyectoId?: Number;
+    temaActa?: TemaActa[];
 }

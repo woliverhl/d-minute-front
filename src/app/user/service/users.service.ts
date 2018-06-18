@@ -11,4 +11,8 @@ export class UsersService {
   getListUsers(){
     return this.HttpClient.get(`${this.restPath.APP}${this.restPath.listUsers}`);
   }
+
+  postUser(user){
+    return this.HttpClient.post(`${this.restPath.APP}${this.restPath.usuarioGuardar}`, user);
+  }
 }

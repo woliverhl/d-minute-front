@@ -5,6 +5,7 @@ import { UsersService } from "app/user/service/users.service";
 import { SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Project } from "app/models/project";
+import { CreateUserComponent } from "app/user/create-user/create-user.component";
 
 @Component({
   selector: 'app-project-list',
@@ -40,6 +41,16 @@ export class ProjectListComponent implements OnInit {
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
+  openUserDialog(): void{
+    let userDialogRef = this.dialog.open(CreateUserComponent, {
+      width: '80%',
+      height: '60%',
+      data: {}
+    });
+
+    // dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
   reloadList(isPosted:boolean):void{
     isPosted ? this.listAllProjects(): undefined;
   }
@@ -69,16 +80,18 @@ export class AddProjectDialog implements OnInit {
 
 
   ngOnInit() {
-    this.UsersService.getListUsers().subscribe(
-      (response:Array<Object>) =>{
-        this.listOfUsers = response.map((cv) => {
-          return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}` }, cv);
-        });
-      },
-      (err) => {
-
-      }
-    );
+    setTimeout(() => {
+      this.UsersService.getListUsers().subscribe(
+        (response:Array<Object>) => {
+          this.listOfUsers = response.map((cv) => {
+            return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}` }, cv);
+          });
+        },
+        (err) => {
+          console.log(err)
+        }
+      );
+    }, 0);
   }
 
   createProjectForm() {

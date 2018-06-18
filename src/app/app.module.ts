@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 //CDK
 import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
@@ -32,7 +33,7 @@ import { SessionComponent } from 'app/session/toolbar/session.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
-import { ProjectDetailsComponent } from 'app/projects/project-details/project-details.component';
+import { ProjectDetailsComponent, Atendants } from 'app/projects/project-details/project-details.component';
 import { SpinnerComponent } from './share/spinner/spinner.component';
 
 //Modelos
@@ -40,6 +41,7 @@ import { restPath } from "app/share/constants/restPath";
 import { Project } from "app/models/project";
 import { User } from "app/models/user";
 import { Reunion } from "app/models/reunion";
+import { Usuario } from "app/models/usuario";
 
 //Services
 import { SessionService } from "app/session/service/session.service";
@@ -52,6 +54,8 @@ import { AuthInterceptorService } from "app/interceptors/auth-interceptor.servic
 
 //Guards
 import { authGuard } from "app/share/guards/authenticate-guard";
+import { UsersListComponent } from './user/users-list/users-list.component';
+import { CreateUserComponent } from './user/create-user/create-user.component';
 
 
 const appRoutes: Routes = [
@@ -64,7 +68,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  entryComponents: [AddProjectDialog, SpinnerComponent],
+  entryComponents: [AddProjectDialog, Atendants, SpinnerComponent,CreateUserComponent],
   declarations: [
     AppComponent,
     SessionComponent,
@@ -73,7 +77,10 @@ const appRoutes: Routes = [
     ProjectListComponent,
     AddProjectDialog,
     SpinnerComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    Atendants,
+    UsersListComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +100,8 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     OverlayModule,
     PortalModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   providers: [
         {
@@ -109,6 +117,7 @@ const appRoutes: Routes = [
           restPath,
           Project,
           User,
+          Usuario,
           Reunion,
           ProjectsService,
           UsersService,

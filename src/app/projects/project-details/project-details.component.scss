@@ -18,10 +18,13 @@
         .meeting-list{
             border: 1px solid rgba(0,0,0,.12);
             border-radius: 5px;
-            .meeting-item{
+            .meeting-items{
                 padding: 10px;
                 white-space: initial;
                 border-bottom: 1px solid rgba(0,0,0,.12);
+            }
+            .meeting-item{
+                cursor: pointer;
             }
         }
         .meeting-menu{
@@ -51,10 +54,23 @@
                 position: relative;
                 float: right;
                 left: 20%;
+                a{
+                    cursor: pointer;
+                }
             }
             &-titulo{
                 text-align: center;
             }
         }
     }
+}
+
+.isSecretary{
+    margin-right: 2em;
+    margin-top: 1em;
+}
+
+.selectedElement{
+    background-color: #1EAAF1;
+    color: #FFFFFF;
 }
