@@ -14,9 +14,8 @@ app.set(port);
 
 // Create a proxy server with custom application logic
 const proxy = httpProxy.createProxyServer({});
+proxy.web(req, res, { target: 'http://dminutezuul.herokuapp.com' });
 
-const server = http.createServer(function(req, res) {
-  // You can define here your custom logic to handle the request
-  // and then proxy the request.
-  proxy.web(req, res, { target: 'http://dminutezuul.herokuapp.com' });
-});
+const server = http.createServer(app);
+
+app.listen(port, () => console.log("App now running on port", port));
