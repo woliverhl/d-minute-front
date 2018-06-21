@@ -13,10 +13,11 @@ let proxyConfig = {
 let server = express();
 
 server.use(express.static(__dirname + '/dist'));
-server.set('views', path.join(__dirname, 'src'));
+//server.set('views', path.join(__dirname, 'src'));
 //Define puerto
 const port = process.env.PORT || '8080';
-server.set(port);
+server.set('port', port);
+
 
 /* methods forwarded to the servertoreach proxy  */
 server.use('/somethingElse', function(req, res)
