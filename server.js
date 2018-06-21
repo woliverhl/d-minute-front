@@ -22,5 +22,4 @@ console.log("LOG: proxy creado");
 
 const server = http.createServer(app);
 console.log("LOG: server creado");
-app.listen(port, () => console.log("App now running on port", port));
-httpProxy.listen(port);
+server.listen(port, () => console.log("App now running on port", port));
