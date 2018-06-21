@@ -2,10 +2,10 @@
   "name": "d-minute-front",
   "version": "0.0.0",
   "license": "MIT",
-  "angular-cli": {},
+  "main": "server.js",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
