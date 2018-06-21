@@ -13,9 +13,7 @@ const port = process.env.PORT || '8080';
 app.set(port);
 
 // Create a proxy server with custom application logic
-const proxy = httpProxy.createProxyServer({});
-proxy.web(req, res, { target: 'http://dminutezuul.herokuapp.com' });
+httpProxy.createProxyServer({target:'http://dminutezuul.herokuapp.com'}).listen(port);
 
 const server = http.createServer(app);
-
 app.listen(port, () => console.log("App now running on port", port));
