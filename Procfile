@@ -1,1 +1,1 @@
-web: npm proxy
+web: npm start
