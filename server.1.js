@@ -31,9 +31,11 @@ app.post('/api/*', upload.array(), function(req, res) {
     	// request method
     	method: 'POST',
     	// headers to send
-    	headers: JSON.stringify(req.headers),
+    	headers: {
+    		'content-type': req['content-type']
+    	},
 
-    	body: JSON.stringify(req.body)
+    	body: req.body
   	};
 
   	console.log('options: ' + JSON.stringify(options));
@@ -41,12 +43,18 @@ app.post('/api/*', upload.array(), function(req, res) {
   	request({
   		method: options.method,
   		uri: options.host + options.path,
-  		headers: options.host,
+  		json: true,
+  		headers: [
+  			{
+  				name: 'content-type',
+  				value: 'application/json'
+  			}
+  		],
   		body: options.body
   	}, function(error, response, body){
   		console.log('error: ' + error);
   		console.log('response' + JSON.stringify(response));
-  	});
+  	}).pipe(res);
 
   	//res.end();
 
