@@ -12,25 +12,21 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const api_path = '/api';
+const host = 'https://dminuteapi.herokuapp.com';
 
-app.post('/api/*', upload.array(), function(req, res) {
+app.post(api_path + '/*', upload.array(), function(req, res) {
 
+	console.log("============ POST =================");
 	console.log("url: " + req.url);
 	console.log("headers: " + JSON.stringify(req.headers));
 	console.log("params: " + JSON.stringify(req.params));
 	console.log("body: " + JSON.stringify(req.body));
+	console.log("============ POST =================");
 
-  	var options = {
-    	// host to forward to
-    	//host:   'http://localhost',
-    	host:   'https://dminuteapi.herokuapp.com',
-    	// port to forward to
-    	port:   80,
-    	// path to forward to
-    	path:   req.url.replace('/api', ''),
-    	// request method
+  	let options = {
+    	path:   req.url.replace(api_path, ''),
     	method: 'POST',
-    	// headers to send
     	headers: {
     		'content-type': req['content-type']
     	},
@@ -42,55 +38,43 @@ app.post('/api/*', upload.array(), function(req, res) {
 
   	request({
   		method: options.method,
-  		uri: options.host + options.path,
+  		uri: host + options.path,
   		json: true,
-  		headers: [
-  			{
-  				name: 'content-type',
-  				value: 'application/json'
-  			}
-  		],
+  		headers: options.headers,
   		body: options.body
   	}, function(error, response, body){
   		console.log('error: ' + error);
   		console.log('response' + JSON.stringify(response));
   	}).pipe(res);
+});
 
-  	//res.end();
+app.get(api_path + '/*', function(req, res) {
+	console.log("============ REQUEST =================");
+	console.log("============ GET =================");
+	console.log("url: " + req.url);
+	console.log("headers: " + JSON.stringify(req.headers));
+	console.log("params: " + JSON.stringify(req.params));
+	console.log("============ GET =================");
 
-  //console.log(req);
+  	let options = {
+    	path:   req.url.replace(api_path, ''),
+    	headers: {
+    		'Authorization': req.headers.authorization
+    	}
+ 	};
 
-  /*var creq = http.request(options, function(cres) {
+ 	console.log("options: " + JSON.stringify(options));
 
-    // set encoding
-    cres.setEncoding('utf8');
-
-    // wait for data
-    cres.on('data', function(chunk){
-      res.write(chunk);
-    });
-
-    cres.on('close', function(){
-      // closed, let's end client request as well 
-      res.writeHead(cres.statusCode);
-      res.end();
-    });
-
-    cres.on('end', function(){
-      // finished, let's finish client request as well 
-      res.writeHead(cres.statusCode);
-      res.end();
-    });
-
-  }).on('error', function(e) {
-    // we got an error, return 500 error to client and log error
-    console.log(e.message);
-    res.writeHead(500);
-    res.end();
-  });
-
-  creq.end();*/
-
+ 	request({
+ 		url: host + options.path,
+ 		headers: options.headers,
+ 	}, function(error, response, body){
+  		console.log('error: ' + error);
+  		console.log('response: ' + JSON.stringify(response));
+  		console.log('body: ' + JSON.stringify(body));
+  	})
+ 	.pipe(res);
+ 	console.log("============ END REQUEST =================");
 });
 
 
