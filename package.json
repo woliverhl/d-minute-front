@@ -2,7 +2,7 @@
   "name": "d-minute-front",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "server.1.js",
+  "main": "server.js",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
