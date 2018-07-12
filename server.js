@@ -28,7 +28,7 @@ app.post(api_path + '/*', upload.array(), function(req, res) {
     	path:   req.url.replace(api_path, ''),
     	method: 'POST',
     	headers: {
-    		'content-type': req['content-type']
+    		'Authorization': req.headers.authorization
     	},
 
     	body: req.body
