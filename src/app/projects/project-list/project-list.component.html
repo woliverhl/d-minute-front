@@ -16,7 +16,7 @@
         <mat-card-content>
 
           <mat-nav-list dense>
-            <a mat-list-item [routerLink]="['/project', project.proyectoId]" *ngFor = "let project of listArray"> {{project.nombre}} </a>
+            <a mat-list-item [routerLink]="['/project', project.proyectoId]" *ngFor = "let project of listArray">Nombre Proyecto: {{project.nombre}} / Fecha Inicio: {{project.fechaInicio | date:'dd-MM-yyyy'}} / Fecha Fin: {{project.fechaFin | date:'dd-MM-yyyy'}}</a>
           </mat-nav-list>
 
         </mat-card-content>
