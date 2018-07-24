@@ -5,6 +5,8 @@ mat-toolbar{
     .toolbarContainer{
         img{
             display: inline-block;
+            height: 4em;
+            cursor: pointer;
         }
         &-session-options p,&-session-options a, &-session-options img{
             display: inline-block;

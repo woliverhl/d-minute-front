@@ -17,13 +17,10 @@
               </div>
             </div>
             <div class="meeting-detail">
-              <div class="meeting-detail-options">
-                  <button mat-raised-button class="addThemeButton" (click)="displayAddThemeDialog()" type="button">
-                    Nuevo Tema
-                  </button>
+              <div class="meeting-detail-options" *ngIf="selectedMeeting !== undefined">
                 <a (click)="displayAttendants()">Lista de Asistentes</a>
                 <button mat-icon-button>
-                  <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                  <mat-icon aria-label="Example icon-button with a heart icon" (click)="displayAddThemeDialog()">add</mat-icon>
                 </button>
                 <button mat-icon-button>
                   <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>

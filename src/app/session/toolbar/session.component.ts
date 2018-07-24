@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'app/session/service/session.service';
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
@@ -7,7 +8,7 @@ import { SessionService } from 'app/session/service/session.service';
 })
 export class SessionComponent implements OnInit {
 
-  constructor(private sessionService: SessionService) { }
+  constructor(private sessionService: SessionService, private router:Router) { }
 
   userName : String 
 
@@ -26,6 +27,10 @@ export class SessionComponent implements OnInit {
 
   closeSession(){
     this.sessionService.logOut();
+  }
+
+  goHome(){
+    this.router.navigate(['project-list']);
   }
 
 }
