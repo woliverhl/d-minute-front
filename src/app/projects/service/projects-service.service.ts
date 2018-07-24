@@ -44,4 +44,12 @@ export class ProjectsService {
     return this.http.get(`${this.restPath.APP}${this.restPath.getMeetingById}${actaId}`);
   }
 
+  postTheme(tema: any){
+    return this.http.post(`${this.restPath.APP}${this.restPath.guardarTema}`,tema);
+  }
+
+  listThemes(actaId:any){
+    return this.http.get(`${this.restPath.APP}${this.restPath.listarTema}${actaId}`);
+  }
+
 }

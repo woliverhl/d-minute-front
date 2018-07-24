@@ -18,6 +18,9 @@
             </div>
             <div class="meeting-detail">
               <div class="meeting-detail-options">
+                  <button mat-raised-button class="addThemeButton" (click)="displayAddThemeDialog()" type="button">
+                    Nuevo Tema
+                  </button>
                 <a (click)="displayAttendants()">Lista de Asistentes</a>
                 <button mat-icon-button>
                   <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
@@ -30,8 +33,8 @@
                 </button>
               </div>
               <div class="meeting-detail-titulo" *ngIf="selectedMeeting !== undefined">
-                <p>REUNIÓN {{ selectedMeeting.fecha }}</p>
-                <p><b>OBJETIVO:</b> {{ selectedMeeting.resumen }}</p>
+                <h5>REUNIÓN {{ selectedMeeting.fecha }}</h5>
+                <h5><b>OBJETIVO:</b> {{ selectedMeeting.resumen }}</h5>
               </div>
               <div class="meeting-detail-body" [ngSwitch]="saving">
                 <div class="formActa" *ngSwitchCase="true">
@@ -54,6 +57,7 @@
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
+                        <button mat-raised-button type="button" (click)="addMember()">Agregar Miembro</button>
                         <mat-list *ngIf="Reunion.usuarioActa.length > 0">
                           <h3 mat-subheader>Miembros</h3>
                           <mat-list-item *ngFor="let member of Reunion.usuarioActa">
@@ -64,26 +68,6 @@
                             </button>
                           </mat-list-item>
                         </mat-list>
-                        <div class="col-md-12">
-                          <button mat-raised-button type="button" (click)="addMember()">Agregar Miembro</button>
-                          
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <h3 mat-subheader>Tema</h3>
-                      </div>
-                      <div class="col-md-12">
-                        <div formArrayName="temaActa" *ngFor="let item of addMeetingForm.get('temaActa').controls; let i = index;">
-                          <div [formGroupName]="i">
-                            <mat-form-field>
-                              <input matInput placeholder="Nombre" formControlName="nombre" type="text">
-                            </mat-form-field>
-                            <mat-form-field>
-                              <input matInput placeholder="Discusion" formControlName="discusion" type="text">
-                            </mat-form-field>
-                            <button mat-raised-button type="button" (click)="addTheme()">Agregar Tema</button>
-                          </div>
-                        </div>
                       </div>
                       <div class="col-md-12">
                         <button mat-raised-button type="submit">Agregar Acta</button>
@@ -92,18 +76,14 @@
                     </form>
                 </div>
                 <div *ngSwitchCase="false">
-                  <h5>Memoria sección Investigación</h5>
-                  <p>Se conversa sobre los pasos a seguir en la tesis y que es lo que debemos abordar de forma inicial. El marco teórico sera
-                    lo primero que debemos abordar del cual se define que: no es un conjunto de definiciones, mas bien una elaboración de
-                    un cuento donde estén representados los conceptos es decir crear una narrativa del problema.</p>
-                  <mat-list *ngIf="selectedMeeting !== undefined && selectedMeeting.temaActa.length > 0">
-                    <h3 mat-subheader>Temas</h3>
-                    <mat-list-item *ngFor="let theme of selectedMeeting.temaActa">
-                      <p mat-line>
-                        {{theme.nombre}}{{theme.discusion}}
-                      </p>
-                    </mat-list-item>
-                  </mat-list>
+                    <div *ngIf="selectedMeeting !== undefined && selectedMeeting.temaActa.length > 0">
+                        <div class="listThemes" *ngFor="let theme of selectedMeeting.temaActa">
+                          <h5>{{theme.nombre}}</h5>
+                          <p >
+                            {{theme.discusion}}
+                          </p>
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>

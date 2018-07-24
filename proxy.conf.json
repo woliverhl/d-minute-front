@@ -1,9 +1,9 @@
 {
     "/api": {
-        "target": "http://dminutezuul.herokuapp.com",
+        "target": "https://dminuteapi.herokuapp.com",
         "secure": false,
         "pathRewrite": {
-            "^/api": "/api/dminutems"
+            "^/api": ""
         },
         "changeOrigin": true,
         "logLevel": "debug"

@@ -15,4 +15,6 @@ export class restPath {
     public getAttendantList = '/acta/getUsuariosActa/';
     public getMeetingById = '/acta/getActa/';
     public usuarioGuardar = '/token/usuarioGuardar';
+    public guardarTema = '/tema/guardarTema';
+    public listarTema = '/tema/listarTema/'
 }

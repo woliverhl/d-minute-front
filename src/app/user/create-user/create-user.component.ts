@@ -13,7 +13,7 @@ export class CreateUserComponent implements OnInit {
 
   addUserForm: FormGroup;
 
-  constructor(public fb:FormBuilder,private user: Usuario, private userService:UsersService, public dialogRef: MatDialogRef<CreateUserComponent>) { }
+  constructor(public fb:FormBuilder,public user: Usuario, private userService:UsersService, public dialogRef: MatDialogRef<CreateUserComponent>) { }
 
   ngOnInit() {
     this.createUserForm();

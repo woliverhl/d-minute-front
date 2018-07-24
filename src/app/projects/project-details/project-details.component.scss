@@ -13,6 +13,12 @@
         display: block;
         margin: 1em auto;
     }
+    .addThemeButton{
+        background-color:#1EAAF1;
+        color: #FFFFFF;
+        display: inline-block;
+        margin: 1em auto;
+    }
     &-mettings{
         width: 100%;
         .meeting-list{
@@ -59,7 +65,9 @@
                 }
             }
             &-titulo{
-                text-align: center;
+                padding: 1em;
+                text-align: left;
+                border-bottom: 1px solid gray;
             }
         }
     }
@@ -73,4 +81,13 @@
 .selectedElement{
     background-color: #1EAAF1;
     color: #FFFFFF;
+}
+
+.listThemes{
+    padding: 1em;
+    margin: 2em 0;
+    border-bottom: 1px solid gray;
+    h5{
+        text-align: center;
+    }
 }

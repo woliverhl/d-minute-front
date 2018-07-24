@@ -11,6 +11,7 @@ import { Reunion } from "app/models/reunion";
 import { User } from "app/models/user";
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { UsersListComponent } from "app/user/users-list/users-list.component";
+import { TemaActa } from '../../models/tema';
 
 @Component({
   selector: 'app-project-details',
@@ -26,11 +27,13 @@ export class ProjectDetailsComponent implements OnInit {
   public saving: Boolean;
   public selectedMember: Object;
   addMeetingForm: FormGroup;
+  addThemeForm: FormGroup;
   activeMeeting: Reunion = undefined;
   private _differ: any;
   selectedMeeting: Reunion;
   temaSelectedActa: FormArray;
   themeCounter: any = 0;
+  themeList: any[] = [];
 
 
   constructor(private projectService: ProjectsService, 
@@ -63,23 +66,8 @@ export class ProjectDetailsComponent implements OnInit {
       fecha: [this.Reunion.fecha, Validators.required],
       resumen: [this.Reunion.resumen, Validators.required],
       usuarioActa: [this.Reunion.usuarioActa, Validators.required],
-      temaActa:  this.fb.array([this.createTheme()]),
       selectedMember: [this.selectedMember]
     });
-  }
-
-  createTheme(): FormGroup {
-    return this.fb.group({
-      id: this.themeCounter++,
-      nombre: '',
-      discusion: '',
-      actaId: 0
-    });
-  }
-
-  addTheme(): void {
-    this.temaSelectedActa = this.addMeetingForm.get('temaActa') as FormArray;
-    this.temaSelectedActa.push(this.createTheme());
   }
 
   addMember(): void {
@@ -100,10 +88,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
       Object.assign({secretario: 'N', asiste: 'S'},{username: cv.username})
     ));
-    this.Reunion.temaActa = this.temaSelectedActa.value;
-    this.temaSelectedActa.reset();
     var payload = Object.assign({ proyectoId: this.projectId}, this.Reunion);
-    console.log(payload)
     this.projectService.postReunion(payload)
       .subscribe((response) => {
         console.log(response);
@@ -146,7 +131,9 @@ export class ProjectDetailsComponent implements OnInit {
     }else if(acta !== undefined){
       this.selectedMeeting = acta;
     }
-    this.selectedMeeting !== undefined && this.selectedMeeting['actaId'] !== undefined ? this.getActaById(this.selectedMeeting['actaId']) : undefined;
+    if(this.selectedMeeting !== undefined && this.selectedMeeting['actaId'] !== undefined){
+      this.getActaById(this.selectedMeeting['actaId']);
+    }
   }
 
   getActaById(actaId:any):void{
@@ -161,6 +148,14 @@ export class ProjectDetailsComponent implements OnInit {
 
   displayAttendants(){
     let dialogRef = this.dialog.open(Atendants, {
+      width: '80%',
+      height: '80%',
+      data: { id: this.selectedMeeting['actaId']}
+    });
+  }
+
+  displayAddThemeDialog(){
+    let dialogRef = this.dialog.open(AddTheme, {
       width: '80%',
       height: '80%',
       data: { id: this.selectedMeeting['actaId']}
@@ -230,4 +225,46 @@ export class Atendants implements AfterContentInit  {
   editAttendants(){
     this.edit = true;
   }
+}
+
+@Component({
+  selector: 'add-theme-dialog',
+  templateUrl: './add-theme-dialog.html',
+  styleUrls: ['./add-theme-dialog.scss']
+})
+export class AddTheme implements OnInit  {
+  public addThemeForm: FormGroup;
+  private actaId: any;
+
+  constructor(public dialogRef: MatDialogRef<AddTheme>, 
+    private projectService: ProjectsService, private route: ActivatedRoute,
+    private fb: FormBuilder,  private Tema:TemaActa,
+    @Inject(MAT_DIALOG_DATA) data){
+      this.actaId = data.id;
+    }
+
+  ngOnInit(){
+    this.createThemeForm();
+  }
+
+  createThemeForm() {
+    this.addThemeForm = this.fb.group({
+      nombre: [this.Tema.nombre, Validators.required],
+      discusion: [this.Tema.discusion, Validators.required]
+    });
+  }
+
+  postTheme(){
+    console.log(this.Tema);
+    this.Tema.actaId = this.actaId;
+    this.Tema.id = 0;
+    this.projectService.postTheme(this.Tema).subscribe(
+      (data) => {
+        this.dialogRef.close();
+      },(err) => {
+        console.log(err)
+      });
+  }
+
+
 }

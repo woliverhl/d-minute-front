@@ -33,7 +33,7 @@ import { SessionComponent } from 'app/session/toolbar/session.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
-import { ProjectDetailsComponent, Atendants } from 'app/projects/project-details/project-details.component';
+import { ProjectDetailsComponent, Atendants, AddTheme } from 'app/projects/project-details/project-details.component';
 import { SpinnerComponent } from './share/spinner/spinner.component';
 
 //Modelos
@@ -42,6 +42,7 @@ import { Project } from "app/models/project";
 import { User } from "app/models/user";
 import { Reunion } from "app/models/reunion";
 import { Usuario } from "app/models/usuario";
+import { TemaActa } from 'app/models/tema';
 
 //Services
 import { SessionService } from "app/session/service/session.service";
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  entryComponents: [AddProjectDialog, Atendants, SpinnerComponent,CreateUserComponent],
+  entryComponents: [AddProjectDialog, Atendants, AddTheme, SpinnerComponent,CreateUserComponent],
   declarations: [
     AppComponent,
     SessionComponent,
@@ -79,6 +80,7 @@ const appRoutes: Routes = [
     SpinnerComponent,
     ProjectDetailsComponent,
     Atendants,
+    AddTheme,
     UsersListComponent,
     CreateUserComponent
   ],
@@ -122,6 +124,7 @@ const appRoutes: Routes = [
           ProjectsService,
           UsersService,
           authGuard,
+          TemaActa,
           SpinnerService
       ],
   bootstrap: [AppComponent]
