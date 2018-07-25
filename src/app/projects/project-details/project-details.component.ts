@@ -71,23 +71,23 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   addMember(): void {
-    if (this.selectedMember != undefined && !this.Reunion.usuarioActa.includes(this.selectedMember)) {
-      this.Reunion.usuarioActa.push(this.selectedMember);
+    /*if (this.selectedMember != undefined && !this.Reunion.usuarioActa.includes(this.selectedMember)) {
+      //this.Reunion.usuarioActa.push(this.selectedMember);
       let index = this.listOfUsers.indexOf(this.selectedMember);
       this.listOfUsers.splice(index, 1)
       this.selectedMember = undefined;
-    }
+    }*/
   }
 
   deleteMember(miembro: Object): void {
-    let index = this.Reunion.usuarioActa.indexOf(miembro);
+    let index = 0;//this.Reunion.usuarioActa.indexOf(miembro);
     index > -1 ? this.Reunion.usuarioActa.splice(index, 1) : console.log('Member Not Found');
   }
 
   crearReunion(){
-    this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
+    /*this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
       Object.assign({secretario: 'N', asiste: 'S'},{username: cv.username})
-    ));
+    ));*/
     var payload = Object.assign({ proyectoId: this.projectId}, this.Reunion);
     this.projectService.postReunion(payload)
       .subscribe((response) => {
