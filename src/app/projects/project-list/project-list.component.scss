@@ -5,7 +5,13 @@ mat-card{
 }
 
 mat-card-title{
-    font-size: 17px!important;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 60px !important;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 1px;
+    line-height: 74px;
+    color: #000000;
 }
 
 mat-card-header{
@@ -23,4 +29,15 @@ button{
     width: auto;
     color: white;
     background-color: #21B3D8;
+}
+
+.pad-left-zero{
+    padding-left: 0px;
+}
+
+.mat-list-item-text{
+    display: block !important;
+}
+.mat-list-item-date{
+    display: block !important;
 }

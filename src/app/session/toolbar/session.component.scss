@@ -12,14 +12,13 @@ mat-toolbar{
             display: inline-block;
         }
         &-session-options-username{
-            font-family: Helvetica Neue;
             font-size: 13px;
             position: absolute;
             top: 0px;
             right: 0px;
             padding: 1em 1em;
             p{
-                font-weight: 700;
+                font-weight: bold;
             }
             a{
                 font-weight: 400;

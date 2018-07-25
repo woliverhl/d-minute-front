@@ -27,11 +27,12 @@
         margin: 1em;
     }
     button{
+        background-color:#19A0C4;
         margin-left: 33%;
         width: 30%;
         box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
         border-radius: 5px;
-        color: black
+        color: white;
     }
     button:disabled{
         color: gray;
