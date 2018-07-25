@@ -1,10 +1,13 @@
+import { TemaActa } from "./tema";
+import { UsuarioActa } from "./usuarioActa";
+
 export class Reunion {
     public fecha: Date;
     public resumen: String;
-    public correlativo?: Number;
-    public estado?: any;
-    public proyectoId? : Number;
-    public usuarioActa? : Array<any>;
-    public temaActa?: Object[];
-    public actaId?: any;
+    public correlativo: Number;
+    public estado: String;
+    public proyectoId : Number;
+    public usuarioActa : UsuarioActa[];
+    public temaActa: TemaActa[];
+    public actaId: Number;
 }
