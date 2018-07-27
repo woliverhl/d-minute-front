@@ -1,28 +1,25 @@
 <div class="container" style="margin: 0;">
   <div class="row background">
-    <div class="col-md-12">
-      <img src="../../../assets/img/logos/Logos-03.png" class="meeting-logo" alt="">
-    </div>
       <form action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
         <div class="login-form">
+          <img src="../../../assets/img/logos/Logos-01.png" class="meeting-logo" alt="">
           <div class="row login-form__login-inputs">
             <div class="col-md-12">
-                <mat-icon svgIcon="email"></mat-icon>
-                <mat-form-field>
-                  <input matInput placeholder="Correo Electronico" type="email" [(ngModel)]="User.userName" formControlName="userName">
-                </mat-form-field>
+                <div class="tit-text">INGRESA A TU CUENTA</div>
+                <label for="userName">Mail:</label>
+                <input placeholder="mail@mail.com" type="email" [(ngModel)]="User.userName" formControlName="userName">
             </div>
             <div class="col-md-12">
-              <mat-icon svgIcon="password"></mat-icon>
-              <mat-form-field class="">
-                <input matInput placeholder="Contraseña" type="password" [(ngModel)]="User.userPass" formControlName="userPass">
-              </mat-form-field>
+              <label for="userPass">Clave:</label>
+              <input placeholder="******" type="password" [(ngModel)]="User.userPass" formControlName="userPass">
             </div>
             <div class="col-md-12">
-              <button mat-button type="submit" [disabled]="!loginForm.valid">Entrar</button>
+              <button mat-button type="submit" [disabled]="!loginForm.valid">INGRESAR</button>
             </div>
           </div>
         </div>
       </form>
+      <div class="copyright">By TalW &#9400; - 2018</div>
   </div>
 </div>
