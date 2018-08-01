@@ -1,38 +1,39 @@
-$border-bottom: 1px solid gray ;
 
 mat-card{
-    margin-top: 2em;
+    margin-top: 40px;
+    padding: 38px 40px 32px 40px;
 }
 
 mat-card-title{
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 60px !important;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px !important;
     font-style: normal;
     font-weight: 900;
-    letter-spacing: 1px;
-    line-height: 74px;
-    color: #000000;
+    color: #333333;
 }
 
 mat-card-header{
-    border-bottom: $border-bottom;
-}
-
-mat-nav-list :any-link{
-    border-bottom: $border-bottom;
+    justify-content: center;
+    margin-bottom: 40px;
 }
 
 button{
-    margin-bottom: 1em;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-left: 24px;
     height: auto;
-    padding: 0 1em;
+    padding: 6px 30px 6px 30px;
     width: auto;
-    color: white;
-    background-color: #21B3D8;
+    color: #0081f0;
+    border-radius: 6px;
+    border: solid 1px #0081f0;
 }
 
 .pad-left-zero{
     padding-left: 0px;
+    text-align: center;
 }
 
 .mat-list-item-text{

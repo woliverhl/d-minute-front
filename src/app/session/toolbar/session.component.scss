@@ -1,29 +1,49 @@
 mat-toolbar{
-    background-color:#21B3D8;
+    background-color:#0081f0;
     color:#FFFFFF;
     position: relative;
+    font-family: Source Sans Pro;
     .toolbarContainer{
+        height: 64px;
         img{
             display: inline-block;
-            height: 4em;
+            height: 71px;
             cursor: pointer;
+            margin-left: 150px;
         }
         &-session-options p,&-session-options a, &-session-options img{
             display: inline-block;
         }
         &-session-options-username{
-            font-size: 13px;
+            font-size: 18px;
             position: absolute;
             top: 0px;
             right: 0px;
-            padding: 1em 1em;
-            p{
-                font-weight: bold;
+            margin: 15px 146px 0px 0px;
+            display: flex;
+            align-items: center;
+            span{
+                font-weight: 600;
             }
             a{
-                font-weight: 400;
                 cursor: pointer;
             }
         }
+    }
+}
+
+footer{
+    height: 42px;
+    background-color: #4a4a4a;
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    p{
+        font-family: Source Sans Pro;
+        font-size: 16px;
+        font-weight: normal;
+        color: #ffffff;
+        margin: 11px;
     }
 }

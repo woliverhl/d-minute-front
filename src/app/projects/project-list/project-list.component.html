@@ -5,11 +5,7 @@
       <mat-card>
         <mat-card-header>
           <div class="row">
-            <mat-card-title>Proyectos Activos</mat-card-title>
-            <div class="col-sm-12 pad-left-zero">
-              <button mat-raised-button (click)="openProyectDialog()">Agregar Proyecto</button>
-              <button mat-raised-button (click)="openUserDialog()">Agregar Usuario</button>
-            </div>
+            <mat-card-title>PROYECTOS ACTIVOS</mat-card-title>
           </div>
         </mat-card-header>
         <mat-card-content>
@@ -20,7 +16,10 @@
               <span class="mat-list-item-date"> Fecha Inicio: {{project.fechaInicio | date:'dd-MM-yyyy'}} / Fecha Fin: {{project.fechaFin | date:'dd-MM-yyyy'}}</span>
             </a>
           </mat-nav-list>
-
+          <div class="col-sm-12 pad-left-zero">
+              <button mat-raised-button (click)="openProyectDialog()">Agregar Proyecto</button>
+              <button mat-raised-button (click)="openUserDialog()">Agregar Usuario</button>
+            </div>
         </mat-card-content>
         <mat-card-actions>
         </mat-card-actions>
