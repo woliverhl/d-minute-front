@@ -9,13 +9,46 @@
           </div>
         </mat-card-header>
         <mat-card-content>
+          <mat-table #table [dataSource]="listaProyectos">
+            <ng-container matColumnDef="nombre">
+              <mat-header-cell *matHeaderCellDef> Nombre del proyecto </mat-header-cell>
+              <mat-cell *matCellDef="let e"> 
+                <a [routerLink]="['/project', e.proyectoId]">
+                  {{e.nombre}}
+                </a>
+              </mat-cell>
+            </ng-container>
 
-          <mat-nav-list dense>
+            <ng-container matColumnDef="inicio">
+              <mat-header-cell *matHeaderCellDef> Fecha de inicio </mat-header-cell>
+              <mat-cell *matCellDef="let e"> {{e.fechaInicio | date: 'dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fin">
+              <mat-header-cell *matHeaderCellDef> Fecha de inicio </mat-header-cell>
+              <mat-cell *matCellDef="let e"> {{e.fechaFin | date: 'dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+              <mat-cell *matCellDef="let e">
+                <a [routerLink]="['/project', e.proyectoId]"> 
+                  <i class="material-icons">edit</i>
+                </a>
+                <i class="material-icons">delete</i>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+          <!--mat-nav-list dense>
             <a mat-list-item [routerLink]="['/project', project.proyectoId]" *ngFor = "let project of listArray">
               <span class="mat-list-item-date">Proyecto: {{project.nombre}} /&#160;</span>
               <span class="mat-list-item-date"> Fecha Inicio: {{project.fechaInicio | date:'dd-MM-yyyy'}} / Fecha Fin: {{project.fechaFin | date:'dd-MM-yyyy'}}</span>
             </a>
-          </mat-nav-list>
+          </mat-nav-list-->
           <div class="col-sm-12 pad-left-zero">
               <button mat-raised-button (click)="openProyectDialog()">Agregar Proyecto</button>
               <button mat-raised-button (click)="openUserDialog()">Agregar Usuario</button>
@@ -27,3 +60,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

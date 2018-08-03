@@ -1,0 +1,18 @@
+mat-toolbar{
+    position: relative;
+    bottom: 0%;
+    height: 42px;
+    background-color: #4a4a4a;
+    color: #ffffff;
+    font-family: Source Sans Pro;
+    font-weight: normal;
+    margin: 19px 0px 0px 0px;
+    h3{
+        font-size: 16px;
+    }
+}
+.spacer {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}

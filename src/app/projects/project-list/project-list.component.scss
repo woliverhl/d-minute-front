@@ -1,7 +1,7 @@
 
 mat-card{
     margin-top: 40px;
-    padding: 38px 40px 32px 40px;
+    padding: 38px 40px 16px 40px;
 }
 
 mat-card-title{
@@ -14,14 +14,67 @@ mat-card-title{
 
 mat-card-header{
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
+}
+
+mat-table{
+    font-family: 'Source Sans Pro';
+    
+    mat-header-row{
+        background-color: #e1e1e1;
+        height: 45px;
+        min-height: 45px;
+        mat-header-cell{
+            font-size: 16px !important;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+    mat-row{
+        height: 40px;
+        min-height: 40px;
+        a{
+            color: black;
+        }
+        i{
+            color: #00a1f0;
+            font-size: 16px;
+            margin: 0px 12px 0px 12px;
+        }
+    }
+}
+
+.mat-row:hover{
+    background-color: rgba(216, 216, 216, 0.3);
+    a{
+        color: #00a1f0;
+    }
+}
+.mat-column-nombre {
+    flex: 0 0 40%;
+    font-weight: 600;
+    font-size: 16px !important;
+}
+.mat-column-inicio {
+    flex: 0 0 20%;
+    text-align: center;
+    font-size: 16px !important;
+}
+.mat-column-fin{
+    flex: 0 0 20%;
+    text-align: center;
+    font-size: 16px !important;
+}
+.mat-column-acciones {
+    flex: 0 0 20%;
+    text-align: center;
 }
 
 button{
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro';
     font-size: 16px;
     font-weight: 600;
-    margin-top: 32px;
+    margin-top: 5px;
     margin-left: 24px;
     height: auto;
     padding: 6px 30px 6px 30px;

@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ProjectsService } from "app/projects/service/projects-service.service";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatPaginator, MatTableDataSource } from '@angular/material';
 import { UsersService } from "app/user/service/users.service";
 import { SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,7 +14,10 @@ import { CreateUserComponent } from "app/user/create-user/create-user.component"
 })
 export class ProjectListComponent implements OnInit {
 
-  public listArray:Object;
+  displayedColumns: string[] = ['nombre', 'inicio', 'fin', 'acciones'];
+  listaProyectos:MatTableDataSource<Project>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private projectsService: ProjectsService, private dialog: MatDialog) { }
 
@@ -25,7 +28,11 @@ export class ProjectListComponent implements OnInit {
   public listAllProjects(){
     this.projectsService.listProjects().subscribe(
       (response) => {
-        this.listArray = response;
+        this.listaProyectos = new MatTableDataSource<Project>(response);
+        this.listaProyectos.paginator = this.paginator;
+        if (this.listaProyectos.paginator) {
+          this.listaProyectos.paginator.firstPage();
+        }
       }, (err) => {
         console.log(err);
       });

@@ -19,17 +19,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
 
 //CDK
 import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
 import { AppComponent } from 'app/app.component';
 import { SessionComponent } from 'app/session/toolbar/session.component';
+import { FooterComponent } from 'app/session/footer/footer.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
@@ -82,7 +85,8 @@ const appRoutes: Routes = [
     Atendants,
     AddTheme,
     UsersListComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,10 @@ const appRoutes: Routes = [
     OverlayModule,
     PortalModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    CdkTableModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
         {
