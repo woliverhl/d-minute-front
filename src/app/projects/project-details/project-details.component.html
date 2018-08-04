@@ -1,4 +1,5 @@
 <app-session></app-session>
+<app-breadcrumb *ngIf="project !== undefined" [steps]= "['Proyectos activos']" [here]="project.descripcion"></app-breadcrumb>
 <div class="details-container">
   <mat-card *ngIf="project !== undefined">
     <mat-card-content>

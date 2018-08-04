@@ -33,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from 'app/app.component';
 import { SessionComponent } from 'app/session/toolbar/session.component';
 import { FooterComponent } from 'app/session/footer/footer.component';
+import { BreadcrumbComponent } from 'app/session/breadcrumb/breadcrumb.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
@@ -86,7 +87,8 @@ const appRoutes: Routes = [
     AddTheme,
     UsersListComponent,
     CreateUserComponent,
-    FooterComponent
+    FooterComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
