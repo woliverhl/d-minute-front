@@ -5,7 +5,9 @@
   <div *ngIf="project !== undefined" class="menu">
     <div class="meeting-list">
       <div class="meeting-items" *ngFor="let reu of reuniones">
-        <a class="meeting-item" (click)="selectMeeting(reu)" [class.selected]="wasClicked">{{reu.resumen}}</a>
+        <a class="meeting-item" (click)="selectMeeting(reu)" [class.selected]="wasClicked">
+          Reuni&oacute;n {{ reu.fecha | date: 'dd/MM/yyyy hh:mm' }}
+        </a>
       </div>
     </div>
     <button class="addMeetingButton" (click)="switchPostMeeting()" type="button">
@@ -40,8 +42,8 @@
               </button>
             </div-->
             <div class="meeting-detail-titulo" *ngIf="selectedMeeting !== undefined">
-              <h5>REUNIÓN {{ selectedMeeting.fecha }}</h5>
-              <h5><b>OBJETIVO:</b> {{ selectedMeeting.resumen }}</h5>
+              <h5>Reuni&oacute;n {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }}</h5>
+              <h6>Objetivo: {{ selectedMeeting.resumen }}</h6>
             </div>
             <div class="meeting-detail-body" [ngSwitch]="saving">
               <div class="formActa" *ngSwitchCase="true">
