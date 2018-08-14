@@ -173,11 +173,52 @@ h5{
     color: #FFFFFF;
 }
 
-.listThemes{
+/*.listThemes{
     padding: 1em;
     margin: 2em 0;
     border-bottom: 1px solid gray;
     h5{
         text-align: center;
     }
+}*/
+
+.participantes{
+    padding: 0 0 0 17px;
+    font-size: 16px;
+    .participante{
+        display: inline-block;
+        padding: 8px 0 0 8px;
+        width: 310px;
+        height: 37px;
+        background-color: #ececec;
+        font-size: 14px;
+        font-weight: 600;
+        color: #333333;
+        margin-right: 18px;
+        margin-bottom: 14px;
+    }
+}
+
+.acta{
+    background-color: #f8f8f8;
+    margin: 8px 17px 8px 17px;
+    padding: 16px;
+    h5{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    p{
+        font-size: 16px;
+        color: #9b9b9b;
+    }
+    h6{
+        font-size: 16px;
+        margin-left: 8px;
+    }
+}
+
+.separator{
+    height: 2px;
+    border: solid 1px #c5c5c5;
+    margin: 24px 17px 24px 17px;
 }
