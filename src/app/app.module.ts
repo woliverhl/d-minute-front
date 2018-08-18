@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ViewContainerRef } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Materials Stuff
@@ -39,6 +39,7 @@ import { SignInComponent } from 'app/session/sign-in/sign-in.component';
 import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
 import { ProjectDetailsComponent, Atendants, AddTheme } from 'app/projects/project-details/project-details.component';
 import { SpinnerComponent } from './share/spinner/spinner.component';
+import { AddMeetingComponent } from './projects/project-details/add-meeting';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -75,7 +76,14 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  entryComponents: [AddProjectDialog, Atendants, AddTheme, SpinnerComponent,CreateUserComponent],
+  entryComponents: [
+    AddProjectDialog,
+    Atendants,
+    AddTheme,
+    SpinnerComponent,
+    CreateUserComponent,
+    AddMeetingComponent
+  ],
   declarations: [
     AppComponent,
     SessionComponent,
@@ -91,12 +99,14 @@ const appRoutes: Routes = [
     CreateUserComponent,
     FooterComponent,
     BreadcrumbComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    AddMeetingComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false }),
     MatInputModule,

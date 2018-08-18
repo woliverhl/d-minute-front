@@ -1,0 +1,29 @@
+<h1>AGREGAR REUNI&Oacute;N</h1>
+<div class="mleft">
+  <p>Objetivo</p>
+  <input class="objetivo" [(ngModel)]="data.resumen">
+</div>
+<div class="mleft dib dFecha">
+  <p>Fecha Reuni&oacute;n</p>
+  <i class="material-icons">event_note</i><input class="fecha" [(ngModel)]="data.fecha">
+</div>
+<div class="dib dHoraIni">
+  <p>Hora de inicio</p>
+  <i class="material-icons">query_builder</i><input class="hora">
+</div>
+<div class="dib dHoraFin">
+  <p>Hora de termino</p>
+  <i class="material-icons">query_builder</i><input class="hora" >
+</div>
+<div class="mleft">
+  <p>Asistentes</p>
+  <!--TODO!-->
+</div>
+<div class="addAttendant mleft">
+  <button class="button-a">Agregar asistente</button>
+</div>
+<div class="separator"></div>
+<div class="button-container">
+  <button class="button-a" mat-button (click)="onCancelarClick()">CANCELAR</button>
+  <button class="button-b" mat-button [mat-dialog-close]="data" cdkFocusInitial>AGREGAR REUNI&Oacute;N</button>
+</div>

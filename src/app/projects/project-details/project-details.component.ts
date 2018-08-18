@@ -12,6 +12,7 @@ import { User } from "app/models/user";
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { UsersListComponent } from "app/user/users-list/users-list.component";
 import { TemaActa } from '../../models/tema';
+import { AddMeetingComponent } from './add-meeting'
 
 @Component({
   selector: 'app-project-details',
@@ -34,8 +35,8 @@ export class ProjectDetailsComponent implements OnInit {
   temaSelectedActa: FormArray;
   themeCounter: any = 0;
   themeList: any[] = [];
-
-
+  nuevaReunion: Reunion;
+  
   constructor(private projectService: ProjectsService, 
       private userService: UsersService, private route: ActivatedRoute, 
     public Reunion: Reunion, private fb: FormBuilder, private dialog: MatDialog) {
@@ -54,11 +55,27 @@ export class ProjectDetailsComponent implements OnInit {
           console.log(err);
         });
     this.getListUsers();
-    this.createMeetingForm();
+    //this.createMeetingForm();
+  }
+
+  openAddMeeting(): void{
+    let dialogRef = this.dialog.open(AddMeetingComponent, {
+        width: '744px',
+        height: '533px',
+        data: new Reunion()
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      this.guardarReunion(result)
+    })
   }
 
   switchPostMeeting(){
     this.saving = true; 
+  }
+
+  private guardarReunion(reunion: Reunion): void{
+    console.log("Nueva Reu: " + JSON.stringify(reunion));
   }
 
   createMeetingForm() {
