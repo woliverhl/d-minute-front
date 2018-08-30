@@ -40,8 +40,8 @@ export class ProjectListComponent implements OnInit {
 
   openProyectDialog(): void{
     let dialogRef = this.dialog.open(AddProjectDialog, {
-      width: '80%',
-      height: '60%',
+      width: '744px',
+      height: '533px',
       data: {}
     });
 

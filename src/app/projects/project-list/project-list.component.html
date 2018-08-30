@@ -43,12 +43,6 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
           <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
-          <!--mat-nav-list dense>
-            <a mat-list-item [routerLink]="['/project', project.proyectoId]" *ngFor = "let project of listArray">
-              <span class="mat-list-item-date">Proyecto: {{project.nombre}} /&#160;</span>
-              <span class="mat-list-item-date"> Fecha Inicio: {{project.fechaInicio | date:'dd-MM-yyyy'}} / Fecha Fin: {{project.fechaFin | date:'dd-MM-yyyy'}}</span>
-            </a>
-          </mat-nav-list-->
           <div class="col-sm-12 pad-left-zero">
               <button mat-raised-button (click)="openProyectDialog()">Agregar Proyecto</button>
               <button mat-raised-button (click)="openUserDialog()">Agregar Usuario</button>
