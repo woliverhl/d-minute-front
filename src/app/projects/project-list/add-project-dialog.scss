@@ -1,4 +1,164 @@
-:host{
+.container{
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-left: 22.5px;
+    h4{
+        text-align: center;
+        display: inline-block;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #333333;
+        width: 95%;
+        margin-bottom: 43px;
+    }
+    .closeModalButton{
+        position: relative;
+        top: 0;
+        right: 0;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #00a1f0;
+    }
+    .campoTexto{
+        width: 49%;
+        display: inline-block;
+        label{
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input{
+            width: 316px;
+            height: 32px;
+            border: solid 1px #e8e8e8;
+            font-size: 12px;
+            padding:9px 8px 8px 8px;
+            color: #4a4a4a;
+        }
+        margin-bottom: 24px;
+    }
+    .campoFecha{
+        width: 49%;
+        display: inline-block;
+        label{
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input{
+            width: 130px;
+            height: 32px;
+            border: solid 1px #e8e8e8;
+            border-left: none;
+            font-size: 12px;
+            padding:9px 8px 8px 8px;
+            color: #4a4a4a;
+        }
+        margin-bottom: 24px;
+        .fechaIconoContainer{
+            border: solid 1px #e8e8e8;
+            border-right: none;
+            padding: 5.5px 0px 4px 8px;
+            vertical-align: middle;
+            .fechaIcono{
+                font-size: 14px;
+                color: #9b9b9b;
+            }
+        }
+    }
+    .miembros{
+        h4{
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #333333;
+            text-align: left;
+        }
+        .miembro{
+            width: 47%;
+            height: 57px;
+            background-color: #ececec;
+            padding: 0px 8px 16px;
+            display: inline-block;
+            margin-right: 16px;
+            margin-bottom: 8px;
+            h4{
+                display: inline-block;
+                margin-bottom: 4px;
+                width: 89%;
+            }
+            mat-icon{
+                font-size: 16px;
+                color: #00a1f0;
+                margin-top: 8px;
+            }
+            mat-icon:hover{
+                cursor: pointer;
+            }
+            p{
+                font-size: 12px;
+            }
+        }
+        .add{
+            display: block;
+            margin-bottom: 25px;
+            .selectedMember{
+                display: inline-block;
+                width: 23%;
+                height: 48px;
+                border-radius: 6px;
+                border: solid 1px #0081f0;
+                padding: 10px;
+            }
+            .addMember{
+                margin-left: 16px;
+                width: 161px;
+                height: 48px;
+                border-radius: 6px;
+                border: solid 1px #0081f0;
+                background-color: #ffffff;
+                color: #0081f0;
+                font-weight: 600;
+            }
+        }
+    }
+    mat-divider{
+        margin-bottom: 25px;
+    }
+    .botonera{
+        text-align: center;
+        .cancelar{
+            width: 182px;
+            height: 48px;
+            border-radius: 6px;
+            border: solid 1px #0081f0;
+            background-color: #ffffff;
+            color: #0081f0;
+            margin-right: 12px;
+        }
+        .crearProyecto{
+            width: 223px;
+            height: 48px;
+            border-radius: 6px;
+            border: solid 1px #0081f0;
+            background-color: #0081f0;
+            color: #ffffff;
+            margin-left: 12px;
+        }
+    }
+}
+
+/*:host{
     display: block;
     padding: 1em;
 }
@@ -36,5 +196,5 @@ button.deleteMember.mat-button{
     height: 50%!important;
     min-width: 0px!important;
     background-color: red!important;
-}
+}*/
 
