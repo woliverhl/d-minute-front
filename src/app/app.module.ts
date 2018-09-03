@@ -61,7 +61,7 @@ import { AuthInterceptorService } from "app/interceptors/auth-interceptor.servic
 //Guards
 import { authGuard } from "app/share/guards/authenticate-guard";
 import { UsersListComponent } from './user/users-list/users-list.component';
-import { CreateUserComponent } from './user/create-user/create-user.component';
+import { AddUserComponent } from './user/create-user/add-user';
 
 //pipes
 import { CapitalizePipe } from "./share/pipe/capitalize-pipe";
@@ -81,7 +81,7 @@ const appRoutes: Routes = [
     Atendants,
     AddTheme,
     SpinnerComponent,
-    CreateUserComponent,
+    AddUserComponent,
     AddMeetingComponent
   ],
   declarations: [
@@ -96,7 +96,7 @@ const appRoutes: Routes = [
     Atendants,
     AddTheme,
     UsersListComponent,
-    CreateUserComponent,
+    AddUserComponent,
     FooterComponent,
     BreadcrumbComponent,
     CapitalizePipe,

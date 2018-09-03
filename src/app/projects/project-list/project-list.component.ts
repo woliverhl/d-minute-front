@@ -5,7 +5,7 @@ import { UsersService } from "app/user/service/users.service";
 import { SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Project } from "app/models/project";
-import { CreateUserComponent } from "app/user/create-user/create-user.component";
+import { AddUserComponent } from 'app/user/create-user/add-user';
 
 @Component({
   selector: 'app-project-list',
@@ -49,13 +49,13 @@ export class ProjectListComponent implements OnInit {
   }
 
   openUserDialog(): void{
-    let userDialogRef = this.dialog.open(CreateUserComponent, {
-      width: '80%',
-      height: '60%',
+    let dialogRef = this.dialog.open(AddUserComponent, {
+      width: '744px',
+      height: '433px',
       data: {}
     });
 
-    // dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
   reloadList(isPosted:boolean):void{

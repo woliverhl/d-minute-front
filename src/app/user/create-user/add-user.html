@@ -1,0 +1,27 @@
+<div class="container">
+  <h4>AGREGAR USUARIO</h4>
+  <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+  <form action="" [formGroup]="addUserForm" (ngSubmit)="postUser()">
+      <div class="campoTexto">
+          <label for="nombre">Nombre usuario</label>
+          <input [(ngModel)]="Usuario.nombre" formControlName="nombre"  type="text">
+      </div>
+      <div class="campoTexto">
+          <label for="apellido">Apellido usuario</label>
+          <input [(ngModel)]="Usuario.apellido" formControlName="apellido" type="text">
+      </div>
+      <div class="campoTexto">
+          <label for="username">Usuario</label>
+          <input [(ngModel)]="Usuario.username" formControlName="username" type="text">
+      </div>
+      <div class="campoTexto">
+          <label for="password">Contraseña</label>
+          <input [(ngModel)]="Usuario.password" formControlName="password" type="password">
+      </div>
+      <mat-divider></mat-divider>
+        <div class="botonera">
+              <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+              <button class="crearUsuario" type="submit" [disabled]="!addUserForm.valid">CREAR NUEVO USUARIO</button>
+        </div>
+  </form>
+</div>
