@@ -12,7 +12,8 @@ import { User } from "app/models/user";
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { UsersListComponent } from "app/user/users-list/users-list.component";
 import { TemaActa } from '../../models/tema';
-import { AddMeetingComponent } from './add-meeting'
+import { AddMeetingComponent } from './sintaxis/add-meeting';
+
 
 @Component({
   selector: 'app-project-details',
@@ -282,6 +283,4 @@ export class AddTheme implements OnInit  {
         console.log(err)
       });
   }
-
-
 }

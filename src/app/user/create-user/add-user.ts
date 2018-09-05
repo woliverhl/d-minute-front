@@ -19,10 +19,11 @@ export class AddUserComponent implements OnInit {
         private fb: FormBuilder, public Usuario: Usuario,
         @Inject(MAT_DIALOG_DATA) public data: any, ) {
         this.createUserForm();
+        this.ngOnInit();
     }
 
     ngOnInit(): void {
-            
+        this.cleanUserForm();
     }
 
     createUserForm() {
@@ -31,6 +32,15 @@ export class AddUserComponent implements OnInit {
             apellido: [this.Usuario.apellido, Validators.required],
             username: [this.Usuario.username, Validators.required],
             password: [this.Usuario.password, Validators.required]
+        });
+    }
+
+    cleanUserForm() {
+        this.addUserForm = this.fb.group({
+            nombre: [this.Usuario.nombre, ""],
+            apellido: [this.Usuario.apellido, ""],
+            username: [this.Usuario.username, ""],
+            password: [this.Usuario.password, ""]
         });
     }
 

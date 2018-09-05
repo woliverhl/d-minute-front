@@ -36,10 +36,10 @@ import { FooterComponent } from 'app/session/footer/footer.component';
 import { BreadcrumbComponent } from 'app/session/breadcrumb/breadcrumb.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
-import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
+import { ProjectListComponent } from 'app/projects/project-list/project-list.component';
 import { ProjectDetailsComponent, Atendants, AddTheme } from 'app/projects/project-details/project-details.component';
 import { SpinnerComponent } from './share/spinner/spinner.component';
-import { AddMeetingComponent } from './projects/project-details/add-meeting';
+
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -65,6 +65,8 @@ import { AddUserComponent } from './user/create-user/add-user';
 
 //pipes
 import { CapitalizePipe } from "./share/pipe/capitalize-pipe";
+import { AddProjectDialog } from './projects/project-list/add-project-dialog';
+import { AddMeetingComponent } from './projects/project-details/sintaxis/add-meeting';
 
 const appRoutes: Routes = [
   { path: 'sign-in', component: SignInComponent },
