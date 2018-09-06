@@ -24,23 +24,15 @@ export class ProjectDetailsComponent implements OnInit {
   project: Project;
   projectId: Number;
   reuniones: Reunion [];
-  listOfUsers: Array<Object>;
   public saving: Boolean;
-  public selectedMember: Object;
   addMeetingForm: FormGroup;
-  addThemeForm: FormGroup;
   activeMeeting: Reunion = undefined;
-  private _differ: any;
   selectedMeeting: Reunion;
-  temaSelectedActa: FormArray;
-  themeCounter: any = 0;
-  themeList: any[] = [];
-  nuevaReunion: Reunion;
   
   constructor(private projectService: ProjectsService, 
       private userService: UsersService, private route: ActivatedRoute, 
     public Reunion: Reunion, private fb: FormBuilder, private dialog: MatDialog) {
-        this.Reunion.usuarioActa = [];
+
       }
 
   ngOnInit() {
@@ -58,64 +50,6 @@ export class ProjectDetailsComponent implements OnInit {
     //this.createMeetingForm();
   }
 
-  openAddMeeting(): void{
-    let dialogRef = this.dialog.open(AddMeetingComponent, {
-        width: '744px',
-        height: '533px',
-        data: new Reunion()
-    });
-
-    dialogRef.afterClosed().subscribe(result =>{
-      this.guardarReunion(result)
-    })
-  }
-
-  switchPostMeeting(){
-    this.saving = true; 
-  }
-
-  private guardarReunion(reunion: Reunion): void{
-    console.log("Nueva Reu: " + JSON.stringify(reunion));
-  }
-
-  createMeetingForm() {
-    this.addMeetingForm = this.fb.group({
-      fecha: [this.Reunion.fecha, Validators.required],
-      resumen: [this.Reunion.resumen, Validators.required],
-      usuarioActa: [this.Reunion.usuarioActa, Validators.required],
-      selectedMember: [this.selectedMember]
-    });
-  }
-
-  addMember(): void {
-    /*if (this.selectedMember != undefined && !this.Reunion.usuarioActa.includes(this.selectedMember)) {
-      //this.Reunion.usuarioActa.push(this.selectedMember);
-      let index = this.listOfUsers.indexOf(this.selectedMember);
-      this.listOfUsers.splice(index, 1)
-      this.selectedMember = undefined;
-    }*/
-  }
-
-  deleteMember(miembro: Object): void {
-    let index = 0;//this.Reunion.usuarioActa.indexOf(miembro);
-    index > -1 ? this.Reunion.usuarioActa.splice(index, 1) : console.log('Member Not Found');
-  }
-
-  crearReunion(){
-    /*this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
-      Object.assign({secretario: 'N', asiste: 'S'},{username: cv.username})
-    ));*/
-    var payload = Object.assign({ proyectoId: this.projectId}, this.Reunion);
-    this.projectService.postReunion(payload)
-      .subscribe((response) => {
-        console.log(response);
-        this.saving = false;
-        this.listarReuniones();
-      }), (err) => {
-        console.log(err);
-      };
-  }
-
   listarReuniones(){
     this.projectService.listReunion(this.project.proyectoId).subscribe(
       (response: Reunion[]) => {
@@ -129,17 +63,8 @@ export class ProjectDetailsComponent implements OnInit {
     );
   }
 
-  getListUsers(){
-    this.userService.getListUsers().subscribe(
-      (response: Array<Object>) => {
-        this.listOfUsers = response.map((cv) => {
-          return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}`}, cv);
-        });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  private guardarReunion(reunion: Reunion): void{
+    console.log("Nueva Reu: " + JSON.stringify(reunion));
   }
 
   selectMeeting(acta: Reunion = undefined){
@@ -162,4 +87,64 @@ export class ProjectDetailsComponent implements OnInit {
       }
     );
   }
+
+  openAddMeeting(): void{
+    let dialogRef = this.dialog.open(AddMeetingComponent, {
+        width: '744px',
+        height: '533px',
+        data: new Reunion()
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      this.guardarReunion(result)
+    })
+  }
+  
+  //**METODOS PARA CREAR UNA REUNIÓN */
+  listOfUsers: Array<Object>;
+  addThemeForm: FormGroup;
+  themeList: any[] = [];
+  nuevaReunion: Reunion;
+  themeCounter: any = 0;
+  public selectedMember: Object;
+  private _differ: any;
+  temaSelectedActa: FormArray;
+
+  createMeetingForm() {
+    this.addMeetingForm = this.fb.group({
+      fecha: [this.Reunion.fecha, Validators.required],
+      resumen: [this.Reunion.resumen, Validators.required],
+      usuarioActa: [this.Reunion.usuarioActa, Validators.required],
+      selectedMember: [this.selectedMember]
+    });
+  }
+
+  crearReunion(){
+    /*this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
+      Object.assign({secretario: 'N', asiste: 'S'},{username: cv.username})
+    ));*/
+    var payload = Object.assign({ proyectoId: this.projectId}, this.Reunion);
+    this.projectService.postReunion(payload)
+      .subscribe((response) => {
+        console.log(response);
+        this.saving = false;
+        this.listarReuniones();
+      }), (err) => {
+        console.log(err);
+      };
+  }
+
+  getListUsers(){
+    this.userService.getListUsers().subscribe(
+      (response: Array<Object>) => {
+        this.listOfUsers = response.map((cv) => {
+          return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}`}, cv);
+        });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
 }
