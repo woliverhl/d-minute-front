@@ -26,8 +26,8 @@ import { UsersService } from '../../../user/service/users.service';
         @Inject(MAT_DIALOG_DATA) public data: Project) {
             this.Project = data; 
             this.createMeetingForm();
-            this.Reunion.usuarioActa = [];
             this.listaUserProyecto();
+            this.Reunion.usuarioActa = [];
         }
 
     createMeetingForm() {

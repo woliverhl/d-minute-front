@@ -19,6 +19,9 @@
             <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span><input [(ngModel)]="Project.fechaFin" formControlName="deathLine" type="date">
         </div>
         <div class="miembros">
+            <div class="campoTexto">
+
+            </div>
             <h4>Miembros del Equipo</h4>
             <div class="miembro" *ngFor="let member of Project.usuariosNuevoProyecto">
                 <h4>{{ member.nombre }}  {{ member.apellido }}</h4>
