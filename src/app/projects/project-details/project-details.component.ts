@@ -10,7 +10,6 @@ import { Project } from "app/models/project";
 import { Reunion } from "app/models/reunion";
 import { User } from "app/models/user";
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { UsersListComponent } from "app/user/users-list/users-list.component";
 import { TemaActa } from '../../models/tema';
 import { AddMeetingComponent } from './sintaxis/add-meeting';
 
@@ -55,7 +54,7 @@ export class ProjectDetailsComponent implements OnInit {
         },(err)=>{
           console.log(err);
         });
-    this.getListUsers();
+    //this.getListUsers();
     //this.createMeetingForm();
   }
 
@@ -162,125 +161,5 @@ export class ProjectDetailsComponent implements OnInit {
         console.log(err);
       }
     );
-  }
-
-  displayAttendants(){
-    let dialogRef = this.dialog.open(Atendants, {
-      width: '80%',
-      height: '80%',
-      data: { id: this.selectedMeeting['actaId']}
-    });
-  }
-
-  displayAddThemeDialog(){
-    let dialogRef = this.dialog.open(AddTheme, {
-      width: '80%',
-      height: '80%',
-      data: { id: this.selectedMeeting['actaId']}
-    });
-  }
-
-}
-
-@Component({
-  selector: 'atttendants-details-dialog',
-  templateUrl: './atttendants-details-dialog.html',
-  styleUrls: ['./atttendants-details-dialog.scss']
-})
-export class Atendants implements AfterContentInit  {
-
-  projectId: string;
-  actaId: string;
-  listOfAttendants: Object[];
-  edit: Boolean;
-  acta: Array<Reunion>;
-  @ViewChild(UsersListComponent)
-  private userListComponent: UsersListComponent;
-
-  constructor(public dialogRef: MatDialogRef<Atendants>, 
-    private projectService: ProjectsService, private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) data){
-      this.edit = false;
-      this.actaId = data.id;
-  }
-
-  ngAfterContentInit() {
-    this.getAttendantList();
-  }
-
-  getAttendantList() {
-    //Ugly solution
-    setTimeout(() => {
-      this.projectService.getReunionById(this.actaId).subscribe(
-        (data: Array<Reunion>) => {
-          this.acta = data;
-          this.listOfAttendants = data['usuarioActa'];
-        }, (err) => {
-          console.log(err);
-        }
-      );
-    }, 0);
-  }
-
-  submitList(event:boolean){
-    if(event){
-      let fixedacta = this.userListComponent.listOfSelectedUsers.map((usuario, index) => {
-          delete usuario['fullName'];
-          return usuario;
-      });
-    this.acta['usuarioActa'] = fixedacta;
-    this.projectService.postReunion(this.acta).subscribe(
-      (data) => {
-        this.userListComponent.listOfSelectedUsers = [];
-        console.log(data);
-      },(err) => {
-        console.log(err)
-      });
-    }
-
-  }
-  
-  editAttendants(){
-    this.edit = true;
-  }
-}
-
-@Component({
-  selector: 'add-theme-dialog',
-  templateUrl: './add-theme-dialog.html',
-  styleUrls: ['./add-theme-dialog.scss']
-})
-export class AddTheme implements OnInit  {
-  public addThemeForm: FormGroup;
-  private actaId: any;
-
-  constructor(public dialogRef: MatDialogRef<AddTheme>, 
-    private projectService: ProjectsService, private route: ActivatedRoute,
-    private fb: FormBuilder,  private Tema:TemaActa,
-    @Inject(MAT_DIALOG_DATA) data){
-      this.actaId = data.id;
-    }
-
-  ngOnInit(){
-    this.createThemeForm();
-  }
-
-  createThemeForm() {
-    this.addThemeForm = this.fb.group({
-      nombre: [this.Tema.nombre, Validators.required],
-      discusion: [this.Tema.discusion, Validators.required]
-    });
-  }
-
-  postTheme(){
-    console.log(this.Tema);
-    this.Tema.actaId = this.actaId;
-    this.Tema.id = 0;
-    this.projectService.postTheme(this.Tema).subscribe(
-      (data) => {
-        this.dialogRef.close();
-      },(err) => {
-        console.log(err)
-      });
   }
 }
