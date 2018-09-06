@@ -23,7 +23,6 @@ export class AddUserComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.cleanUserForm();
     }
 
     createUserForm() {
@@ -36,12 +35,9 @@ export class AddUserComponent implements OnInit {
     }
 
     cleanUserForm() {
-        this.addUserForm = this.fb.group({
-            nombre: [this.Usuario.nombre, ""],
-            apellido: [this.Usuario.apellido, ""],
-            username: [this.Usuario.username, ""],
-            password: [this.Usuario.password, ""]
-        });
+        if(this.addUserForm.valid){
+            this.addUserForm.reset();
+        }
     }
 
     onNoClick(): void {
@@ -56,6 +52,7 @@ export class AddUserComponent implements OnInit {
             this.onNoClick();
             this.saved.emit(true);
             console.log(response);
+            this.cleanUserForm();
           }, (err) => {
             console.log(err);
           });
