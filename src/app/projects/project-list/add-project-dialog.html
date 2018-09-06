@@ -21,7 +21,7 @@
         <div class="miembros">
             <h4>Miembros del Equipo</h4>
             <div class="miembro" *ngFor="let member of Project.usuariosNuevoProyecto">
-                <h4>{{ member.nombre }}</h4>
+                <h4>{{ member.nombre }}  {{ member.apellido }}</h4>
                 <mat-icon class="deleteMember" (click)="deleteMember(member)">delete</mat-icon>
                 <p>{{ member.username }}</p>
             </div>

@@ -23,6 +23,7 @@ export class AddUserComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.cleanUserForm(this.addUserForm);
     }
 
     createUserForm() {
@@ -34,13 +35,14 @@ export class AddUserComponent implements OnInit {
         });
     }
 
-    cleanUserForm() {
-        if(this.addUserForm.valid){
-            this.addUserForm.reset();
+    cleanUserForm(formulario: FormGroup) {
+        if(formulario.valid){
+            formulario.reset();
         }
     }
 
     onNoClick(): void {
+        this.cleanUserForm(this.addUserForm);
         this.dialogRef.close();
       }
 
@@ -52,7 +54,7 @@ export class AddUserComponent implements OnInit {
             this.onNoClick();
             this.saved.emit(true);
             console.log(response);
-            this.cleanUserForm();
+            this.cleanUserForm(this.addUserForm);
           }, (err) => {
             console.log(err);
           });

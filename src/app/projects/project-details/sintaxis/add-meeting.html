@@ -1,29 +1,46 @@
-<h1>AGREGAR REUNI&Oacute;N</h1>
-<div class="mleft">
-  <p>Objetivo</p>
-  <input class="objetivo" [(ngModel)]="data.resumen">
-</div>
-<div class="mleft dib dFecha">
-  <p>Fecha Reuni&oacute;n</p>
-  <i class="material-icons">event_note</i><input class="fecha" [(ngModel)]="data.fecha">
-</div>
-<div class="dib dHoraIni">
-  <p>Hora de inicio</p>
-  <i class="material-icons">query_builder</i><input class="hora">
-</div>
-<div class="dib dHoraFin">
-  <p>Hora de termino</p>
-  <i class="material-icons">query_builder</i><input class="hora" >
-</div>
-<div class="mleft">
-  <p>Asistentes</p>
-  <!--TODO!-->
-</div>
-<div class="addAttendant mleft">
-  <button class="button-a">Agregar asistente</button>
-</div>
-<div class="separator"></div>
-<div class="button-container">
-  <button class="button-a" mat-button (click)="onCancelarClick()">CANCELAR</button>
-  <button class="button-b" mat-button [mat-dialog-close]="data" cdkFocusInitial>AGREGAR REUNI&Oacute;N</button>
+<div class="container">
+    <h4>AGREGAR REUNIÓN</h4>
+    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+    <form action="" [formGroup]="addMeetingForm" (ngSubmit)="postMeeting()">
+        <div class="campoTexto">
+            <label for="objetivo">Objetivo Reunión</label>
+             <input [(ngModel)]="Reunion.resumen" formControlName="objetivo"  type="text">
+        </div>
+        <div class="campoFecha">
+            <label for="startDate">Fecha Reunión</label>
+            <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span><input [(ngModel)]="Reunion.fecha" formControlName="fecha" type="date">
+        </div>
+
+        <div class="campoFecha">
+            <label for="startHoraH">Hora Inicio</label>
+            <span class="fechaIconoContainer"><mat-icon class="fechaIcono">query_builder</mat-icon></span><input [(ngModel)]="Reunion.horaInicio" formControlName="horaInicio" type="time">
+        </div>
+        <div class="campoFecha">
+            <label for="startHoraF">Hora Termino</label>
+            <span class="fechaIconoContainer"><mat-icon class="fechaIcono">query_builder</mat-icon></span><input [(ngModel)]="Reunion.horaFin" formControlName="horaFin" type="time">
+        </div>
+
+        <div class="miembros">
+            <h4>Asistentes Reunión</h4>
+            <div class="miembro" *ngFor="let member of Reunion.usuarioActa">
+                <h4>{{ member.nombre }}</h4>
+                <mat-icon class="deleteMember" (click)="deleteMember(member)">delete</mat-icon>
+                <p>{{ member.username }}</p>
+            </div>
+            <div class="add">
+                <mat-select class="selectedMember" [(ngModel)]="selectedMember" formControlName="selectedMember">
+                    <mat-option *ngFor="let user of Project.usuariosNuevoProyecto" [value]="user">
+                        {{ user.nombre }}
+                    </mat-option>
+                </mat-select>
+                <button class="addMember" type="button" (click)= "addMember()">Agregar Miembro</button>
+            </div>
+            
+            <mat-divider></mat-divider>
+            <div class="botonera">
+                <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+                <button class="crearReunion" type="submit" [disabled]="!addMeetingForm.valid">CREAR NUEVA REUNIÓN</button>
+            </div>
+        </div>
+    </form>
 </div>

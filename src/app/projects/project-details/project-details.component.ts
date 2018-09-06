@@ -9,8 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { Project } from "app/models/project";
 import { Reunion } from "app/models/reunion";
 import { User } from "app/models/user";
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { TemaActa } from '../../models/tema';
+import { FormGroup } from '@angular/forms';
 import { AddMeetingComponent } from './sintaxis/add-meeting';
 
 
@@ -31,8 +30,8 @@ export class ProjectDetailsComponent implements OnInit {
   
   constructor(private projectService: ProjectsService, 
       private userService: UsersService, private route: ActivatedRoute, 
-    public Reunion: Reunion, private fb: FormBuilder, private dialog: MatDialog) {
-
+    public Reunion: Reunion, private dialog: MatDialog) {
+      
       }
 
   ngOnInit() {
@@ -46,8 +45,6 @@ export class ProjectDetailsComponent implements OnInit {
         },(err)=>{
           console.log(err);
         });
-    //this.getListUsers();
-    //this.createMeetingForm();
   }
 
   listarReuniones(){
@@ -61,10 +58,6 @@ export class ProjectDetailsComponent implements OnInit {
         console.log(err);
       }
     );
-  }
-
-  private guardarReunion(reunion: Reunion): void{
-    console.log("Nueva Reu: " + JSON.stringify(reunion));
   }
 
   selectMeeting(acta: Reunion = undefined){
@@ -91,60 +84,13 @@ export class ProjectDetailsComponent implements OnInit {
   openAddMeeting(): void{
     let dialogRef = this.dialog.open(AddMeetingComponent, {
         width: '744px',
-        height: '533px',
-        data: new Reunion()
+        height: '433px',
+        data: this.project
     });
 
     dialogRef.afterClosed().subscribe(result =>{
-      this.guardarReunion(result)
+      this.listarReuniones();
     })
-  }
-  
-  //**METODOS PARA CREAR UNA REUNIÓN */
-  listOfUsers: Array<Object>;
-  addThemeForm: FormGroup;
-  themeList: any[] = [];
-  nuevaReunion: Reunion;
-  themeCounter: any = 0;
-  public selectedMember: Object;
-  private _differ: any;
-  temaSelectedActa: FormArray;
-
-  createMeetingForm() {
-    this.addMeetingForm = this.fb.group({
-      fecha: [this.Reunion.fecha, Validators.required],
-      resumen: [this.Reunion.resumen, Validators.required],
-      usuarioActa: [this.Reunion.usuarioActa, Validators.required],
-      selectedMember: [this.selectedMember]
-    });
-  }
-
-  crearReunion(){
-    /*this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
-      Object.assign({secretario: 'N', asiste: 'S'},{username: cv.username})
-    ));*/
-    var payload = Object.assign({ proyectoId: this.projectId}, this.Reunion);
-    this.projectService.postReunion(payload)
-      .subscribe((response) => {
-        console.log(response);
-        this.saving = false;
-        this.listarReuniones();
-      }), (err) => {
-        console.log(err);
-      };
-  }
-
-  getListUsers(){
-    this.userService.getListUsers().subscribe(
-      (response: Array<Object>) => {
-        this.listOfUsers = response.map((cv) => {
-          return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}`}, cv);
-        });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   }
 
 }

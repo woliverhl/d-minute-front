@@ -23,8 +23,14 @@ export class AddProjectDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,) { 
       this.createProjectForm();
       this.Project.usuariosNuevoProyecto = [];
+      this.cleanUserForm(this.addProjectForm);
     }
 
+    cleanUserForm(formulario: FormGroup) {
+      if(formulario.valid){
+          formulario.reset();
+      }
+  }
 
   ngOnInit() {
     setTimeout(() => {
@@ -62,6 +68,7 @@ export class AddProjectDialog implements OnInit {
   }
 
   onNoClick(): void {
+    this.cleanUserForm(this.addProjectForm);
     this.dialogRef.close();
   }
 
@@ -80,6 +87,7 @@ export class AddProjectDialog implements OnInit {
         this.onNoClick();
         this.saved.emit(true);
         console.log(response);
+        this.cleanUserForm(this.addProjectForm);
       }, (err) => {
         console.log(err);
       });

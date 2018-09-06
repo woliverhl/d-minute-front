@@ -1,5 +1,4 @@
 import { TemaActa } from "./tema";
-import { UsuarioActa } from "./usuarioActa";
 import { ElementoDialogo } from "./ElementoDialogo";
 
 export class Reunion {
@@ -11,7 +10,7 @@ export class Reunion {
     public correlativo: Number;
     public estado: String;
     public proyectoId : Number;
-    public usuarioActa : UsuarioActa[];
+    public usuarioActa : Array<Object>;
     public temaActa: TemaActa[];
     public tareaPendiente: ElementoDialogo[];
     public actaId: Number;
