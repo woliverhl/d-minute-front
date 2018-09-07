@@ -26,7 +26,6 @@ import { UsersService } from '../../../user/service/users.service';
         @Inject(MAT_DIALOG_DATA) public data: Project) {
             this.Project = data; 
             this.createMeetingForm();
-            this.listaUserProyecto();
             this.Reunion.usuarioActa = [];
         }
 
@@ -36,28 +35,26 @@ import { UsersService } from '../../../user/service/users.service';
           objetivo: [this.Reunion.resumen, Validators.required],
           usuarioActa: [this.Reunion.usuarioActa, Validators.required],
           horaInicio: [this.Reunion.horaInicio, Validators.required],
-          horaFin: [this.Reunion.horaFin, Validators.required],
           selectedMember: [this.selectedMember]
         });
       }
 
     ngOnInit() {
         setTimeout(() => {
-          this.userService.getListUsers().subscribe(
-            (response:Array<Object>) => {
-              this.listOfUsers = response.map((cv) => {
-                return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}` }, cv);
-              });
-            },
-            (err) => {
-              console.log(err)
-            }
-          );
+          this.projectService.getProjectById(this.Project.proyectoId.toString()).subscribe(
+            (response: Project) => {
+              this.Project = response;
+            },(err)=>{
+              console.log(err);
+            });
         }, 0);
     }
 
     postMeeting(){
         if(this.addMeetingForm.valid){
+          this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, i) => {
+            return {username: cv['username'], asiste: "S", secretario: "N"};
+          });
           let postObject = Object.assign({ proyectoId: this.Project.proyectoId}, this.Reunion);
           this.projectService.postReunion(postObject).subscribe((response) => {
             this.onNoClick();
@@ -70,32 +67,23 @@ import { UsersService } from '../../../user/service/users.service';
         }
       }
 
-    listaUserProyecto(){
-        this.projectService.getProjectById(this.Project.proyectoId.toString()).subscribe(
-            (response: Project) => {
-              this.Project = response;
-            },(err)=>{
-              console.log(err);
-            });
-      }
-
       addMember():void{
-        if (this.selectedMember != undefined && !this.Project.usuariosNuevoProyecto.includes(this.selectedMember)){
-          this.Project.usuariosNuevoProyecto.push(this.selectedMember);
-          let index = this.listOfUsers.indexOf(this.selectedMember);
-          this.listOfUsers.splice(index, 1) 
+        if (this.selectedMember != undefined && !this.Reunion.usuarioActa.includes(this.selectedMember)){
+          this.Reunion.usuarioActa.push(this.selectedMember);
+          let index = this.Project.usuariosNuevoProyecto.indexOf(this.selectedMember);
+          this.Project.usuariosNuevoProyecto.splice(index, 1) 
           this.selectedMember = undefined;
         }
       }
-    
+
+      deleteMember(miembro: Object): void{
+        let index = this.Reunion.usuarioActa.indexOf(miembro);
+        index > -1 ? this.Reunion.usuarioActa.splice(index, 1) : console.log('Member Not Found');
+      }
+
       onNoClick(): void {
         this.cleanUserForm(this.addMeetingForm);
         this.dialogRef.close();
-      }
-    
-      deleteMember(miembro: Object): void{
-        let index = this.Project.usuariosNuevoProyecto.indexOf(miembro);
-        index > -1 ? this.Project.usuariosNuevoProyecto.splice(index, 1) : console.log('Member Not Found');
       }
 
       cleanUserForm(formulario: FormGroup) {

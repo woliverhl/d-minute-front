@@ -18,10 +18,7 @@
             <label for="deathLine">Fecha Termino Estimada</label>
             <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span><input [(ngModel)]="Project.fechaFin" formControlName="deathLine" type="date">
         </div>
-        <div class="miembros">
-            <div class="campoTexto">
-
-            </div>
+        <div class="miembros">            
             <h4>Miembros del Equipo</h4>
             <div class="miembro" *ngFor="let member of Project.usuariosNuevoProyecto">
                 <h4>{{ member.nombre }}  {{ member.apellido }}</h4>
@@ -36,12 +33,11 @@
                 </mat-select>
                 <button class="addMember" type="button" (click)= "addMember()">Agregar Miembro</button>
             </div>
-            
-            <mat-divider></mat-divider>
-            <div class="botonera">
-                <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-                <button class="crearProyecto" type="submit" [disabled]="!addProjectForm.valid">CREAR NUEVO PROYECTO</button>
-            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="botonera">
+            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+            <button class="crearProyecto" type="submit" [disabled]="!addProjectForm.valid">CREAR NUEVO PROYECTO</button>
         </div>
     </form>
 </div>

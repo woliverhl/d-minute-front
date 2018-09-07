@@ -35,12 +35,11 @@
                 </mat-select>
                 <button class="addMember" type="button" (click)= "addMember()">Agregar Miembro</button>
             </div>
-            
-            <mat-divider></mat-divider>
-            <div class="botonera">
-                <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-                <button class="crearReunion" type="submit" [disabled]="!addMeetingForm.valid">CREAR NUEVA REUNIÓN</button>
-            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="botonera">
+            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+            <button class="crearReunion" type="submit" [disabled]="!addMeetingForm.valid">CREAR NUEVA REUNIÓN</button>
         </div>
     </form>
 </div>

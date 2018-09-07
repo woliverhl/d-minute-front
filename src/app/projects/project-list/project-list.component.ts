@@ -41,7 +41,6 @@ export class ProjectListComponent implements OnInit {
   openProyectDialog(): void{
     let dialogRef = this.dialog.open(AddProjectDialog, {
       width: '744px',
-      height: '533px',
       data: {}
     });
 
@@ -51,7 +50,6 @@ export class ProjectListComponent implements OnInit {
   openUserDialog(): void{
     let dialogRef = this.dialog.open(AddUserComponent, {
       width: '744px',
-      height: '433px',
       data: {}
     });
 

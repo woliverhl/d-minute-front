@@ -84,7 +84,6 @@ export class ProjectDetailsComponent implements OnInit {
   openAddMeeting(): void{
     let dialogRef = this.dialog.open(AddMeetingComponent, {
         width: '744px',
-        height: '433px',
         data: this.project
     });
 

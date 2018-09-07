@@ -4,7 +4,7 @@
     h4{
         text-align: center;
         display: inline-block;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -12,13 +12,13 @@
         letter-spacing: normal;
         color: #333333;
         width: 95%;
-        margin-bottom: 43px;
+        margin-bottom: 10px;
     }
     .closeModalButton{
         position: relative;
         top: 0;
         right: 0;
-        font-size: 18px;
+        font-size: 14px;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
@@ -32,7 +32,7 @@
         label{
             display: block;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
         input{
             width: 316px;
@@ -50,7 +50,7 @@
         label{
             display: block;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
         input{
             width: 130px;
@@ -68,7 +68,7 @@
             padding: 5.5px 0px 4px 8px;
             vertical-align: middle;
             .fechaIcono{
-                font-size: 14px;
+                font-size: 12px;
                 color: #9b9b9b;
             }
         }
@@ -99,7 +99,7 @@
                 width: 89%;
             }
             mat-icon{
-                font-size: 16px;
+                font-size: 14px;
                 color: #00a1f0;
                 margin-top: 8px;
             }
@@ -111,6 +111,7 @@
             }
         }
         .add{
+            font-size: 14px;
             display: block;
             margin-bottom: 25px;
             .selectedMember{
@@ -122,6 +123,7 @@
                 padding: 10px;
             }
             .addMember{
+                font-size: 14px;
                 margin-left: 16px;
                 width: 161px;
                 height: 48px;
@@ -137,7 +139,8 @@
         margin-bottom: 25px;
     }
     .botonera{
-        text-align: center;
+        text-align: center;        
+        font-size: 14px;
         .cancelar{
             width: 182px;
             height: 48px;

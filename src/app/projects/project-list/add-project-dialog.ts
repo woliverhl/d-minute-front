@@ -67,11 +67,6 @@ export class AddProjectDialog implements OnInit {
     }
   }
 
-  onNoClick(): void {
-    this.cleanUserForm(this.addProjectForm);
-    this.dialogRef.close();
-  }
-
   deleteMember(miembro: Object): void{
     let index = this.Project.usuariosNuevoProyecto.indexOf(miembro);
     index > -1 ? this.Project.usuariosNuevoProyecto.splice(index, 1) : console.log('Member Not Found');
@@ -79,7 +74,6 @@ export class AddProjectDialog implements OnInit {
 
   postProject(){
     if(this.addProjectForm.valid){
-      let postObject = Object.assign({}, this.Project);
       this.Project.usuariosNuevoProyecto = this.Project.usuariosNuevoProyecto.map((cv, i) => {
         return {username: cv['username']};
       });
@@ -93,6 +87,11 @@ export class AddProjectDialog implements OnInit {
       });
     }
     
+  }
+  
+  onNoClick(): void {
+    this.cleanUserForm(this.addProjectForm);
+    this.dialogRef.close();
   }
 
 }
