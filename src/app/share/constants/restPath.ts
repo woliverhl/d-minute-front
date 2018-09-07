@@ -20,6 +20,7 @@ export class restPath {
     public projectById = '/proyecto/proyectoid/';
     public getProyect = '/proyecto/proyectoid?proyectoid='; 
     public listProyects = '/proyecto/listarProyectoUsuario';
+    public listarMinutaProyectoById = '/bff/listarMinutaProyecto/';
     //***FIN OPCIONES DE PROYECTO***//
 
     //***INICIO OPCIONES DE ACTA O REUNION ***//    

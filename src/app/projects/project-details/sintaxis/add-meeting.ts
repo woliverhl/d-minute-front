@@ -33,8 +33,9 @@ import { UsersService } from '../../../user/service/users.service';
         this.addMeetingForm = this.fb.group({
           fecha: [this.Reunion.fecha, Validators.required],
           objetivo: [this.Reunion.resumen, Validators.required],
-          usuarioActa: [this.Reunion.usuarioActa, Validators.required],
           horaInicio: [this.Reunion.horaInicio, Validators.required],
+          usuarioActa: [this.Reunion.usuarioActa, ],
+          horaFin: [this.Reunion.horaFin, ],
           selectedMember: [this.selectedMember]
         });
       }
@@ -82,7 +83,6 @@ import { UsersService } from '../../../user/service/users.service';
       }
 
       onNoClick(): void {
-        this.cleanUserForm(this.addMeetingForm);
         this.dialogRef.close();
       }
 

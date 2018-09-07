@@ -52,4 +52,8 @@ export class ProjectsService {
     return this.http.get(`${this.restPath.APP}${this.restPath.listarTema}${actaId}`);
   }
 
+  listarMinutaProyecto(projectId: String){
+    return this.http.get(`${this.restPath.APP}${this.restPath.listarMinutaProyectoById}${projectId}`);
+  }
+
 }

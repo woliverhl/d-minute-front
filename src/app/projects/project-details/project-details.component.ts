@@ -11,6 +11,7 @@ import { Reunion } from "app/models/reunion";
 import { User } from "app/models/user";
 import { FormGroup } from '@angular/forms';
 import { AddMeetingComponent } from './sintaxis/add-meeting';
+import { ActaDialogica } from '../../models/ActaDialogica';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { AddMeetingComponent } from './sintaxis/add-meeting';
 })
 export class ProjectDetailsComponent implements OnInit {
 
+  actaDialogica: ActaDialogica;
   project: Project;
   projectId: Number;
   reuniones: Reunion [];
@@ -37,10 +39,11 @@ export class ProjectDetailsComponent implements OnInit {
   ngOnInit() {
     this.saving = false;
     this.route.paramMap.switchMap((params: ParamMap) =>
-      this.projectService.getProjectById(params.get('id'))).subscribe(
-        (response: Project) => {
-          this.projectId = response['proyectoId'];
-          this.project = response;
+      this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
+        (response: ActaDialogica) => {
+          this.actaDialogica = response;
+          this.projectId = this.actaDialogica.proyectoDto.proyectoId;
+          this.project = this.actaDialogica.proyectoDto;
           this.project !== undefined ? this.listarReuniones() : undefined;
         },(err)=>{
           console.log(err);
@@ -48,16 +51,10 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   listarReuniones(){
-    this.projectService.listReunion(this.project.proyectoId).subscribe(
-      (response: Reunion[]) => {
-        this.reuniones = response;
-        this.activeMeeting = this.reuniones.length > 0 ? this.reuniones[0] : undefined;
-        this.saving = this.reuniones.length === 0 || this.reuniones.length === undefined ? true : false;
-        this.selectMeeting();
-      },(err) =>{
-        console.log(err);
-      }
-    );
+    this.reuniones = this.actaDialogica.listaActa;
+    this.activeMeeting = this.reuniones.length > 0 ? this.reuniones[0] : undefined;
+    this.saving = this.reuniones.length === 0 || this.reuniones.length === undefined ? true : false;
+    this.selectedMeeting  = this.reuniones[0];
   }
 
   selectMeeting(acta: Reunion = undefined){
@@ -87,9 +84,10 @@ export class ProjectDetailsComponent implements OnInit {
         data: this.project
     });
 
-    dialogRef.afterClosed().subscribe(result =>{
-      this.listarReuniones();
-    })
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
+  reloadList(isPosted:boolean):void{
+    isPosted ? this.ngOnInit(): undefined;
+  }
 }
