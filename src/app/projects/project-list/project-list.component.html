@@ -32,10 +32,8 @@
             <ng-container matColumnDef="acciones">
               <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
               <mat-cell *matCellDef="let e">
-                <a [routerLink]="['/project', e.proyectoId]"> 
-                  <i class="material-icons">edit</i>
-                </a>
-                <i class="material-icons">delete</i>
+                  <i class="material-icons" (click)="editProyectDialog(e.proyectoId)">edit</i>
+                  <i class="material-icons" (click)="deleteProyectDialog(e.proyectoId)">delete</i>
               </mat-cell>
             </ng-container>
 

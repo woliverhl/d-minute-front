@@ -1,4 +1,5 @@
 import { TemaActa } from "./tema";
+import { Reunion } from "./reunion";
 export class Project {
     constructor(){}
     public nombre: string;
@@ -7,4 +8,5 @@ export class Project {
     public fechaFin: Date;
     public usuariosNuevoProyecto: Array<Object>;
     public proyectoId: Number;
+    public meet: Reunion;
 }

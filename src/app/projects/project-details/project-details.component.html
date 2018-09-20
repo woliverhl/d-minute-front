@@ -11,7 +11,7 @@
     <div *ngIf="project !== undefined" class="meeting-list">
       <div class="meeting-items" *ngFor="let reu of reuniones">
         <a class="meeting-item" (click)="selectMeeting(reu)" [class.selected]="wasClicked">
-          Reuni&oacute;n {{ reu.fecha | date: 'dd/MM/yyyy hh:mm' }}
+          Reuni&oacute;n {{ reu.fecha | date: 'dd/MM/yyyy' }} - {{ reu.horaInicio }} 
         </a>
       </div>
     </div>
@@ -22,12 +22,21 @@
         <div class="details-container-mettings">
           <div class="meeting-detail">
             <div class="meeting-detail-titulo" *ngIf="selectedMeeting !== undefined">
-              <h5>Reuni&oacute;n {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }}</h5>
-              <h6>Objetivo: {{ selectedMeeting.resumen }}</h6>
+             
+              <div class="encabezado">REUNI&Oacute;N {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }} - INICIO {{ selectedMeeting.horaInicio }}hrs. 
+                - TERMINO {{ selectedMeeting.horaFin }}hrs.
+              </div>
+              <a class="agregarTema" (click)="openEditMeeting()" [class.selected]="wasClicked">
+                  [+] AGREGAR TEMA
+            </a>
+            <i class="material-icons" >print</i>
+            <i class="material-icons" (click)="openEditMeeting()">edit</i>
+            <i class="material-icons" >delete</i>
+              <h6>OBJETIVO: {{ selectedMeeting.resumen }}</h6>
             </div>
             <div *ngIf="selectedMeeting !== undefined && selectedMeeting.usuarioActa.length > 0">
                 <div class="participantes">
-                  <h5>Participantes</h5>
+                  <h5>PARTICIPANTES</h5>
                   <div class="participante" *ngFor="let user of selectedMeeting.usuarioActa">
                       {{user.nombre | capitalize }}
                     </div>
@@ -40,8 +49,8 @@
                   <p >
                     {{theme.discusion}}
                   </p>
-                  <h6>Elementos de di&aacute;logo</h6>
-                  <ul>
+                  <h6>ELEMENTOS DE DI&Aacute;LOGO</h6>
+                  <ul class="elementos">
                     <li *ngFor="let e of theme.elementoDialogoDto">{{e.descripcion}}</li>
                   </ul>
                 </div>

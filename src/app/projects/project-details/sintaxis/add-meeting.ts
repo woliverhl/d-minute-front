@@ -24,9 +24,12 @@ import { UsersService } from '../../../user/service/users.service';
         private projectService: ProjectsService, private userService: UsersService,
         private fb: FormBuilder, public Reunion: Reunion,
         @Inject(MAT_DIALOG_DATA) public data: Project) {
-            this.Project = data; 
-            this.createMeetingForm();
-            this.Reunion.usuarioActa = [];
+          this.Project = data; 
+          this.createMeetingForm();
+          this.Reunion.usuarioActa = [];          
+            if (this.data.meet != undefined){
+              this.Reunion = this.data.meet;
+            }
         }
 
     createMeetingForm() {
@@ -56,6 +59,9 @@ import { UsersService } from '../../../user/service/users.service';
           this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, i) => {
             return {username: cv['username'], asiste: "S", secretario: "N"};
           });
+          if (this.Project.meet != undefined){
+            this.Reunion.actaId = this.Project.meet.actaId;
+          }
           let postObject = Object.assign({ proyectoId: this.Project.proyectoId}, this.Reunion);
           this.projectService.postReunion(postObject).subscribe((response) => {
             this.onNoClick();

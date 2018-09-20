@@ -90,4 +90,15 @@ export class ProjectDetailsComponent implements OnInit {
   reloadList(isPosted:boolean):void{
     isPosted ? this.ngOnInit(): undefined;
   }
+
+  openEditMeeting(){
+    this.project.meet=this.selectedMeeting;
+    let dialogRef = this.dialog.open(AddMeetingComponent, {
+      width: '744px',
+      data: this.project
+  });
+
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
 }

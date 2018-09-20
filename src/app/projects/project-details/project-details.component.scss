@@ -1,5 +1,5 @@
 h5{
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .details-container{
@@ -9,7 +9,7 @@ h5{
     width: 80%;
     font-family: 'Source Sans Pro', sans-serif;
     h1{
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
         margin: 0 0 8px 50px;
     }
@@ -44,9 +44,10 @@ h5{
             border: solid 1px #0081f0;
             background-color: #FFFFFF;
             color: #0081f0;
-            font-size: 16px; 
+            font-size: 14px; 
             margin-top: 16px;
             align-self: center;
+            cursor: pointer;
         }
     }
     .tab-container{
@@ -72,15 +73,33 @@ h5{
     .meeting-detail-titulo{
         color: #333333;
         margin-left: 16px;
-        font-size: 16px;
-        h5{
+        font-size: 14px;
+        .encabezado{
             font-weight: 600;
             margin-top: 16px;
+            font-size: 12px;
         }
         h6{
             font-weight: 400;
             color: #9b9b9b;
-            margin-top: 9px;
+            font-size: 12px;
+        }
+        .agregarTema {
+            width: 97px;
+            height: 18px;
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: normal;
+            text-align: center;
+            color: #00a1f0;
+            cursor: pointer;
+          }
+          i{
+            color: #00a1f0;
+            font-size: 14px;
+            margin: 0px 12px 0px 12px;
+            cursor: pointer;
         }
     }
 
@@ -152,7 +171,7 @@ h5{
 
 /deep/.mat-tab-label{
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
 }
@@ -184,14 +203,14 @@ h5{
 
 .participantes{
     padding: 0 0 0 17px;
-    font-size: 16px;
+    font-size: 12px;
     .participante{
         display: inline-block;
         padding: 8px 0 0 8px;
         width: 310px;
         height: 37px;
         background-color: #ececec;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
         color: #333333;
         margin-right: 18px;
@@ -202,23 +221,28 @@ h5{
 .acta{
     background-color: #f8f8f8;
     margin: 8px 17px 8px 17px;
-    padding: 16px;
+    padding: 8px;
     h5{
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 600;
     }
     p{
-        font-size: 16px;
+        font-size: 12px;
         color: #9b9b9b;
     }
     h6{
-        font-size: 16px;
+        font-size: 12px;
         margin-left: 8px;
     }
+    .elementos{
+        font-size: 12px;
+        margin-left: 8px;
+    }
+
 }
 
 .separator{
     height: 2px;
     border: solid 1px #c5c5c5;
-    margin: 24px 17px 24px 17px;
+    margin: 0px 17px 0px 17px;
 }

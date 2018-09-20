@@ -25,6 +25,7 @@
         line-height: normal;
         letter-spacing: normal;
         color: #00a1f0;
+        cursor: pointer;
     }
     .campoTexto{
         width: 49%;
@@ -132,6 +133,7 @@
                 background-color: #ffffff;
                 color: #0081f0;
                 font-weight: 600;
+                cursor: pointer;
             }
         }
     }
@@ -149,6 +151,7 @@
             background-color: #ffffff;
             color: #0081f0;
             margin-right: 12px;
+            cursor: pointer;
         }
         .crearProyecto{
             width: 223px;
@@ -158,6 +161,7 @@
             background-color: #0081f0;
             color: #ffffff;
             margin-left: 12px;
+            cursor: pointer;
         }
     }
 }

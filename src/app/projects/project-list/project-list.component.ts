@@ -41,7 +41,7 @@ export class ProjectListComponent implements OnInit {
   openProyectDialog(): void{
     let dialogRef = this.dialog.open(AddProjectDialog, {
       width: '744px',
-      data: {}
+      data: "0"
     });
 
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -58,6 +58,24 @@ export class ProjectListComponent implements OnInit {
 
   reloadList(isPosted:boolean):void{
     isPosted ? this.listAllProjects(): undefined;
+  }
+
+  deleteProyectDialog(proyectoid: String): void{
+    let dialogRef = this.dialog.open(AddProjectDialog, {
+      width: '744px',
+      data: proyectoid
+    });
+
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  editProyectDialog(proyectoid: String): void{
+    let dialogRef = this.dialog.open(AddProjectDialog, {
+      width: '744px',
+      data: proyectoid
+    });
+
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
 }

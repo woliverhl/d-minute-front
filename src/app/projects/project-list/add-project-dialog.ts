@@ -16,14 +16,19 @@ export class AddProjectDialog implements OnInit {
   public addProjectForm: FormGroup;
   public selectedMember: Object;
   public saved: EventEmitter<any> = new EventEmitter();
+  projectId: String;
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectDialog>, private UsersService: UsersService, 
     private fb: FormBuilder, public Project: Project, private projectsService: ProjectsService,
-    @Inject(MAT_DIALOG_DATA) public data: any,) { 
+    @Inject(MAT_DIALOG_DATA) public data: String,) { 
       this.createProjectForm();
       this.Project.usuariosNuevoProyecto = [];
       this.cleanUserForm(this.addProjectForm);
+      if (data != "0"){
+        this.projectId = data;
+        this.loadProyectoExistente();
+      }
     }
 
     cleanUserForm(formulario: FormGroup) {
@@ -77,21 +82,42 @@ export class AddProjectDialog implements OnInit {
       this.Project.usuariosNuevoProyecto = this.Project.usuariosNuevoProyecto.map((cv, i) => {
         return {username: cv['username']};
       });
-      this.projectsService.addProject(this.Project).subscribe((response) => {
-        this.onNoClick();
-        this.saved.emit(true);
-        console.log(response);
-        this.cleanUserForm(this.addProjectForm);
-      }, (err) => {
-        console.log(err);
-      });
+      if (Number(this.projectId) == 0){
+        this.projectsService.addProject(this.Project).subscribe((response) => {
+          this.onNoClick();
+          this.saved.emit(true);
+          console.log(response);
+          this.cleanUserForm(this.addProjectForm);
+        }, (err) => {
+          console.log(err);
+        });
+      }
+      else{
+        this.Project.proyectoId = Number(this.projectId);
+        this.projectsService.editProject(this.Project).subscribe((response) => {
+          this.onNoClick();
+          this.saved.emit(true);
+          console.log(response);
+          this.cleanUserForm(this.addProjectForm);
+        }, (err) => {
+          console.log(err);
+        });
+      }
     }
-    
   }
   
   onNoClick(): void {
     this.cleanUserForm(this.addProjectForm);
     this.dialogRef.close();
+  }
+
+  loadProyectoExistente() {
+      this.projectsService.getProjectById(this.projectId).subscribe(
+        (response: Project) => {
+          this.Project = response;  
+        },(err)=>{
+          console.log(err);
+        });
   }
 
 }
