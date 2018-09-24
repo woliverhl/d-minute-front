@@ -79,6 +79,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   openAddMeeting(): void{
+    this.project.meet = undefined;
     let dialogRef = this.dialog.open(AddMeetingComponent, {
         width: '744px',
         data: this.project
@@ -97,7 +98,7 @@ export class ProjectDetailsComponent implements OnInit {
       width: '744px',
       data: this.project
   });
-
+    this.selectedMeeting = undefined;
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 

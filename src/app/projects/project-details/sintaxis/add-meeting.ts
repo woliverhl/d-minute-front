@@ -48,6 +48,27 @@ import { UsersService } from '../../../user/service/users.service';
           this.projectService.getProjectById(this.Project.proyectoId.toString()).subscribe(
             (response: Project) => {
               this.Project = response;
+              if ((this.Reunion.usuarioActa != undefined) && (this.Reunion.usuarioActa != [])){
+                if (this.Project.usuariosNuevoProyecto.length == this.Reunion.usuarioActa.length){
+                  this.Project.usuariosNuevoProyecto = [];
+                }
+                if ((this.Project.usuariosNuevoProyecto.length > this.Reunion.usuarioActa.length) && (this.Reunion.usuarioActa.length > 0)){
+                   let usuariosNuevoProyecto: Array<Object> = new Array<Object>();
+                   for (let indexi = 0; indexi < this.Project.usuariosNuevoProyecto.length; indexi++) {
+                     let val = 1;
+                      for (let indexj = 0; indexj < this.Reunion.usuarioActa.length; indexj++) {
+                        if (this.Project.usuariosNuevoProyecto[indexi]["username"] == this.Reunion.usuarioActa[indexj]["username"]){
+                          val = 0;
+                          break;
+                        }
+                      }
+                      if (val == 1){
+                        usuariosNuevoProyecto.push(this.Project.usuariosNuevoProyecto[indexi]);
+                      }
+                   }
+                   this.Project.usuariosNuevoProyecto = usuariosNuevoProyecto;
+                }
+              }
             },(err)=>{
               console.log(err);
             });
@@ -86,6 +107,7 @@ import { UsersService } from '../../../user/service/users.service';
       deleteMember(miembro: Object): void{
         let index = this.Reunion.usuarioActa.indexOf(miembro);
         index > -1 ? this.Reunion.usuarioActa.splice(index, 1) : console.log('Member Not Found');
+        this.Project.usuariosNuevoProyecto.push(miembro);
       }
 
       onNoClick(): void {

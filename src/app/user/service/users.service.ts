@@ -12,6 +12,10 @@ export class UsersService {
     return this.HttpClient.get(`${this.restPath.APP}${this.restPath.listUsers}`);
   }
 
+  postListUsersParam(entradaLista){
+    return this.HttpClient.post(`${this.restPath.APP}${this.restPath.listUsersParam}`, entradaLista);
+  }
+
   postUser(user){
     return this.HttpClient.post(`${this.restPath.APP}${this.restPath.usuarioGuardar}`, user);
   }

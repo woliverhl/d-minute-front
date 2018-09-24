@@ -7,8 +7,8 @@
     left: 30%;
     background-color: #FFFFFF;
     display: inline-block;
-    width: 473px;
-    height: 470px;
+    width: 453px;
+    height: 440px;
     z-index: 1000;
     padding: 24px 0px 0px 0px;
     &__welcome-message{
@@ -51,7 +51,7 @@
         height: 48px;
         border-radius: 6px;
         color: white;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
     }
     button:disabled{
@@ -67,7 +67,7 @@
         width: auto;
         height: 21px;
         margin: 2px 0px 0px 118px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
@@ -93,7 +93,7 @@
     color: #ffffff;
     font-family: Open Sans;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
     position: fixed;
     bottom: 0;
     left: 43%;

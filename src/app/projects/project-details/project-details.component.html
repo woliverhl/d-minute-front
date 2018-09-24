@@ -34,16 +34,18 @@
             <i class="material-icons" >delete</i>
               <h6>OBJETIVO: {{ selectedMeeting.resumen }}</h6>
             </div>
-            <div *ngIf="selectedMeeting !== undefined && selectedMeeting.usuarioActa.length > 0">
+            <div *ngIf="selectedMeeting !== undefined">
                 <div class="participantes">
                   <h5>PARTICIPANTES</h5>
-                  <div class="participante" *ngFor="let user of selectedMeeting.usuarioActa">
-                      {{user.nombre | capitalize }}
+                    <div *ngIf="selectedMeeting.usuarioActa !== undefined">
+                      <div class="participante" *ngFor="let user of selectedMeeting.usuarioActa">
+                          {{user.nombre | capitalize }}
+                        </div>
                     </div>
                   </div>
             </div> 
             <div class="separator"></div>
-            <div *ngIf="selectedMeeting !== undefined && selectedMeeting.temaActa.length > 0">
+            <div *ngIf="selectedMeeting !== undefined">
                 <div class="acta" *ngFor="let theme of selectedMeeting.temaActa">
                   <h5>{{theme.nombre}}</h5>
                   <p >

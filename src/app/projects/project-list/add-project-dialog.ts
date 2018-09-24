@@ -4,6 +4,7 @@ import { ProjectsService } from "app/projects/service/projects-service.service";
 import { UsersService } from "app/user/service/users.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Project } from "app/models/project";
+import { EntradaLista } from '../../models/EntradaLista';
 
 @Component({
   selector: 'add-project-dialog',
@@ -12,6 +13,9 @@ import { Project } from "app/models/project";
 })
 export class AddProjectDialog implements OnInit {
 
+  ngOnInit(): void {
+    
+  }
   public listOfUsers: any;
   public addProjectForm: FormGroup;
   public selectedMember: Object;
@@ -29,6 +33,9 @@ export class AddProjectDialog implements OnInit {
         this.projectId = data;
         this.loadProyectoExistente();
       }
+      else{
+        this.loadListaUser();
+      }
     }
 
     cleanUserForm(formulario: FormGroup) {
@@ -37,9 +44,27 @@ export class AddProjectDialog implements OnInit {
       }
   }
 
-  ngOnInit() {
+  loadListaUser() {
     setTimeout(() => {
       this.UsersService.getListUsers().subscribe(
+        (response:Array<Object>) => {
+          this.listOfUsers = response.map((cv) => {
+            return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}` }, cv);
+          });
+        },
+        (err) => {
+          console.log(err)
+        }
+      );
+    }, 0);
+  }
+
+  loadListaUserExiste() {
+    setTimeout(() => {
+      let entradaLista: EntradaLista = new EntradaLista();
+      entradaLista.numero = Number(this.projectId);
+      entradaLista.tipo = "PROY";
+      this.UsersService.postListUsersParam(entradaLista).subscribe(
         (response:Array<Object>) => {
           this.listOfUsers = response.map((cv) => {
             return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}` }, cv);
@@ -73,6 +98,7 @@ export class AddProjectDialog implements OnInit {
   }
 
   deleteMember(miembro: Object): void{
+    this.listOfUsers.push(miembro);
     let index = this.Project.usuariosNuevoProyecto.indexOf(miembro);
     index > -1 ? this.Project.usuariosNuevoProyecto.splice(index, 1) : console.log('Member Not Found');
   }
@@ -114,7 +140,8 @@ export class AddProjectDialog implements OnInit {
   loadProyectoExistente() {
       this.projectsService.getProjectById(this.projectId).subscribe(
         (response: Project) => {
-          this.Project = response;  
+          this.Project = response;
+          this.loadListaUserExiste();
         },(err)=>{
           console.log(err);
         });
