@@ -9,9 +9,10 @@ import { Observable } from 'rxjs/Observable';
 import { Project } from "app/models/project";
 import { Reunion } from "app/models/reunion";
 import { User } from "app/models/user";
+import { ActaDialogica } from '../../models/ActaDialogica';
 import { FormGroup } from '@angular/forms';
 import { AddMeetingComponent } from './sintaxis/add-meeting';
-import { ActaDialogica } from '../../models/ActaDialogica';
+import { AddTemaComponent } from './sintaxis/add-tema';
 
 
 @Component({
@@ -100,6 +101,29 @@ export class ProjectDetailsComponent implements OnInit {
   });
     this.selectedMeeting = undefined;
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openAddTema(): void{
+    let temaReunion = this.selectedMeeting
+    temaReunion.temaActa = undefined;
+    let dialogRef = this.dialog.open(AddTemaComponent, {
+        width: '744px',
+        data: temaReunion
+    });
+
+  dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openEditTema(temaId:any): void{
+    console.log(temaId);
+    let temaReunion = this.selectedMeeting
+    temaReunion.temaActa = undefined;
+    let dialogRef = this.dialog.open(AddTemaComponent, {
+        width: '744px',
+        data: temaReunion
+    });
+
+  dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
 }

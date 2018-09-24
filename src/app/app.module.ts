@@ -43,7 +43,7 @@ import { UsersListComponent } from './user/users-list/users-list.component';
 import { AddUserComponent } from './user/create-user/add-user';
 import { AddProjectDialog } from './projects/project-list/add-project-dialog';
 import { AddMeetingComponent } from './projects/project-details/sintaxis/add-meeting';
-
+import { AddTemaComponent } from './projects/project-details/sintaxis/add-tema';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -82,7 +82,8 @@ const appRoutes: Routes = [
     AddProjectDialog,
     SpinnerComponent,
     AddUserComponent,
-    AddMeetingComponent
+    AddMeetingComponent,
+    AddTemaComponent
   ],
   declarations: [
     AppComponent,
@@ -98,7 +99,8 @@ const appRoutes: Routes = [
     FooterComponent,
     BreadcrumbComponent,
     CapitalizePipe,
-    AddMeetingComponent
+    AddMeetingComponent,
+    AddTemaComponent
   ],
   imports: [
     BrowserModule,

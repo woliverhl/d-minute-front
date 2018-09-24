@@ -26,12 +26,12 @@
               <div class="encabezado">REUNI&Oacute;N {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }} - INICIO {{ selectedMeeting.horaInicio }}hrs. 
                 - TERMINO {{ selectedMeeting.horaFin }}hrs.
               </div>
-              <a class="agregarTema" (click)="openEditMeeting()" [class.selected]="wasClicked">
-                  [+] AGREGAR TEMA
-            </a>
-            <i class="material-icons" >print</i>
-            <i class="material-icons" (click)="openEditMeeting()">edit</i>
-            <i class="material-icons" >delete</i>
+            <div class="interno">
+                <a class="agregarTema" (click)="openAddTema()" [class.selected]="wasClicked">[+] AGREGAR TEMA</a>
+                <i class="material-icons" >print</i>
+                <i class="material-icons" (click)="openEditMeeting()">edit</i>
+                <i class="material-icons" >delete</i>
+            </div>
               <h6>OBJETIVO: {{ selectedMeeting.resumen }}</h6>
             </div>
             <div *ngIf="selectedMeeting !== undefined">
@@ -47,14 +47,21 @@
             <div class="separator"></div>
             <div *ngIf="selectedMeeting !== undefined">
                 <div class="acta" *ngFor="let theme of selectedMeeting.temaActa">
+                  <div class="interno">
+                      <a class="agregarElemento" (click)="openEditTema(theme.id)" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>
+                      <i class="material-icons" (click)="openEditTema(theme.id)">edit</i>
+                      <i class="material-icons" >delete</i>
+                  </div>
                   <h5>{{theme.nombre}}</h5>
                   <p >
                     {{theme.discusion}}
                   </p>
-                  <h6>ELEMENTOS DE DI&Aacute;LOGO</h6>
-                  <ul class="elementos">
-                    <li *ngFor="let e of theme.elementoDialogoDto">{{e.descripcion}}</li>
-                  </ul>
+                  <div *ngIf="theme.elementoDialogoDto.length > 0">
+                      <h6>ELEMENTOS DE DI&Aacute;LOGO</h6>
+                      <ul class="elementos">
+                        <li *ngFor="let e of theme.elementoDialogoDto">{{e.descripcion}}</li>
+                      </ul>
+                  </div>
                 </div>
             </div>           
           </div>
