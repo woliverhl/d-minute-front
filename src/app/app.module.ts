@@ -44,6 +44,7 @@ import { AddUserComponent } from './user/create-user/add-user';
 import { AddProjectDialog } from './projects/project-list/add-project-dialog';
 import { AddMeetingComponent } from './projects/project-details/sintaxis/add-meeting';
 import { AddTemaComponent } from './projects/project-details/sintaxis/add-tema';
+import { AddElementoDialogoComponent } from './projects/project-details/sintaxis/add-elemento-dialogo';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -52,12 +53,16 @@ import { User } from "app/models/user";
 import { Reunion } from "app/models/reunion";
 import { Usuario } from "app/models/usuario";
 import { TemaActa } from 'app/models/tema';
+import { ActaDialogica } from './models/ActaDialogica';
+import { ElementoDialogo } from './models/ElementoDialogo';
 
 //Services
 import { SessionService } from "app/session/service/session.service";
 import { ProjectsService } from "app/projects/service/projects-service.service";
 import { UsersService } from "app/user/service/users.service";
 import { SpinnerService } from "app/share/spinner/spinner.service";
+import { TemaService } from './projects/service/tema-service.service';
+import { ActaService } from './projects/service/acta-service.service';
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
@@ -67,6 +72,7 @@ import { authGuard } from "app/share/guards/authenticate-guard";
 
 //pipes
 import { CapitalizePipe } from "./share/pipe/capitalize-pipe";
+
 
 const appRoutes: Routes = [
   { path: 'sign-in', component: SignInComponent },
@@ -83,7 +89,8 @@ const appRoutes: Routes = [
     SpinnerComponent,
     AddUserComponent,
     AddMeetingComponent,
-    AddTemaComponent
+    AddTemaComponent,
+    AddElementoDialogoComponent
   ],
   declarations: [
     AppComponent,
@@ -100,7 +107,8 @@ const appRoutes: Routes = [
     BreadcrumbComponent,
     CapitalizePipe,
     AddMeetingComponent,
-    AddTemaComponent
+    AddTemaComponent,
+    AddElementoDialogoComponent
   ],
   imports: [
     BrowserModule,
@@ -144,9 +152,13 @@ const appRoutes: Routes = [
           Usuario,
           Reunion,
           ProjectsService,
+          TemaService,
+          ActaService,
           UsersService,
           authGuard,
           TemaActa,
+          ActaDialogica,
+          ElementoDialogo,
           SpinnerService
       ],
   bootstrap: [AppComponent]

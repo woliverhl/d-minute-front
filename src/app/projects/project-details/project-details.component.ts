@@ -14,6 +14,9 @@ import { FormGroup } from '@angular/forms';
 import { AddMeetingComponent } from './sintaxis/add-meeting';
 import { AddTemaComponent } from './sintaxis/add-tema';
 import { TemaActa } from '../../models/tema';
+import { ActaService } from '../service/acta-service.service';
+import { TemaService } from '../service/tema-service.service';
+import { AddElementoDialogoComponent } from './sintaxis/add-elemento-dialogo';
 
 
 @Component({
@@ -32,7 +35,8 @@ export class ProjectDetailsComponent {
   selectedMeeting: Reunion = undefined;
   ActivateMeeting: Reunion = undefined;
   
-  constructor(private projectService: ProjectsService, 
+  constructor(private projectService: ProjectsService, private actaService: ActaService, 
+      private temaService: TemaService, 
       private userService: UsersService, private route: ActivatedRoute, 
     public Reunion: Reunion, private dialog: MatDialog) {
       this.ngOnInit();
@@ -71,7 +75,7 @@ export class ProjectDetailsComponent {
   }
 
   getActaById(actaId:any):void{
-    this.projectService.getReunionById(actaId).subscribe(
+    this.actaService.getReunionById(actaId).subscribe(
       (data: Reunion) => {
         this.selectedMeeting = data;
       }, (err) => {
@@ -105,7 +109,7 @@ export class ProjectDetailsComponent {
   }
 
   openDelMeeting() {
-      this.projectService.postDelReunion(this.selectedMeeting).subscribe(
+      this.actaService.postDelReunion(this.selectedMeeting).subscribe(
         (response) => {
           this.ngOnInit();
       }, (err) => {
@@ -151,13 +155,22 @@ export class ProjectDetailsComponent {
       }
     }
     if (temaActaDel != undefined){
-      this.projectService.postDelTheme(temaActaDel).subscribe(
+      this.temaService.postDelTheme(temaActaDel).subscribe(
         (response) => {
           this.ngOnInit();
       }, (err) => {
         console.log(err);
       });
     }
+  }
+
+  openElementoDialogo(){
+    let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+      width: '744px'
+     // data: this.project
+  });
+    
+   // dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
 }

@@ -5,6 +5,7 @@ import { Reunion } from "app/models/reunion";
 import { Project } from '../../../models/project';
 import { ProjectsService } from '../../service/projects-service.service';
 import { UsersService } from '../../../user/service/users.service';
+import { ActaService } from '../../service/acta-service.service';
 
 @Component({
     selector: 'add-meeting',
@@ -22,6 +23,7 @@ import { UsersService } from '../../../user/service/users.service';
     constructor(
         public dialogRef: MatDialogRef<AddMeetingComponent>,
         private projectService: ProjectsService, private userService: UsersService,
+        private actaService: ActaService, 
         private fb: FormBuilder, public Reunion: Reunion,
         @Inject(MAT_DIALOG_DATA) public data: Project) {
           this.Project = data; 
@@ -84,7 +86,7 @@ import { UsersService } from '../../../user/service/users.service';
             this.Reunion.actaId = this.Project.meet.actaId;
           }
           let postObject = Object.assign({ proyectoId: this.Project.proyectoId}, this.Reunion);
-          this.projectService.postReunion(postObject).subscribe((response) => {
+          this.actaService.postReunion(postObject).subscribe((response) => {
             this.onNoClick();
             this.saved.emit(true);
             console.log(response);

@@ -10,31 +10,27 @@ import { TemaActa } from '../../models/tema';
 
 
 @Injectable()
-export class ProjectsService {
+export class ActaService {
 
   private httpOptions;
   private route: ActivatedRoute;
 
   constructor(private sessionService: SessionService, private http: HttpClient,private restPath:restPath) {}
 
-  listProjects(): Observable<Project[]>{
-    return this.http.get<Project[]>(`${this.restPath.APP}${this.restPath.listProyects}`);
+  postReunion(payload: Object){
+    return this.http.post(`${this.restPath.APP}${this.restPath.addActa}`, payload);
   }
 
-  addProject(project: Project){
-    return this.http.post(`${this.restPath.APP}${this.restPath.addProyect}`,project);
+  postDelReunion(payload: Object){
+    return this.http.post(`${this.restPath.APP}${this.restPath.delActa}`, payload);
   }
 
-  editProject(project: Project){
-    return this.http.post(`${this.restPath.APP}${this.restPath.editProyect}`,project);
+  listReunion(projectId: Number){
+    return this.http.get(`${this.restPath.APP}${this.restPath.listarReuniones}${projectId}`);
   }
 
-  getProjectById(projectId: String){
-    return this.http.get(`${this.restPath.APP}${this.restPath.projectById}${projectId}`);
-  }
-
-  delProjectById(projectId: String){
-    return this.http.get(`${this.restPath.APP}${this.restPath.delProjectById}${projectId}`);
+  getReunionById(actaId: String){
+    return this.http.get(`${this.restPath.APP}${this.restPath.getMeetingById}${actaId}`);
   }
 
   listarMinutaProyecto(projectId: String){
