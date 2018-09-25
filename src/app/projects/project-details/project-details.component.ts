@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Inject, DoCheck, NgModule, AfterContentInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, DoCheck, NgModule, AfterContentInit, ViewChild } from '@angular/core';
 import { NgSwitch } from '@angular/common';
 import { ProjectsService } from 'app/projects/service/projects-service.service';
 import { UsersService } from "app/user/service/users.service";
@@ -13,6 +13,7 @@ import { ActaDialogica } from '../../models/ActaDialogica';
 import { FormGroup } from '@angular/forms';
 import { AddMeetingComponent } from './sintaxis/add-meeting';
 import { AddTemaComponent } from './sintaxis/add-tema';
+import { TemaActa } from '../../models/tema';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { AddTemaComponent } from './sintaxis/add-tema';
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss']
 })
-export class ProjectDetailsComponent implements OnInit {
+export class ProjectDetailsComponent {
 
   actaDialogica: ActaDialogica;
   project: Project;
@@ -28,14 +29,14 @@ export class ProjectDetailsComponent implements OnInit {
   reuniones: Reunion [];
   public saving: Boolean;
   addMeetingForm: FormGroup;
-  activeMeeting: Reunion = undefined;
-  selectedMeeting: Reunion;
+  selectedMeeting: Reunion = undefined;
+  ActivateMeeting: Reunion = undefined;
   
   constructor(private projectService: ProjectsService, 
       private userService: UsersService, private route: ActivatedRoute, 
     public Reunion: Reunion, private dialog: MatDialog) {
-      
-      }
+      this.ngOnInit();
+    }
 
   ngOnInit() {
     this.saving = false;
@@ -53,9 +54,9 @@ export class ProjectDetailsComponent implements OnInit {
 
   listarReuniones(){
     this.reuniones = this.actaDialogica.listaActa;
-    this.activeMeeting = this.reuniones.length > 0 ? this.reuniones[0] : undefined;
     this.saving = this.reuniones.length === 0 || this.reuniones.length === undefined ? true : false;
-    this.selectedMeeting  = this.reuniones[0];
+    this.selectedMeeting  = this.reuniones.length > 0 ? this.reuniones[0] : undefined;
+    this.reloadList.bind(this);
   }
 
   selectMeeting(acta: Reunion = undefined){
@@ -103,6 +104,15 @@ export class ProjectDetailsComponent implements OnInit {
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
+  openDelMeeting() {
+      this.projectService.postDelReunion(this.selectedMeeting).subscribe(
+        (response) => {
+          this.ngOnInit();
+      }, (err) => {
+        console.log(err);
+      });
+  }
+
   openAddTema(): void{
     let temaReunion = this.selectedMeeting
     temaReunion.temaActa = undefined;
@@ -115,15 +125,39 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   openEditTema(temaId:any): void{
-    console.log(temaId);
     let temaReunion = this.selectedMeeting
-    temaReunion.temaActa = undefined;
+    let listaTemaActa: Array<TemaActa> = new Array<TemaActa>();
+    for (let indexi = 0; indexi < this.selectedMeeting.temaActa.length; indexi++) {
+      if (this.selectedMeeting.temaActa[indexi].id == Number(temaId)){
+        listaTemaActa.push(this.selectedMeeting.temaActa[indexi]);
+        break;
+      }
+    }
+    temaReunion.temaActa = listaTemaActa;
     let dialogRef = this.dialog.open(AddTemaComponent, {
         width: '744px',
         data: temaReunion
     });
-
   dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openDelTema(temaId:any): void{
+    let temaReunion = this.selectedMeeting
+    let temaActaDel: TemaActa = undefined;
+    for (let indexi = 0; indexi < this.selectedMeeting.temaActa.length; indexi++) {
+      if (this.selectedMeeting.temaActa[indexi].id == Number(temaId)){
+        temaActaDel = this.selectedMeeting.temaActa[indexi];
+        break;
+      }
+    }
+    if (temaActaDel != undefined){
+      this.projectService.postDelTheme(temaActaDel).subscribe(
+        (response) => {
+          this.ngOnInit();
+      }, (err) => {
+        console.log(err);
+      });
+    }
   }
 
 }

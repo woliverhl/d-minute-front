@@ -78,4 +78,13 @@ export class ProjectListComponent implements OnInit {
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
+  delProyectDialog(proyectoid: String) {
+    this.projectsService.delProjectById(proyectoid).subscribe(
+      (response: Project) => {
+        this.listAllProjects();
+      },(err)=>{
+        console.log(err);
+      });
+  }
+
 }

@@ -30,13 +30,13 @@
                 <a class="agregarTema" (click)="openAddTema()" [class.selected]="wasClicked">[+] AGREGAR TEMA</a>
                 <i class="material-icons" >print</i>
                 <i class="material-icons" (click)="openEditMeeting()">edit</i>
-                <i class="material-icons" >delete</i>
+                <i class="material-icons" (click)="openDelMeeting()">delete</i>
             </div>
               <h6>OBJETIVO: {{ selectedMeeting.resumen }}</h6>
             </div>
             <div *ngIf="selectedMeeting !== undefined">
                 <div class="participantes">
-                  <h5>PARTICIPANTES</h5>
+                  <h5>PARTICIPANTES:</h5>
                     <div *ngIf="selectedMeeting.usuarioActa !== undefined">
                       <div class="participante" *ngFor="let user of selectedMeeting.usuarioActa">
                           {{user.nombre | capitalize }}
@@ -48,9 +48,9 @@
             <div *ngIf="selectedMeeting !== undefined">
                 <div class="acta" *ngFor="let theme of selectedMeeting.temaActa">
                   <div class="interno">
-                      <a class="agregarElemento" (click)="openEditTema(theme.id)" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>
+                      <a class="agregarElemento" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>
                       <i class="material-icons" (click)="openEditTema(theme.id)">edit</i>
-                      <i class="material-icons" >delete</i>
+                      <i class="material-icons" (click)="openDelTema(theme.id)">delete</i>
                   </div>
                   <h5>{{theme.nombre}}</h5>
                   <p >

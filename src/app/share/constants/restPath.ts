@@ -17,6 +17,7 @@ export class restPath {
     //METODO POST
     public addProyect = '/proyecto/nuevoProyecto';
     public editProyect = '/proyecto/editarProyecto';
+    public delProjectById = '/proyecto/eliminarProyecto/';
     //METODO GET
     public projectById = '/proyecto/proyectoid/';
     public getProyect = '/proyecto/proyectoid?proyectoid='; 

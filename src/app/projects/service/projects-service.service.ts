@@ -6,6 +6,7 @@ import { restPath } from "../../share/constants/restPath";
 import { Project } from "../../models/project";
 import { Reunion } from "../../models/reunion";
 import { ParamMap, ActivatedRoute } from "@angular/router";
+import { TemaActa } from '../../models/tema';
 
 
 @Injectable()
@@ -32,8 +33,16 @@ export class ProjectsService {
     return this.http.get(`${this.restPath.APP}${this.restPath.projectById}${projectId}`);
   }
 
+  delProjectById(projectId: String){
+    return this.http.get(`${this.restPath.APP}${this.restPath.delProjectById}${projectId}`);
+  }
+
   postReunion(payload: Object){
     return this.http.post(`${this.restPath.APP}${this.restPath.addActa}`, payload);
+  }
+
+  postDelReunion(payload: Object){
+    return this.http.post(`${this.restPath.APP}${this.restPath.delActa}`, payload);
   }
 
   listReunion(projectId: Number){
@@ -48,8 +57,12 @@ export class ProjectsService {
     return this.http.get(`${this.restPath.APP}${this.restPath.getMeetingById}${actaId}`);
   }
 
-  postTheme(tema: any){
+  postTheme(tema: TemaActa){
     return this.http.post(`${this.restPath.APP}${this.restPath.guardarTema}`,tema);
+  }
+
+  postDelTheme(tema: TemaActa){
+    return this.http.post(`${this.restPath.APP}${this.restPath.delTema}`,tema);
   }
 
   listThemes(actaId:any){
