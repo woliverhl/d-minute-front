@@ -23,7 +23,7 @@
         letter-spacing: normal;
         color: #333333;
         text-align: left;
-        margin-bottom: 4px;
+        margin-bottom: 0px;
     }
     .closeModalButton{
         position: relative;
@@ -50,7 +50,7 @@
             color: #00a1f0;
             text-align: center
         }
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         .elementoIconoContainer{
             padding: 5.5px 0px 4px 8px;
             vertical-align: top;
@@ -73,10 +73,9 @@
         .selectedEstado{
             display: inline-block;
             width: 23%;
-            height: 48px;
-            border-radius: 6px;
-            border: solid 1px #0081f0;
-            padding: 10px;
+            height: 32px;
+            border: solid 1px #e8e8e8;
+            padding: 7px 16px 7px 16px;
         }
         margin-bottom: 24px;
     }
@@ -101,9 +100,10 @@
         .fechaIconoContainer{
             border: solid 1px #e8e8e8;
             border-right: none;
-            padding: 5.5px 0px 4px 8px;
+            padding: 5.5px 0px 4.5px 8px;
             vertical-align: middle;
             .fechaIcono{
+                font-family: 'Material Icons' !important;
                 font-size: 12px;
                 color: #9b9b9b;
             }
@@ -119,6 +119,7 @@
         }
         textarea{
             width: 516px;
+            height: 65px;
             border: solid 1px #e8e8e8;
             font-size: 12px;
             padding:9px 8px 8px 8px;
