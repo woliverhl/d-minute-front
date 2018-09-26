@@ -29,8 +29,8 @@ export class AddProjectDialog implements OnInit {
       this.createProjectForm();
       this.Project.usuariosNuevoProyecto = [];
       this.cleanUserForm(this.addProjectForm);
+      this.projectId = data;
       if (data != "0"){
-        this.projectId = data;
         this.loadProyectoExistente();
       }
       else{

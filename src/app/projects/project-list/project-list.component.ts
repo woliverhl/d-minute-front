@@ -1,8 +1,6 @@
-import { Component, OnInit, Inject, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectsService } from "app/projects/service/projects-service.service";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatPaginator, MatTableDataSource } from '@angular/material';
-import { UsersService } from "app/user/service/users.service";
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Project } from "app/models/project";
 import { AddUserComponent } from 'app/user/create-user/add-user';
 import { AddProjectDialog } from 'app/projects/project-list/add-project-dialog';
@@ -39,15 +37,6 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
-  openProyectDialog(): void{
-    let dialogRef = this.dialog.open(AddProjectDialog, {
-      width: '744px',
-      data: "0"
-    });
-
-    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
-  }
-
   openUserDialog(): void{
     let dialogRef = this.dialog.open(AddUserComponent, {
       width: '744px',
@@ -59,6 +48,15 @@ export class ProjectListComponent implements OnInit {
 
   reloadList(isPosted:boolean):void{
     isPosted ? this.listAllProjects(): undefined;
+  }
+
+  openProyectDialog(): void{
+    let dialogRef = this.dialog.open(AddProjectDialog, {
+      width: '744px',
+      data: "0"
+    });
+
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
   deleteProyectDialog(proyectoid: String): void{

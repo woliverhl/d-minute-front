@@ -46,6 +46,8 @@ import { AddMeetingComponent } from './projects/project-details/sintaxis/add-mee
 import { AddTemaComponent } from './projects/project-details/sintaxis/add-tema';
 import { AddElementoDialogoComponent } from './projects/project-details/sintaxis/add-elemento-dialogo';
 import { DelProjectDialog } from './projects/project-list/del-project-dialog';
+import { delMeetingComponent } from './projects/project-details/del-acta-dialog';
+import { delTemaComponent } from './projects/project-details/del-tema-dialog';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -93,6 +95,8 @@ const appRoutes: Routes = [
     AddUserComponent,
     AddMeetingComponent,
     AddTemaComponent,
+    delMeetingComponent,
+    delTemaComponent,
     AddElementoDialogoComponent
   ],
   declarations: [
@@ -103,6 +107,8 @@ const appRoutes: Routes = [
     ProjectListComponent,
     AddProjectDialog,
     DelProjectDialog,
+    delMeetingComponent,
+    delTemaComponent,
     SpinnerComponent,
     ProjectDetailsComponent,
     UsersListComponent,

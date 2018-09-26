@@ -1,0 +1,22 @@
+<div class="container">
+    <h4>ELIMINAR REUNION</h4>
+    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+    <form action="" [formGroup]="delActaForm" (ngSubmit)="delReunion()">
+        <div class="campoTexto">
+            <label for="name">Objetivo Reunión</label>
+            <div class="resumenActa">
+                {{Reunion.resumen}}
+            </div>
+        </div>
+        <div class="campoTexto">
+            <label for="fecha">Fecha Reunión</label>
+            <div class="fechaActa">
+                {{Reunion.fecha}}
+            </div>
+        </div>
+        <div class="botonera">
+            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+            <button class="aceptar" type="submit">ELIMINAR REUNION</button>
+        </div>
+    </form>
+</div>

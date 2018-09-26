@@ -4,7 +4,6 @@ import { ProjectsService } from "app/projects/service/projects-service.service";
 import { UsersService } from "app/user/service/users.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Project } from "app/models/project";
-import { EntradaLista } from '../../models/EntradaLista';
 
 @Component({
   selector: 'del-project-dialog',
@@ -71,59 +70,5 @@ export class DelProjectDialog implements OnInit {
     this.cleanUserForm(this.delProjectForm);
     this.dialogRef.close();
   }
-
-  /*addMember():void{
-    if (this.selectedMember != undefined && !this.Project.usuariosNuevoProyecto.includes(this.selectedMember)){
-      this.Project.usuariosNuevoProyecto.push(this.selectedMember);
-      let index = this.listOfUsers.indexOf(this.selectedMember);
-      this.listOfUsers.splice(index, 1) 
-      this.selectedMember = undefined;
-    }
-  }
-
-  deleteMember(miembro: Object): void{
-    this.listOfUsers.push(miembro);
-    let index = this.Project.usuariosNuevoProyecto.indexOf(miembro);
-    index > -1 ? this.Project.usuariosNuevoProyecto.splice(index, 1) : console.log('Member Not Found');
-  }
-
-  postProject(){
-    if(this.addProjectForm.valid){
-      this.Project.usuariosNuevoProyecto = this.Project.usuariosNuevoProyecto.map((cv, i) => {
-        return {username: cv['username']};
-      });
-      if (Number(this.projectId) == 0){
-        this.projectsService.addProject(this.Project).subscribe((response) => {
-          this.onNoClick();
-          this.saved.emit(true);
-          console.log(response);
-          this.cleanUserForm(this.addProjectForm);
-        }, (err) => {
-          console.log(err);
-        });
-      }
-      else{
-        this.Project.proyectoId = Number(this.projectId);
-        this.projectsService.editProject(this.Project).subscribe((response) => {
-          this.onNoClick();
-          this.saved.emit(true);
-          console.log(response);
-          this.cleanUserForm(this.addProjectForm);
-        }, (err) => {
-          console.log(err);
-        });
-      }
-    }
-  }
-  
-  loadProyectoExistente() {
-      this.projectsService.getProjectById(this.projectId).subscribe(
-        (response: Project) => {
-          this.Project = response;
-          this.loadListaUserExiste();
-        },(err)=>{
-          console.log(err);
-        });
-  }*/
 
 }

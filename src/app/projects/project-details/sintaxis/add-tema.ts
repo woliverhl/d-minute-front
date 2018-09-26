@@ -1,6 +1,5 @@
 import { Component, Inject, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Reunion } from "app/models/reunion";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { TemaActa } from '../../../models/tema';
 import { TemaService } from '../../service/tema-service.service';
@@ -14,23 +13,18 @@ import { TemaService } from '../../service/tema-service.service';
     
     addTemaForm: FormGroup;
     public saved: EventEmitter<any> = new EventEmitter();
-    public reunion: Reunion
     
     constructor(
         public dialogRef: MatDialogRef<AddTemaComponent>, 
         private fb: FormBuilder, public temaActa: TemaActa,
         private temaService: TemaService, 
-        @Inject(MAT_DIALOG_DATA) public data: Reunion) {
-            this.reunion = data;
+        @Inject(MAT_DIALOG_DATA) public data: TemaActa) {
+            this.temaActa = data;
             this.createTemaForm();
-            if ((this.reunion.temaActa != undefined) && (this.reunion.temaActa.length>0)){
-                this.temaActa = this.reunion.temaActa[0];
-            }
         }
 
     postTema(){
-        let postObject = Object.assign({ actaId: this.reunion.actaId}, this.temaActa);
-          this.temaService.postTheme(postObject).subscribe((response) => {
+        this.temaService.postTheme(this.temaActa).subscribe((response) => {
             this.cleanUserForm(this.addTemaForm);
             this.onNoClick();
             this.saved.emit(true);
