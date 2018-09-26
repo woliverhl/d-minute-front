@@ -45,6 +45,7 @@ import { AddProjectDialog } from './projects/project-list/add-project-dialog';
 import { AddMeetingComponent } from './projects/project-details/sintaxis/add-meeting';
 import { AddTemaComponent } from './projects/project-details/sintaxis/add-tema';
 import { AddElementoDialogoComponent } from './projects/project-details/sintaxis/add-elemento-dialogo';
+import { DelProjectDialog } from './projects/project-list/del-project-dialog';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -86,6 +87,7 @@ const appRoutes: Routes = [
 @NgModule({
   entryComponents: [
     AddProjectDialog,
+    DelProjectDialog,
     SpinnerComponent,
     AddUserComponent,
     AddMeetingComponent,
@@ -99,6 +101,7 @@ const appRoutes: Routes = [
     SignInComponent,
     ProjectListComponent,
     AddProjectDialog,
+    DelProjectDialog,
     SpinnerComponent,
     ProjectDetailsComponent,
     UsersListComponent,

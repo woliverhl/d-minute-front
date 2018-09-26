@@ -1,0 +1,22 @@
+<div class="container">
+    <h4>ELIMINAR PROYECTO</h4>
+    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+    <form action="" [formGroup]="delProjectForm" (ngSubmit)="delProject()">
+        <div class="campoTexto">
+            <label for="name">Nombre del proyecto</label>
+            <div class="nombreProyecto">
+                {{Project.nombre}}
+            </div>
+        </div>
+        <div class="campoTexto">
+            <label for="description">Descripci&oacute;n del proyecto</label>
+            <div class="descripcionProyecto">
+                {{Project.descripcion}}
+            </div>
+        </div>
+        <div class="botonera">
+            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+            <button class="crearProyecto" type="submit">ELIMINAR PROYECTO</button>
+        </div>
+    </form>
+</div>
