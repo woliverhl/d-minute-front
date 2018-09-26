@@ -9,11 +9,11 @@ import { Reunion } from "app/models/reunion";
   })
   export class AddElementoDialogoComponent {
     
-    desacuerdoSrc = '/assets/img/elementos/desacuerdo_unselected.png';
-    dudaSrc = '/assets/img/elementos/duda_unselected.png';
-    acuerdoSrc = '/assets/img/elementos/acuerdo_unselected.png';
-    compromisoSrc = '/assets/img/elementos/compromiso_unselected.png';
-    normaSrc = '/assets/img/elementos/norma_unselected.png';
+    desacuerdoSrc = '../../../assets/img/elementos/desacuerdo_unselected.png';
+    dudaSrc = '../../../assets/img/elementos/duda_unselected.png';
+    acuerdoSrc = '../../../assets/img/elementos/acuerdo_unselected.png';
+    compromisoSrc = '../../../assets/img/elementos/compromiso_unselected.png';
+    normaSrc = '../../../assets/img/elementos/norma_unselected.png';
 
 
     constructor(
