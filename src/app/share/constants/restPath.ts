@@ -8,6 +8,7 @@ export class restPath {
     public logIn: string = '/token/generate-token';
     public listUsers = '/usuario/listaUsuarios';
     public listUsersParam = '/bff/listaUsuarioFiltro';
+    public listEstadoElemento = '/bff/estadoElemento';
     public getUser = '/usuario/user?username=';
     public usuarioGuardar = '/token/usuarioGuardar';
     public listarTipoElementoDialogo = '/listaFormulario/tiposElementoDialogo';

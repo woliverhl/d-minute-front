@@ -1,82 +1,79 @@
 <div class="container">
     <h4>AGREGAR ELEMENTO DE DIÁLOGO</h4>
     <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
-    <form action="" [formGroup]="addMeetingForm" (ngSubmit)="postMeeting()">
+    <form action="" [formGroup]="addElementoForm" (ngSubmit)="postElementoDialogo()">
 
         <h4 class="h4seleccion">Selecciona el tipo de elemento</h4>
-        <div class="campoElemento"> 
-            <span class="elementoIconoContainer">
-                    <img src="../../../assets/img/elementos/iconos-01.png" class="elemento-logo" alt=""
-                        onselect="this.src='../../../assets/img/elementos/iconos-06.png'"
-                    >
-            </span>
-            <label for="startElementoDuda">Desacuerdo o Brecha</label>
+        <div class="alineacion">
+                <div class="campoElemento"> 
+                        <span class="elementoIconoContainer">
+                                <img src="../../../assets/img/elementos/iconos-01.png" class="elemento-logo" alt=""
+                                    onselect="this.src='../../../assets/img/elementos/iconos-06.png'"
+                                >
+                        </span>
+                        <label for="startElementoDuda">Desacuerdo o Brecha</label>
+                    </div>
+                    <div class="campoElemento"> 
+                            <span class="elementoIconoContainer">
+                                    <img src="../../../assets/img/elementos/iconos-02.png" class="elemento-logo" alt="">
+                            </span>
+                            <label for="startElementoDuda">Duda o Busqueda</label>
+                    </div>
+                    <div class="campoElemento"> 
+                            <span class="elementoIconoContainer">
+                                    <img src="../../../assets/img/elementos/iconos-03.png" class="elemento-logo"  alt="">
+                            </span>
+                            <label for="startElementoDuda">Acuerdo de Coordinación</label>
+                    </div>
+                    <div class="campoElemento"> 
+                            <span class="elementoIconoContainer">
+                                    <img src="../../../assets/img/elementos/iconos-04.png" class="elemento-logo" alt="">
+                            </span>
+                            <label for="startElementoDuda">Compromiso Individual</label>
+                    </div>
+                    <div class="campoElemento"> 
+                            <span class="elementoIconoContainer">
+                                    <img src="../../../assets/img/elementos/iconos-05.png" class="elemento-logo" alt="" >
+                            </span>
+                            <label for="startElementoDuda">Norma Común</label>
+                    </div>
         </div>
-        <div class="campoElemento"> 
-                <span class="elementoIconoContainer">
-                        <img src="../../../assets/img/elementos/iconos-02.png" class="elemento-logo" alt="">
-                </span>
-                <label for="startElementoDuda">Duda o Busqueda</label>
-        </div>
-        <div class="campoElemento"> 
-                <span class="elementoIconoContainer">
-                        <img src="../../../assets/img/elementos/iconos-03.png" class="elemento-logo"  alt="">
-                </span>
-                <label for="startElementoDuda">Acuerdo de Coordinación</label>
-        </div>
-        <div class="campoElemento"> 
-                <span class="elementoIconoContainer">
-                        <img src="../../../assets/img/elementos/iconos-04.png" class="elemento-logo" alt="">
-                </span>
-                <label for="startElementoDuda">Compromiso Individual</label>
-        </div>
-        <div class="campoElemento"> 
-                <span class="elementoIconoContainer">
-                        <img src="../../../assets/img/elementos/iconos-05.png" class="elemento-logo" alt="" >
-                </span>
-                <label for="startElementoDuda">Norma Común</label>
-        </div>
-
 
         <div class="campoTexto">
-            <label for="objetivo">Estado Elemento</label>
-            <mat-select class="selectedEstado" [(ngModel)]="selectedMember" formControlName="selectedMember">
-                    <mat-option *ngFor="let user of Project.usuariosNuevoProyecto" [value]="user">
-                        {{ user.nombre }}
+            <label for="strEstado">Estado Elemento</label>
+            <mat-select class="selectedEstado" [(ngModel)]="elementoDialogo.estado" formControlName="selectedEstado">
+                    <mat-option *ngFor="let est of listaEstado" [value]="est.estado">
+                        {{ est.detalle }}
                     </mat-option>
             </mat-select>
         </div>
 
         <div class="campoFecha">
                 <label for="startDate">Fecha de Cierre</label>
-                <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span><input [(ngModel)]="Reunion.fecha" formControlName="fecha" type="date">
+                <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span>
+                <input [(ngModel)]="elementoDialogo.fechaCompromiso" formControlName="fechaCompromiso" type="date">
+        </div>
+
+        <div class="miembros">
+                <label for="strResponsable">Responsable Elemento</label>
+                <div class="add">
+                    <mat-select class="selectedMember" [(ngModel)]="selectedMember" formControlName="selectedMember">
+                        <mat-option *ngFor="let user of Reunion.usuarioActa" [value]="user">
+                            {{ user.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </div>
         </div>
 
         <div class="campoDiscusion">
                 <label for="strDiscusion">Descripción Elemento</label>
-                <textarea [(ngModel)]="temaActa.discusion" formControlName="discusion" rows="5" ></textarea>
+                <textarea [(ngModel)]="elementoDialogo.descripcion" formControlName="descripcion" rows="5" ></textarea>
         </div>
-
-        <div class="miembros">
-            <h4>Responsable Elemento</h4>
-            <div class="miembro" *ngFor="let member of Reunion.usuarioActa">
-                <h4>{{ member.nombre }}</h4>
-                <mat-icon class="deleteMember" (click)="deleteMember(member)">delete</mat-icon>
-                <p>{{ member.username }}</p>
-            </div>
-            <div class="add">
-                <mat-select class="selectedMember" [(ngModel)]="selectedMember" formControlName="selectedMember">
-                    <mat-option *ngFor="let user of Project.usuariosNuevoProyecto" [value]="user">
-                        {{ user.nombre }}
-                    </mat-option>
-                </mat-select>
-                <button class="addMember" type="button" (click)= "addMember()">Agregar Miembro</button>
-            </div>
-        </div>
+       
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-            <button class="crearElemento" type="submit" [disabled]="!addMeetingForm.valid">CREAR NUEVA REUNIÓN</button>
+            <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">CREAR NUEVA REUNIÓN</button>
         </div>
     </form>
 </div>

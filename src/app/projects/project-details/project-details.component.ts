@@ -17,6 +17,7 @@ import { TemaActa } from '../../models/tema';
 import { ActaService } from '../service/acta-service.service';
 import { TemaService } from '../service/tema-service.service';
 import { AddElementoDialogoComponent } from './sintaxis/add-elemento-dialogo';
+import { ElementoDialogo } from '../../models/ElementoDialogo';
 
 
 @Component({
@@ -166,11 +167,38 @@ export class ProjectDetailsComponent {
 
   openElementoDialogo(){
     let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
-      width: '744px'
-     // data: this.project
+      width: '744px',
+     data: "0"
   });
     
-   // dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openEditElementoDialogo(elementoId:any): void{
+    let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+        width: '744px',
+        data: elementoId
+    });
+  dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openDelElementoDialogo(elementoId:any): void{
+    let temaReunion = this.selectedMeeting
+    let temaActaDel: TemaActa = undefined;
+    for (let indexi = 0; indexi < this.selectedMeeting.temaActa.length; indexi++) {
+      if (this.selectedMeeting.temaActa[indexi].id == Number(elementoId)){
+        temaActaDel = this.selectedMeeting.temaActa[indexi];
+        break;
+      }
+    }
+    if (temaActaDel != undefined){
+      this.temaService.postDelTheme(temaActaDel).subscribe(
+        (response) => {
+          this.ngOnInit();
+      }, (err) => {
+        console.log(err);
+      });
+    }
   }
 
 }

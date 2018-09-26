@@ -156,9 +156,15 @@ h5{
         font-size: 12px;
         color: #9b9b9b;
     }
-    h6{
+    .h6detalle{
+        width: 49%;    
         font-size: 12px;
         margin-left: 8px;
+    }
+    .interno{
+        width: 49%;  
+        position:relative;
+        left: 65%;
     }
     .elementos{
         font-size: 12px;

@@ -28,9 +28,9 @@
               </div>
             <div class="interno">
                 <a class="agregarTema" (click)="openAddTema()" [class.selected]="wasClicked">[+] AGREGAR TEMA</a>
-                <i class="material-icons" >print</i>
-                <i class="material-icons" (click)="openEditMeeting()">edit</i>
-                <i class="material-icons" (click)="openDelMeeting()">delete</i>
+                <i class="material-icons" title="Imprimir Acta">print</i>
+                <i class="material-icons" (click)="openEditMeeting()" title="Editar Acta">edit</i>
+                <i class="material-icons" (click)="openDelMeeting()" title="Eliminar Acta">delete</i>
             </div>
               <h6>OBJETIVO: {{ selectedMeeting.resumen }}</h6>
             </div>
@@ -49,15 +49,19 @@
                 <div class="acta" *ngFor="let theme of selectedMeeting.temaActa">
                   <div class="interno">
                       <a class="agregarElemento" (click)="openElementoDialogo()" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>
-                      <i class="material-icons" (click)="openEditTema(theme.id)">edit</i>
-                      <i class="material-icons" (click)="openDelTema(theme.id)">delete</i>
+                      <i class="material-icons" (click)="openEditTema(theme.id)" title="Editar Tema" >edit</i>
+                      <i class="material-icons" (click)="openDelTema(theme.id)" title="Eliminar Tema">delete</i>
                   </div>
                   <h5>{{theme.nombre}}</h5>
                   <p >
                     {{theme.discusion}}
                   </p>
                   <div *ngIf="theme.elementoDialogoDto.length > 0">
-                      <h6>ELEMENTOS DE DI&Aacute;LOGO</h6>
+                      <label for="strEstado" class="h6detalle">ELEMENTOS DE DI&Aacute;LOGO</label>
+                      <div class="interno">
+                          <i class="material-icons" (click)="openEditElementoDialogo(e.idElemento)" title="Editar Elemento" >edit</i>
+                          <i class="material-icons" (click)="openDelElementoDialogo(e.idElemento)" title="Eliminar Elemento">delete</i>
+                      </div>
                       <ul class="elementos">
                         <li *ngFor="let e of theme.elementoDialogoDto">{{e.descripcion}}</li>
                       </ul>

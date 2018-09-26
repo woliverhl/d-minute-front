@@ -63,6 +63,7 @@ import { UsersService } from "app/user/service/users.service";
 import { SpinnerService } from "app/share/spinner/spinner.service";
 import { TemaService } from './projects/service/tema-service.service';
 import { ActaService } from './projects/service/acta-service.service';
+import { ElementoDialogoService } from './projects/service/elemento-service.service';
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
@@ -155,6 +156,7 @@ const appRoutes: Routes = [
           TemaService,
           ActaService,
           UsersService,
+          ElementoDialogoService,
           authGuard,
           TemaActa,
           ActaDialogica,
