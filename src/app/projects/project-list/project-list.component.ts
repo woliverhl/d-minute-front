@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Project } from "app/models/project";
 import { AddUserComponent } from 'app/user/create-user/add-user';
 import { AddProjectDialog } from 'app/projects/project-list/add-project-dialog';
+import { DelProjectDialog } from 'app/projects/project-list/del-project-dialog';
 
 @Component({
   selector: 'app-project-list',
@@ -61,7 +62,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   deleteProyectDialog(proyectoid: String): void{
-    let dialogRef = this.dialog.open(AddProjectDialog, {
+    let dialogRef = this.dialog.open(DelProjectDialog, {
       width: '744px',
       data: proyectoid
     });
@@ -77,14 +78,4 @@ export class ProjectListComponent implements OnInit {
 
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
-
-  delProyectDialog(proyectoid: String) {
-    this.projectsService.delProjectById(proyectoid).subscribe(
-      (response: Project) => {
-        this.listAllProjects();
-      },(err)=>{
-        console.log(err);
-      });
-  }
-
 }

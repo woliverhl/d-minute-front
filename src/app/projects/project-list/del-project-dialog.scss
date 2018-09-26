@@ -14,20 +14,6 @@
         width: 95%;
         margin-bottom: 10px;
     }
-    .alineacion{
-        vertical-align: top;
-    }
-    .h4seleccion{
-        font-size: 14px;
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #333333;
-        text-align: left;
-        margin-bottom: 0px;
-    }
     .closeModalButton{
         position: relative;
         top: 0;
@@ -41,30 +27,6 @@
         color: #00a1f0;
         cursor: pointer;
     }
-    .campoElemento{
-        width: 19%;
-        display: inline-block;
-        label{
-            width: 94px;
-            height: 15px;
-            display: block;
-            font-weight: normal;
-            font-size: 12px;
-            color: #00a1f0;
-            text-align: center
-        }
-        margin-bottom: 10px;
-        .elementoIconoContainer{
-            padding: 5.5px 0px 4px 8px;
-            vertical-align: top;
-            .elemento-logo{
-                display: block;
-                width: 94px;
-                height: 90px;
-                background-color: #f3f3f3;
-            }
-        }
-    }
     .campoTexto{
         width: 49%;
         display: inline-block;
@@ -73,14 +35,15 @@
             font-weight: 600;
             font-size: 12px;
         }
-        .selectedEstado{
-            display: inline-block;
-            width: 23%;
+        input{
+            width: 316px;
             height: 32px;
             border: solid 1px #e8e8e8;
-            padding: 7px 16px 7px 16px;
+            font-size: 12px;
+            padding:9px 8px 8px 8px;
+            color: #4a4a4a;
         }
-        margin-bottom: 14px;
+        margin-bottom: 24px;
     }
     .campoFecha{
         width: 49%;
@@ -99,53 +62,78 @@
             padding:9px 8px 8px 8px;
             color: #4a4a4a;
         }
-        margin-bottom: 14px;
+        margin-bottom: 24px;
         .fechaIconoContainer{
             border: solid 1px #e8e8e8;
             border-right: none;
-            padding: 5.5px 0px 4.5px 8px;
+            padding: 5.5px 0px 4px 8px;
             vertical-align: middle;
             .fechaIcono{
-                font-family: 'Material Icons' !important;
                 font-size: 12px;
                 color: #9b9b9b;
             }
         }
     }
-    .campoDiscusion{
-        width: 100%;
-        display: inline-block;
-        label{
-            display: block;
-            font-weight: 600;
-            font-size: 12px;
-        }
-        textarea{
-            width: 516px;
-            height: 65px;
-            border: solid 1px #e8e8e8;
-            font-size: 12px;
-            padding:9px 8px 8px 8px;
-            color: #4a4a4a;
-        }
-        margin-bottom: 14px;
-    }
     .miembros{
-        label{
-            display: block;
+        h4{
+            font-size: 14px;
             font-weight: 600;
-            font-size: 12px;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #333333;
+            text-align: left;
+            margin-bottom: 4px;
+        }
+        .miembro{
+            width: 47%;
+            height: 57px;
+            background-color: #ececec;
+            padding: 0px 8px 16px;
+            display: inline-block;
+            margin-right: 16px;
+            margin-bottom: 8px;
+            h4{
+                display: inline-block;
+                margin-bottom: 4px;
+                width: 89%;
+            }
+            mat-icon{
+                font-size: 14px;
+                color: #00a1f0;
+                margin-top: 8px;
+            }
+            mat-icon:hover{
+                cursor: pointer;
+            }
+            p{
+                font-size: 12px;
+            }
         }
         .add{
+            font-size: 14px;
             display: block;
-            margin-bottom: 14px;
-            font-size: 12px;
+            margin-bottom: 25px;
             .selectedMember{
                 display: inline-block;
-                width: 516px;
-                height: 32px;
+                width: 23%;
+                height: 48px;
+                border-radius: 6px;
                 border: solid 1px #0081f0;
                 padding: 10px;
+            }
+            .addMember{
+                font-size: 14px;
+                margin-left: 16px;
+                width: 161px;
+                height: 48px;
+                border-radius: 6px;
+                border: solid 1px #0081f0;
+                background-color: #ffffff;
+                color: #0081f0;
+                font-weight: 600;
+                cursor: pointer;
             }
         }
     }
@@ -153,7 +141,7 @@
         margin-bottom: 25px;
     }
     .botonera{
-        text-align: center;
+        text-align: center;        
         font-size: 14px;
         .cancelar{
             width: 182px;
@@ -165,7 +153,7 @@
             margin-right: 12px;
             cursor: pointer;
         }
-        .crearElemento{
+        .crearProyecto{
             width: 223px;
             height: 48px;
             border-radius: 6px;
@@ -176,7 +164,45 @@
             cursor: pointer;
         }
     }
-    .dib{
-        display: inline-block;
-    }
 }
+
+/*:host{
+    display: block;
+    padding: 1em;
+}
+
+form{
+    width: 100%;
+}
+
+button{
+    margin: 0 auto;
+    color: white;
+    background-color: #21B3D8;
+}
+
+mat-divider{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.memberPanel{
+    display: flex;
+}
+
+.closeModalButton{
+    position: absolute;
+    margin-left: 97%;
+    bottom: 82%;
+    color: #B8B8B8;
+    background-color: #FFFFFF;
+}
+
+
+button.deleteMember.mat-button{
+    width: 16%!important;
+    height: 50%!important;
+    min-width: 0px!important;
+    background-color: red!important;
+}*/
+

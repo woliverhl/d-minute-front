@@ -4,39 +4,35 @@
     <form action="" [formGroup]="addElementoForm" (ngSubmit)="postElementoDialogo()">
 
         <h4 class="h4seleccion">Selecciona el tipo de elemento</h4>
-        <div class="alineacion">
-                <div class="campoElemento"> 
-                        <span class="elementoIconoContainer">
-                                <img src="../../../assets/img/elementos/iconos-01.png" class="elemento-logo" alt=""
-                                    onselect="this.src='../../../assets/img/elementos/iconos-06.png'"
-                                >
-                        </span>
-                        <label for="startElementoDuda">Desacuerdo o Brecha</label>
-                    </div>
-                    <div class="campoElemento"> 
-                            <span class="elementoIconoContainer">
-                                    <img src="../../../assets/img/elementos/iconos-02.png" class="elemento-logo" alt="">
-                            </span>
-                            <label for="startElementoDuda">Duda o Busqueda</label>
-                    </div>
-                    <div class="campoElemento"> 
-                            <span class="elementoIconoContainer">
-                                    <img src="../../../assets/img/elementos/iconos-03.png" class="elemento-logo"  alt="">
-                            </span>
-                            <label for="startElementoDuda">Acuerdo de Coordinación</label>
-                    </div>
-                    <div class="campoElemento"> 
-                            <span class="elementoIconoContainer">
-                                    <img src="../../../assets/img/elementos/iconos-04.png" class="elemento-logo" alt="">
-                            </span>
-                            <label for="startElementoDuda">Compromiso Individual</label>
-                    </div>
-                    <div class="campoElemento"> 
-                            <span class="elementoIconoContainer">
-                                    <img src="../../../assets/img/elementos/iconos-05.png" class="elemento-logo" alt="" >
-                            </span>
-                            <label for="startElementoDuda">Norma Común</label>
-                    </div>
+        <div class="campoElemento"> 
+            <span class="elementoIconoContainer">
+                    <img [src]="desacuerdoSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+            </span>
+            <label for="startElementoDuda">Desacuerdo o Brecha</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                        <img [src]="dudaSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                </span>
+                <label for="startElementoDuda">Duda o <br>B&uacute;squeda</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                        <img [src]="acuerdoSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                </span>
+                <label for="startElementoDuda">Acuerdo de Coordinación</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                        <img [src]="compromisoSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                </span>
+                <label for="startElementoDuda">Compromiso Individual</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                        <img [src]="normaSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="" >
+                </span>
+                <label for="startElementoDuda">Norma <br>Común</label>
         </div>
 
         <div class="campoTexto">
@@ -73,7 +69,11 @@
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+<<<<<<< HEAD
             <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">CREAR NUEVA REUNIÓN</button>
+=======
+            <button class="crearElemento" type="submit" [disabled]="!addMeetingForm.valid">CREAR ELEMENTO</button>
+>>>>>>> 255112222a67a5e50c20bd93b7fbf15bea718b17
         </div>
     </form>
 </div>
