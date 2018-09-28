@@ -26,6 +26,8 @@ import { DatePipe } from '@angular/common';
     compromisoSrc = '../../../assets/img/elementos/compromiso_unselected.png';
     normaSrc = '../../../assets/img/elementos/norma_unselected.png';
 
+    selectedImage: any;
+
     constructor(
         public dialogRef: MatDialogRef<AddElementoDialogoComponent>,
         private actaService: ActaService, private elementoService: ElementoDialogoService,
@@ -34,7 +36,6 @@ import { DatePipe } from '@angular/common';
             this.Reunion = data;
             this.loadEstadoElemento();
             this.createElementForm();
-            this.resetLogos();
             console.log(this.Reunion);
             if ((this.Reunion.temaActa[0].elementoDialogoDto != undefined) && (this.Reunion.temaActa[0].elementoDialogoDto.length > 0)){
               this.elementoDialogo = this.Reunion.temaActa[0].elementoDialogoDto[0];
@@ -95,16 +96,9 @@ import { DatePipe } from '@angular/common';
 
     changeImg(image: any, _codRol: string){
         this.codRol = _codRol;
-        this.resetLogos()
-        image.src = image.src.replace('_unselected', '_selected')
+        if(this.selectedImage !== undefined)
+          this.selectedImage.src = this.selectedImage.src.replace('_selected', '_unselected');
+        image.src = image.src.replace('_unselected', '_selected');
+        this.selectedImage = image;
     }
-
-    resetLogos(){
-        this.desacuerdoSrc = this.desacuerdoSrc.replace('_selected', '_unselected')
-        this.dudaSrc = this.dudaSrc.replace('_selected', '_unselected')
-        this.acuerdoSrc = this.acuerdoSrc.replace('_selected', '_unselected')
-        this.compromisoSrc = this.compromisoSrc.replace('_selected', '_unselected')
-        this.normaSrc = this.normaSrc.replace('_selected', '_unselected')
-    }
-  
   }

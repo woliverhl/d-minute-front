@@ -51,6 +51,8 @@ export class ProjectDetailsComponent {
           this.projectId = this.actaDialogica.proyectoDto.proyectoId;
           this.project = this.actaDialogica.proyectoDto;
           this.project !== undefined ? this.listarReuniones() : undefined;
+          if(this.reuniones !== undefined && this.reuniones.length > 0)
+            this.selectMeeting(this.reuniones[0])
         },(err)=>{
           console.log(err);
         });
