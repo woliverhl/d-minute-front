@@ -50,22 +50,15 @@ export class ProjectDetailsComponent {
           this.actaDialogica = response;
           this.projectId = this.actaDialogica.proyectoDto.proyectoId;
           this.project = this.actaDialogica.proyectoDto;
-          this.project !== undefined ? this.listarReuniones() : undefined;
-          if(this.reuniones !== undefined && this.reuniones.length > 0)
-            this.selectMeeting(this.reuniones[0])
+          this.reuniones = this.actaDialogica.listaActa;
+          this.selectedMeeting = this.actaDialogica.actaDto;
         },(err)=>{
           console.log(err);
         });
   }
 
-  listarReuniones(){
-    this.reuniones = this.actaDialogica.listaActa;
-    this.saving = this.reuniones.length === 0 || this.reuniones.length === undefined ? true : false;
-    this.selectedMeeting  = this.reuniones.length > 0 ? this.reuniones[0] : undefined;
-    this.reloadList.bind(this);
-  }
-
   selectMeeting(acta: Reunion = undefined){
+    console.log("ingreso selectMeeting: " + this.selectedMeeting['actaId']);
     if(acta === undefined && this.reuniones.length > 0){
       this.selectedMeeting  = this.reuniones[0];
     }else if(acta !== undefined){
@@ -101,6 +94,7 @@ export class ProjectDetailsComponent {
   }
 
   openEditMeeting(){
+    this.ActivateMeeting = this.selectedMeeting;
     this.project.meet=this.selectedMeeting;
     let dialogRef = this.dialog.open(AddMeetingComponent, {
       width: '744px',
