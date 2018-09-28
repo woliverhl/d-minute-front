@@ -21,19 +21,25 @@
       <mat-tab label="Sintaxis">
         <div class="details-container-mettings">
           <div class="meeting-detail">
+
             <div class="meeting-detail-titulo" *ngIf="selectedMeeting !== undefined">
              
-              <div class="encabezado">REUNI&Oacute;N {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }} - INICIO {{ selectedMeeting.horaInicio }}hrs. 
-                - TERMINO {{ selectedMeeting.horaFin }}hrs.
-              </div>
-            <div class="interno">
-                <a class="agregarTema" (click)="openAddTema()" [class.selected]="wasClicked">[+] AGREGAR TEMA</a>
-                <i class="material-icons" title="Imprimir Acta">print</i>
-                <i class="material-icons" (click)="openEditMeeting()" title="Editar Acta">edit</i>
-                <i class="material-icons" (click)="openDelMeeting()" title="Eliminar Acta">delete</i>
+            <div class="encabezado">
+              <span>
+                  REUNI&Oacute;N {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }} - INICIO {{ selectedMeeting.horaInicio }}hrs. 
+                  - TERMINO {{ selectedMeeting.horaFin }}hrs.
+              </span>
+                <div class="interno">
+                    <a class="agregarTema" (click)="openAddTema()" [class.selected]="wasClicked">[+] AGREGAR TEMA</a>
+                    <i class="material-icons" title="Imprimir Acta">print</i>
+                    <i class="material-icons" (click)="openEditMeeting()" title="Editar Acta">edit</i>
+                    <i class="material-icons" (click)="openDelMeeting()" title="Eliminar Acta">delete</i>
+                </div>
             </div>
+            
               <h6>OBJETIVO: {{ selectedMeeting.resumen }}</h6>
             </div>
+
             <div *ngIf="selectedMeeting !== undefined">
                 <div class="participantes">
                   <h5>PARTICIPANTES:</h5>
@@ -47,23 +53,33 @@
             <div class="separator"></div>
             <div *ngIf="selectedMeeting !== undefined">
                 <div class="acta" *ngFor="let theme of selectedMeeting.temaActa">
-                  <div class="interno">
-                      <a class="agregarElemento" (click)="openElementoDialogo()" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>
-                      <i class="material-icons" (click)="openEditTema(theme)" title="Editar Tema" >edit</i>
-                      <i class="material-icons" (click)="openDelTema(theme)" title="Eliminar Tema">delete</i>
+                  <div class="nombreTema">
+                      <span>
+                          {{theme.nombre}}
+                    </span>
+                    <div class="interno">
+                        <a class="agregarElemento" (click)="openElementoDialogo(theme)" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>
+                        <i class="material-icons" (click)="openEditTema(theme)" title="Editar Tema" >edit</i>
+                        <i class="material-icons" (click)="openDelTema(theme)" title="Eliminar Tema">delete</i>
+                    </div>
                   </div>
-                  <h5>{{theme.nombre}}</h5>
+                 
                   <p >
                     {{theme.discusion}}
                   </p>
                   <div *ngIf="theme.elementoDialogoDto.length > 0">
-                      <label for="strEstado" class="h6detalle">ELEMENTOS DE DI&Aacute;LOGO</label>
-                      <div class="interno">
-                          <i class="material-icons" (click)="openEditElementoDialogo(e.idElemento)" title="Editar Elemento" >edit</i>
-                          <i class="material-icons" (click)="openDelElementoDialogo(e.idElemento)" title="Eliminar Elemento">delete</i>
-                      </div>
+                      <label for="strEstado" class="h6detalle">ELEMENTOS DE DI&Aacute;LOGO:</label>
                       <ul class="elementos">
-                        <li *ngFor="let e of theme.elementoDialogoDto">{{e.descripcion}}</li>
+                        <li *ngFor="let e of theme.elementoDialogoDto">
+                           <div>
+                             <span>
+                                <a (click)="openEditElementoDialogo(e.idElemento)" title="">
+                                  {{e.codRol}} - 
+                                  {{e.descripcion}}
+                                </a>
+                             </span>
+                           </div>
+                        </li>
                       </ul>
                   </div>
                 </div>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ProjectsService } from 'app/projects/service/projects-service.service';
-import { UsersService } from "app/user/service/users.service";
 import { ParamMap, ActivatedRoute  } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
@@ -16,6 +15,8 @@ import { TemaService } from '../service/tema-service.service';
 import { AddElementoDialogoComponent } from './sintaxis/add-elemento-dialogo';
 import { delMeetingComponent } from './del-acta-dialog';
 import { delTemaComponent } from './del-tema-dialog';
+import { ElementoDialogoService } from '../service/elemento-service.service';
+import { ElementoDialogo } from '../../models/ElementoDialogo';
 
 
 @Component({
@@ -35,8 +36,8 @@ export class ProjectDetailsComponent {
   ActivateMeeting: Reunion = undefined;
   
   constructor(private projectService: ProjectsService, private actaService: ActaService, 
-      private temaService: TemaService, 
-      private userService: UsersService, private route: ActivatedRoute, 
+      private temaService: TemaService, private elementoService: ElementoDialogoService,
+      private route: ActivatedRoute, 
     public Reunion: Reunion, private dialog: MatDialog) {
       this.ngOnInit();
     }
@@ -144,40 +145,46 @@ export class ProjectDetailsComponent {
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-  openElementoDialogo(){
+  openElementoDialogo(temaId:TemaActa){
+    temaId.elementoDialogoDto = new Array<ElementoDialogo>();
+    let temasLista: Array<TemaActa> = new Array<TemaActa>(); 
+    temasLista.push(temaId);
+    let nuevoElemento: Reunion = this.selectedMeeting;
+    nuevoElemento.temaActa = temasLista;
+
     let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
       width: '744px',
-     data: "0"
+     data: nuevoElemento
   });
     
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-  openEditElementoDialogo(elementoId:any): void{
-    let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
-        width: '744px',
-        data: elementoId
-    });
-  dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
-  }
-
-  openDelElementoDialogo(elementoId:any): void{
-    let temaReunion = this.selectedMeeting
-    let temaActaDel: TemaActa = undefined;
-    for (let indexi = 0; indexi < this.selectedMeeting.temaActa.length; indexi++) {
-      if (this.selectedMeeting.temaActa[indexi].id == Number(elementoId)){
-        temaActaDel = this.selectedMeeting.temaActa[indexi];
-        break;
-      }
-    }
-    if (temaActaDel != undefined){
-      this.temaService.postDelTheme(temaActaDel).subscribe(
-        (response) => {
-          this.ngOnInit();
+  openEditElementoDialogo(elementoId:String): void{
+    let dialogRef;
+    this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
+      (response) => {
+          dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+          width: '744px',
+          data: response
+      });
+      dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
       }, (err) => {
         console.log(err);
-      });
-    }
+      }
+    );
+  }
+
+  getElementoDialogoActaId(elementoId:String):Reunion{
+    let retorno: Reunion = new Reunion();
+    this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
+      (response) => {
+        return  response;
+      }, (err) => {
+        console.log(err);
+      }
+    );
+    return retorno;
   }
 
 }

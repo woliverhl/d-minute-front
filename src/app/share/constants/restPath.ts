@@ -9,6 +9,7 @@ export class restPath {
     public listUsers = '/usuario/listaUsuarios';
     public listUsersParam = '/bff/listaUsuarioFiltro';
     public listEstadoElemento = '/bff/estadoElemento';
+    public listActaIdelemento = '/bff/listaActaFiltroElemento/';
     public getUser = '/usuario/user?username=';
     public usuarioGuardar = '/token/usuarioGuardar';
     public listarTipoElementoDialogo = '/listaFormulario/tiposElementoDialogo';

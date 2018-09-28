@@ -74,32 +74,43 @@ h5{
         color: #333333;
         margin-left: 16px;
         font-size: 14px;
+        margin-top: 16px;
+        width: 100%;
         .encabezado{
             font-weight: 600;
-            margin-top: 16px;
             font-size: 12px;
         }
+        span{
+            display: inline-block;
+        }
         h6{
+            margin-top: 10px;
             font-weight: 400;
             color: #9b9b9b;
             font-size: 12px;
         }
-        .agregarTema {
-            width: 97px;
-            height: 18px;
-            font-size: 12px;
-            font-weight: normal;
-            font-stretch: normal;
-            line-height: normal;
-            text-align: center;
-            color: #00a1f0;
-            cursor: pointer;
-          }
-          i{
-            color: #00a1f0;
-            font-size: 14px;
-            margin: 0px 12px 0px 12px;
-            cursor: pointer;
+        .interno{
+            display: inline-block;
+            position: relative;
+            left: 21%;
+            overflow: hidden;
+            .agregarTema {
+                width: 97px;
+                height: 18px;
+                font-size: 12px;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: normal;
+                text-align: center;
+                color: #00a1f0;
+                cursor: pointer;
+              }
+            i{
+                color: #00a1f0;
+                font-size: 14px;
+                margin: 0px 12px 0px 12px;
+                cursor: pointer;
+            }
         }
     }
 }
@@ -128,6 +139,7 @@ h5{
 }
 
 .participantes{
+    margin-top: 10px;
     padding: 0 0 0 17px;
     font-size: 12px;
     .participante{
@@ -140,7 +152,7 @@ h5{
         font-weight: 600;
         color: #333333;
         margin-right: 18px;
-        margin-bottom: 14px;
+        margin-bottom: 6px;
     }
 }
 
@@ -148,23 +160,36 @@ h5{
     background-color: #f8f8f8;
     margin: 8px 17px 8px 17px;
     padding: 8px;
-    h5{
-        font-size: 12px;
-        font-weight: 600;
-    }
     p{
+        margin-bottom: 4px;
         font-size: 12px;
         color: #9b9b9b;
+        text-align: justify;
     }
     .h6detalle{
         width: 49%;    
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+    .nombreTema{
+        margin-bottom: 4px;
         font-size: 12px;
-        margin-left: 8px;
+        font-weight: 600;
+    }
+    span{
+        display: inline-block;
+        a{
+            cursor: pointer;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #00a1f0;
+        }
     }
     .interno{
-        width: 49%;  
-        position:relative;
-        left: 65%;
+        display: inline-block;
+        position: absolute;
+        left: 68%;
+        overflow: hidden;
     }
     .elementos{
         font-size: 12px;
@@ -187,16 +212,10 @@ h5{
         margin: 0px 12px 0px 12px;
         cursor: pointer;
     }
-
 }
 
 .separator{
     height: 2px;
     border: solid 1px #c5c5c5;
     margin: 0px 17px 0px 17px;
-}
-
-.interno{
-    position:relative;
-    left: 65%;
 }

@@ -4,11 +4,11 @@
     <form action="" [formGroup]="addTemaForm" (ngSubmit)="postTema()">
         <div class="campoTexto">
             <label for="strNombre">Nombre Tema</label>
-             <input [(ngModel)]="temaActa.nombre" formControlName="nombre" type="text">
+             <input [(ngModel)]="temaActa.nombre" formControlName="nombre" type="text" maxlength="60">
         </div>
         <div class="campoDiscusion">
                 <label for="strDiscusion">Discusión Tema</label>
-                <textarea [(ngModel)]="temaActa.discusion" formControlName="discusion" rows="5" ></textarea>
+                <textarea [(ngModel)]="temaActa.discusion" formControlName="discusion" rows="5" maxlength="2000" ></textarea>
         </div>
         <mat-divider></mat-divider>
         <div class="botonera">

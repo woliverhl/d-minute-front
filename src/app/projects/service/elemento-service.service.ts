@@ -21,5 +21,12 @@ export class ElementoDialogoService {
     return this.http.get(`${this.restPath.APP}${this.restPath.listEstadoElemento}`);
   }
 
+  getFiltroElementoIdActa(elementoId: String){
+    return this.http.get(`${this.restPath.APP}${this.restPath.listActaIdelemento}${elementoId}`);
+  }
+
+  postElementoDialogo(payload: Object){
+    return this.http.post(`${this.restPath.APP}${this.restPath.addElementoDialogo}`, payload);
+  }
 
 }

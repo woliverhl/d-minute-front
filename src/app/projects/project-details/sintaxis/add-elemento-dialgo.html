@@ -6,31 +6,31 @@
         <h4 class="h4seleccion">Selecciona el tipo de elemento</h4>
         <div class="campoElemento"> 
             <span class="elementoIconoContainer">
-                    <img [src]="desacuerdoSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                    <img [src]="desacuerdoSrc" class="elemento-logo" (click)="changeImg($event.target,'DE')" alt=""> 
             </span>
             <label for="startElementoDuda">Desacuerdo o Brecha</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [src]="dudaSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                        <img [src]="dudaSrc" class="elemento-logo" (click)="changeImg($event.target,'DU')" alt="">
                 </span>
                 <label for="startElementoDuda">Duda o <br>B&uacute;squeda</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [src]="acuerdoSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                        <img [src]="acuerdoSrc" class="elemento-logo" (click)="changeImg($event.target,'AC')" alt="">
                 </span>
                 <label for="startElementoDuda">Acuerdo de Coordinación</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [src]="compromisoSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="">
+                        <img [src]="compromisoSrc" class="elemento-logo" (click)="changeImg($event.target,'CO')" alt="">
                 </span>
                 <label for="startElementoDuda">Compromiso Individual</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [src]="normaSrc" class="elemento-logo" (click)="changeImg($event.target)" alt="" >
+                        <img [src]="normaSrc" class="elemento-logo" (click)="changeImg($event.target,'NO')" alt="" >
                 </span>
                 <label for="startElementoDuda">Norma <br>Común</label>
         </div>
@@ -53,8 +53,8 @@
         <div class="miembros">
                 <label for="strResponsable">Responsable Elemento</label>
                 <div class="add">
-                    <mat-select class="selectedMember" [(ngModel)]="selectedMember" formControlName="selectedMember">
-                        <mat-option *ngFor="let user of Reunion.usuarioActa" [value]="user">
+                    <mat-select class="selectedMember" [(ngModel)]="elementoDialogo.username" formControlName="selectedMember">
+                        <mat-option *ngFor="let user of Reunion.usuarioActa" [value]="user.username">
                             {{ user.nombre }}
                         </mat-option>
                     </mat-select>
@@ -69,11 +69,7 @@
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-<<<<<<< HEAD
-            <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">CREAR NUEVA REUNIÓN</button>
-=======
-            <button class="crearElemento" type="submit" [disabled]="!addMeetingForm.valid">CREAR ELEMENTO</button>
->>>>>>> 255112222a67a5e50c20bd93b7fbf15bea718b17
+            <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">CREAR NUEVO ELEMENTO</button>
         </div>
     </form>
 </div>

@@ -53,7 +53,7 @@
             color: #00a1f0;
             text-align: center
         }
-        margin-bottom: 10px;
+        margin-bottom: 26px;
         .elementoIconoContainer{
             padding: 5.5px 0px 4px 8px;
             vertical-align: top;
@@ -75,8 +75,9 @@
         }
         .selectedEstado{
             display: inline-block;
-            width: 23%;
+            width: 90%;
             height: 32px;
+            font-size: 12px;
             border: solid 1px #e8e8e8;
             padding: 7px 16px 7px 16px;
         }
@@ -144,6 +145,7 @@
                 display: inline-block;
                 width: 516px;
                 height: 32px;
+                font-size: 12px;
                 border: solid 1px #0081f0;
                 padding: 10px;
             }
