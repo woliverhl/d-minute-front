@@ -30,6 +30,7 @@ export class AddProjectDialog implements OnInit {
       this.Project.usuariosNuevoProyecto = [];
       this.cleanUserForm(this.addProjectForm);
       this.projectId = data;
+      this.saved.emit(false);
       if (data != "0"){
         this.loadProyectoExistente();
       }
@@ -84,6 +85,7 @@ export class AddProjectDialog implements OnInit {
       startDate: [this.Project.fechaInicio, Validators.required],
       deathLine: [this.Project.fechaFin, Validators.required],
       usuariosNuevoProyecto: [this.Project.usuariosNuevoProyecto],
+      selectedLider: [this.Project.username, Validators.required],
       selectedMember: [this.selectedMember]
     });
   }

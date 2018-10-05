@@ -50,6 +50,11 @@
                 <input [(ngModel)]="elementoDialogo.fechaCompromiso" formControlName="fechaCompromiso" type="date">
         </div>
 
+        <div class="campoTexto">
+                        <label for="startTitulo">Titulo Elemento</label>
+                        <input [(ngModel)]="elementoDialogo.titulo" formControlName="titulo" max="50">
+        </div>
+
         <div class="miembros">
                 <label for="strResponsable">Responsable Elemento</label>
                 <div class="add">
@@ -62,8 +67,8 @@
         </div>
 
         <div class="campoDiscusion">
-                <label for="strDiscusion">Descripción Elemento</label>
-                <textarea [(ngModel)]="elementoDialogo.descripcion" formControlName="descripcion" rows="5" ></textarea>
+                <label for="strDiscusion">Descripción Elemento (Opcional)</label>
+                <textarea [(ngModel)]="elementoDialogo.descripcion" formControlName="descripcion" rows="5" maxlength="1000" ></textarea>
         </div>
        
         <mat-divider></mat-divider>

@@ -19,6 +19,7 @@ import { TemaService } from '../../service/tema-service.service';
         private fb: FormBuilder, public temaActa: TemaActa,
         private temaService: TemaService, 
         @Inject(MAT_DIALOG_DATA) public data: TemaActa) {
+            this.saved.emit(false);
             this.temaActa = data;
             this.createTemaForm();
         }

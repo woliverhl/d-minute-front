@@ -85,7 +85,6 @@ export class ProjectDetailsComponent {
         width: '744px',
         data: this.project
     });
-
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
@@ -100,7 +99,6 @@ export class ProjectDetailsComponent {
       width: '744px',
       data: this.project
   });
-    this.selectedMeeting = undefined;
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
@@ -109,7 +107,6 @@ export class ProjectDetailsComponent {
       width: '744px',
       data: this.selectedMeeting
   });
-  
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
@@ -121,8 +118,7 @@ export class ProjectDetailsComponent {
         width: '744px',
         data: temaId
     });
-
-  dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
   openEditTema(temaId:TemaActa): void{
@@ -130,7 +126,7 @@ export class ProjectDetailsComponent {
         width: '744px',
         data: temaId
     });
-  dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
   openDelTema(temaId:TemaActa): void{
@@ -152,7 +148,6 @@ export class ProjectDetailsComponent {
       width: '744px',
      data: nuevoElemento
   });
-    
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 

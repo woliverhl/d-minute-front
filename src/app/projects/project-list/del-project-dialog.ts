@@ -26,6 +26,7 @@ export class DelProjectDialog implements OnInit {
     private fb: FormBuilder, public Project: Project, private projectsService: ProjectsService,
     @Inject(MAT_DIALOG_DATA) public data: String,) { 
       this.createProjectForm();
+      this.saved.emit(false);
       this.cleanUserForm(this.delProjectForm);
       if (data != "0"){
         this.projectId = data;

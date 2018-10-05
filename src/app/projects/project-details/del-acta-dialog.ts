@@ -20,6 +20,7 @@ import { ActaService } from '../service/acta-service.service';
         private fb: FormBuilder, public Reunion: Reunion,
         @Inject(MAT_DIALOG_DATA) public data: Reunion) {
           this.Reunion = data; 
+          this.saved.emit(false);
           this.createMeetingForm();
         }
 

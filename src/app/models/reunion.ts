@@ -3,7 +3,7 @@ import { ElementoDialogo } from "./ElementoDialogo";
 
 export class Reunion {
     constructor(){}
-    public fecha: Date;
+    public fecha: String;
     public resumen: String;
     public horaInicio: String;
     public horaFin: String;
@@ -14,4 +14,5 @@ export class Reunion {
     public temaActa: TemaActa[];
     public tareaPendiente: ElementoDialogo[];
     public actaId: Number;
+    public username: string; //Secretario
 }

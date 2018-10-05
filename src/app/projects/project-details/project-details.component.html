@@ -72,12 +72,23 @@
                       <ul class="elementos">
                         <li *ngFor="let e of theme.elementoDialogoDto">
                            <div>
-                             <span>
-                                <a (click)="openEditElementoDialogo(e.idElemento)" title="">
-                                  {{e.codRol}} - 
-                                  {{e.descripcion}}
-                                </a>
-                             </span>
+                              <div *ngIf="e.estado !== 'DELE'">
+                                  <span>
+                                      <a (click)="openEditElementoDialogo(e.idElemento)" title="">
+                                        {{e.codRol}} - 
+                                        {{e.titulo}}
+                                      </a>
+                                   </span>
+                              </div>
+                              <div *ngIf="e.estado == 'DELE'">
+                                      <span class="tachado">
+                                          <a (click)="openEditElementoDialogo(e.idElemento)" title="">
+                                            {{e.codRol}} - 
+                                            {{e.titulo}}
+                                          </a>
+                                       </span>
+                                 
+                              </div>
                            </div>
                         </li>
                       </ul>

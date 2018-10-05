@@ -20,6 +20,7 @@ import { TemaService } from '../service/tema-service.service';
         private temaService: TemaService, 
         @Inject(MAT_DIALOG_DATA) public data: TemaActa) {
             this.temaActa = data;
+            this.saved.emit(false);
             this.createTemaForm();
         }
 

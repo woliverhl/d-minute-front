@@ -6,6 +6,7 @@ import { Project } from '../../../models/project';
 import { ProjectsService } from '../../service/projects-service.service';
 import { UsersService } from '../../../user/service/users.service';
 import { ActaService } from '../../service/acta-service.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'add-meeting',
@@ -27,10 +28,14 @@ import { ActaService } from '../../service/acta-service.service';
         private fb: FormBuilder, public Reunion: Reunion,
         @Inject(MAT_DIALOG_DATA) public data: Project) {
           this.Project = data; 
+          this.saved.emit(false);
           this.createMeetingForm();
           this.Reunion.usuarioActa = [];          
             if (this.data.meet != undefined){
               this.Reunion = this.data.meet;
+            }else{
+              var datePipe = new DatePipe("en-US");
+              this.Reunion.fecha = datePipe.transform(Date.now(), 'yyyy-MM-dd');
             }
         }
 
@@ -41,6 +46,7 @@ import { ActaService } from '../../service/acta-service.service';
           horaInicio: [this.Reunion.horaInicio, Validators.required],
           usuarioActa: [this.Reunion.usuarioActa, ],
           horaFin: [this.Reunion.horaFin, ],
+          selectedSecretario: [this.Reunion.username, Validators.required],
           selectedMember: [this.selectedMember]
         });
       }

@@ -43,7 +43,7 @@
             padding:9px 8px 8px 8px;
             color: #4a4a4a;
         }
-        margin-bottom: 24px;
+        margin-bottom: 10px;
     }
     .campoFecha{
         width: 49%;
@@ -62,7 +62,7 @@
             padding:9px 8px 8px 8px;
             color: #4a4a4a;
         }
-        margin-bottom: 24px;
+        margin-bottom: 10px;
         .fechaIconoContainer{
             border: solid 1px #e8e8e8;
             border-right: none;
@@ -91,7 +91,7 @@
             padding:9px 8px 8px 8px;
             color: #4a4a4a;
         }
-        margin-bottom: 24px;
+        margin-bottom: 10px;
         .HoraIconoContainer{
             border: solid 1px #e8e8e8;
             border-right: none;
@@ -142,7 +142,7 @@
         }
         .add{
             display: block;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             font-size: 14px;
             .selectedMember{
                 display: inline-block;
@@ -195,5 +195,28 @@
     }
     .dib{
         display: inline-block;
+    }
+    .secretario{
+        width: 49%;
+        display: inline-block;
+        label{
+            display: block;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .add{
+            display: block;
+            margin-bottom: 14px;
+            font-size: 12px;
+            .selectedMember{
+                font-style: normal;
+                display: inline-block;
+                width: 90%;
+                height: 32px;
+                font-size: 12px;
+                border: solid 1px #0081f0;
+                padding: 10px;
+            }
+        }
     }
 }

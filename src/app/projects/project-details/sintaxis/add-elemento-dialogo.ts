@@ -33,6 +33,7 @@ import { DatePipe } from '@angular/common';
         private actaService: ActaService, private elementoService: ElementoDialogoService,
         private fb: FormBuilder, public elementoDialogo: ElementoDialogo, public Reunion: Reunion,
         @Inject(MAT_DIALOG_DATA) public data: Reunion) {
+            this.saved.emit(false);
             this.Reunion = data;
             this.loadEstadoElemento();
             this.createElementForm();
@@ -49,17 +50,15 @@ import { DatePipe } from '@angular/common';
         }
 
     loadEstadoElemento() {
-        setTimeout(() => {
-          this.elementoService.getEstadoElemento().subscribe(
-            (response:Array<Estado>) => {
-              this.listaEstado = response;
-            },
-            (err) => {
-              console.log(err)
-            }
-          );
-        }, 0);
-      }
+      this.elementoService.getEstadoElemento().subscribe(
+        (response:Array<Estado>) => {
+          this.listaEstado = response;
+        },
+        (err) => {
+          console.log(err)
+        }
+      );
+    }
 
       onNoClick(): void {
         this.dialogRef.close();
@@ -90,6 +89,7 @@ import { DatePipe } from '@angular/common';
           selectedEstado: [ this.elementoDialogo.estado, Validators.required],
           fechaCompromiso: [ this.elementoDialogo.fechaCompromiso , Validators.required],
           descripcion: [this.elementoDialogo.descripcion, Validators.required],
+          titulo: [this.elementoDialogo.titulo, Validators.required],
           selectedMember: [this.elementoDialogo.username, Validators.required]
         });
       }

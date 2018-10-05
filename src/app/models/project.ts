@@ -9,4 +9,5 @@ export class Project {
     public usuariosNuevoProyecto: Array<Object>;
     public proyectoId: Number;
     public meet: Reunion;
+    public username: string; //Lider de proyecto
 }

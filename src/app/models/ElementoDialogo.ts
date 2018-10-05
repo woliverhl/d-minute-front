@@ -7,5 +7,6 @@ export class ElementoDialogo {
   public username:string;
   public temaId:Number;
   public codRol:string;
+  public titulo:string;
   
 }

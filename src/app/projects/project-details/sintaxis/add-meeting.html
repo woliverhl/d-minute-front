@@ -36,6 +36,16 @@
                 <button class="addMember" type="button" (click)= "addMember()">Agregar Miembro</button>
             </div>
         </div>
+        <div class="secretario" *ngIf="Reunion.usuarioActa.length > 0">
+                <label for="strResponsable">Secretario Reunión</label>
+                <div class="add">
+                    <mat-select class="selectedMember" [(ngModel)]="Reunion.username" formControlName="selectedSecretario">
+                        <mat-option *ngFor="let user of Reunion.usuarioActa" [value]="user.username">
+                            {{ user.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </div>
+        </div>
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
