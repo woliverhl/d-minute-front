@@ -35,6 +35,7 @@ import { DatePipe } from '@angular/common';
         @Inject(MAT_DIALOG_DATA) public data: Reunion) {
             this.saved.emit(false);
             this.Reunion = data;
+            this.loadReunion();
             this.loadEstadoElemento();
             this.createElementForm();
             console.log(this.Reunion);
@@ -53,6 +54,17 @@ import { DatePipe } from '@angular/common';
       this.elementoService.getEstadoElemento().subscribe(
         (response:Array<Estado>) => {
           this.listaEstado = response;
+        },
+        (err) => {
+          console.log(err)
+        }
+      );
+    }
+
+    loadReunion() {
+      this.actaService.getReunionById(this.Reunion.actaId.toString()).subscribe(
+        (response: Reunion) => {
+          this.Reunion = response;
         },
         (err) => {
           console.log(err)

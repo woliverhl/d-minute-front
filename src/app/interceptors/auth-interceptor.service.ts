@@ -7,6 +7,7 @@ import { HttpObserve } from '@angular/common/http/src/client';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { SpinnerService } from '../share/spinner/spinner.service';
+import { erroresHandler } from './erroresHandler';
 
 
 @Injectable()
@@ -43,6 +44,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     }, (err: any) => {
         this.spinner.hide();
       //You fuck up
+       //let eror: erroresHandler = new erroresHandler(this.route,);  
         if(err['status'] === 401){
           console.log('You are banished from the app');
           this.goodByeDude();

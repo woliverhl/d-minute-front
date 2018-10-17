@@ -52,6 +52,7 @@ export class ProjectDetailsComponent {
           this.project = this.actaDialogica.proyectoDto;
           this.reuniones = this.actaDialogica.listaActa;
           this.selectedMeeting = this.actaDialogica.actaDto;
+          console.log(this.actaDialogica);
         },(err)=>{
           console.log(err);
         });

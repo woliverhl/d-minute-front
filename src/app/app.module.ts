@@ -21,6 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 //CDK
 import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
@@ -67,6 +68,7 @@ import { SpinnerService } from "app/share/spinner/spinner.service";
 import { TemaService } from './projects/service/tema-service.service';
 import { ActaService } from './projects/service/acta-service.service';
 import { ElementoDialogoService } from './projects/service/elemento-service.service';
+import { erroresHandler } from 'app/interceptors/erroresHandler';
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
@@ -143,7 +145,8 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     CdkTableModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatGridListModule
   ],
   providers: [
         {

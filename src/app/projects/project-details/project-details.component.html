@@ -99,11 +99,45 @@
         </div>
       </mat-tab>
       <mat-tab label="TAREAS">
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis
-          vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
-          felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum
-          enim, vel tempor sapien arcu a tellus.
+        <div class="kanban">
+            <div class="barra">
+                <div class="campoaccion">
+                    <label for="todo">TODO</label>
+                </div>
+                <div class="campoaccion">
+                    <label for="doing">DOING</label>
+                </div>
+                <div class="campoaccion">
+                    <label for="done">DONE</label>
+                </div>
+            </div>
+            <div *ngIf="actaDialogica !== undefined">
+                <div class="detallekanban">
+                      <div class="divkanban"> 
+                          <div class="todo" *ngFor="let kan of actaDialogica.kanbanTareasTodo" (click)="openEditElementoDialogo(kan.idElemento)"> 
+                              <label for="strtodo">{{kan.codRol}} - {{kan.titulo}}</label>
+                              <label for="strtodo">Resp: {{kan.username}}</label>
+                              <label for="strtodo">Fecha: {{kan.fechaCompromiso}}</label>
+                          </div>
+                      </div>
+                      <div class="linea"></div>
+                      <div class="divkanban">
+                          <div class="doing" *ngFor="let kan of actaDialogica.kanbanTareasDoing" (click)="openEditElementoDialogo(kan.idElemento)"> 
+                              <label for="strtodo">{{kan.codRol}} - {{kan.titulo}}</label>
+                              <label for="strtodo">Resp: {{kan.username}}</label>
+                              <label for="strtodo">Fecha: {{kan.fechaCompromiso}}</label>
+                          </div>
+                      </div>
+                      <div class="linea"></div>
+                      <div class="divkanban">
+                          <div class="done" *ngFor="let kan of actaDialogica.kanbanTareasDone" (click)="openEditElementoDialogo(kan.idElemento)"> 
+                              <label for="strtodo">{{kan.codRol}} - {{kan.titulo}}</label>
+                              <label for="strtodo">Resp: {{kan.username}}</label>
+                              <label for="strtodo">Fecha: {{kan.fechaCompromiso}}</label>
+                          </div>
+                      </div>
+                  </div>
+            </div>
         </div>
       </mat-tab>
     </mat-tab-group>

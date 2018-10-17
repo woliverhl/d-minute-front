@@ -229,3 +229,75 @@ h5{
     border: solid 1px #c5c5c5;
     margin: 0px 17px 0px 17px;
 }
+
+.kanban{
+    display: block;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #ffffff;
+    .barra{
+        height: 44px;
+        background-color: #00a1f0;
+    }
+    .campoaccion{
+        width: 33%;
+        display: inline-block;
+        text-align: center;
+        label {
+            color: #ffffff;
+            width: 44px;
+            height: 20px;
+            font-size: 16px;
+        }
+    }
+    .detallekanban{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: #ffffff;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 14px;
+        .linea{
+            display: inline-block;
+            width: 1px;
+            border: solid 1px #c5c5c5;
+        }
+        .divkanban {
+            margin-left: 5px;
+            width: 31%;
+            display: inline-table;
+            text-align: center;
+            margin-top: 5px
+        }
+        .todo {
+            display: block;
+            text-align: center;
+            height: 63px;
+            margin-top: 4px;
+            background-color: #ffd1d1;
+        }
+        .doing {
+            display: block;
+            text-align: center;
+            height: 63px;
+            margin-top: 4px;
+            background-color: #fff8a0;
+        }
+        .done {
+            display: block;
+            text-align: center;
+            height: 63px;
+            margin-top: 4px;
+            background-color: #d1ffc3;
+        }
+        label{
+            display: block;
+            color: #333333;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            text-align: left;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            margin-left:3px;
+        }
+    }
+}
