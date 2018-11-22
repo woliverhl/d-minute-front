@@ -1,8 +1,9 @@
-import {ErrorHandler} from "@angular/core";
+import {ErrorHandler, Injectable} from "@angular/core";
 import {UNAUTHORIZED, BAD_REQUEST, FORBIDDEN, INTERNAL_SERVER_ERROR} from "http-status-codes";
 import {Router} from "@angular/router";
 import {ToastsManager, Toast} from "ng2-toastr";
 
+@Injectable()
 export class erroresHandler implements ErrorHandler {
 
   static readonly REFRESH_PAGE_ON_TOAST_CLICK_MESSAGE: string = "An error occurred: Please click this message to refresh";

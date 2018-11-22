@@ -1,4 +1,4 @@
-import { Component, Inject, EventEmitter } from '@angular/core';
+import { Component, Inject, EventEmitter, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Reunion } from "app/models/reunion";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,12 +13,18 @@ import { DatePipe } from '@angular/common';
     templateUrl: './add-elemento-dialgo.html',
     styleUrls: ['./add-elemento-dialgo.scss']
   })
-  export class AddElementoDialogoComponent {
+  export class AddElementoDialogoComponent implements AfterViewInit {
 
     addElementoForm: FormGroup;
     public saved: EventEmitter<any> = new EventEmitter();
     public listaEstado: Array<Estado> = new Array<Estado>();
     public codRol: string;
+
+    @ViewChild('desacuerdo') desacuerdo: ElementRef;
+    @ViewChild('duda') duda: ElementRef;
+    @ViewChild('acuerdo') acuerdo: ElementRef;
+    @ViewChild('compromiso') compromiso: ElementRef;
+    @ViewChild('norma') norma: ElementRef;
     
     desacuerdoSrc = '../../../assets/img/elementos/desacuerdo_unselected.png';
     dudaSrc = '../../../assets/img/elementos/duda_unselected.png';
@@ -33,22 +39,27 @@ import { DatePipe } from '@angular/common';
         private actaService: ActaService, private elementoService: ElementoDialogoService,
         private fb: FormBuilder, public elementoDialogo: ElementoDialogo, public Reunion: Reunion,
         @Inject(MAT_DIALOG_DATA) public data: Reunion) {
-            this.saved.emit(false);
-            this.Reunion = data;
-            this.loadReunion();
-            this.loadEstadoElemento();
-            this.createElementForm();
-            console.log(this.Reunion);
-            if ((this.Reunion.temaActa[0].elementoDialogoDto != undefined) && (this.Reunion.temaActa[0].elementoDialogoDto.length > 0)){
-              this.elementoDialogo = this.Reunion.temaActa[0].elementoDialogoDto[0];
-            }
-            else{
-              var datePipe = new DatePipe("en-US");
-              this.elementoDialogo.fechaCompromiso = datePipe.transform(Date.now(), 'yyyy-MM-dd');
-              this.elementoDialogo.estado = "TODO";
-            }
-            console.log(this.elementoDialogo);
-        }
+        
+      this.saved.emit(false);
+      this.Reunion = data;
+      this.loadReunion();
+      this.loadEstadoElemento();
+      this.createElementForm();
+      console.log("[constructor] reunion: "+this.Reunion);
+      if ((this.Reunion.temaActa[0].elementoDialogoDto != undefined) && (this.Reunion.temaActa[0].elementoDialogoDto.length > 0)){
+        this.elementoDialogo = this.Reunion.temaActa[0].elementoDialogoDto[0];
+      }
+      else{
+        var datePipe = new DatePipe("en-US");
+        this.elementoDialogo.fechaCompromiso = datePipe.transform(Date.now(), 'yyyy-MM-dd');
+        this.elementoDialogo.estado = "TODO";
+      }
+      console.log(this.elementoDialogo);
+    }
+
+    ngAfterViewInit() {
+      this.loadImg(this.elementoDialogo.codRol);
+    }
 
     loadEstadoElemento() {
       this.elementoService.getEstadoElemento().subscribe(
@@ -112,5 +123,29 @@ import { DatePipe } from '@angular/common';
           this.selectedImage.src = this.selectedImage.src.replace('_selected', '_unselected');
         image.src = image.src.replace('_unselected', '_selected');
         this.selectedImage = image;
+    }
+
+    loadImg(_codRol: string){
+      console.log('[loadImg] _codRol: '+_codRol);
+      let image: ElementRef;
+      switch(_codRol){
+        case 'DE':
+          image = this.desacuerdo;
+        break;
+        case 'DU':
+          image = this.duda;
+        break;
+        case 'AC':
+          image = this.acuerdo;
+        break;
+        case 'CO':
+          image = this.compromiso;
+        break;
+        case 'NO':
+          image = this.norma;
+        break;
+      }
+      console.log('[loadImg] image: '+image);
+      this.changeImg(image.nativeElement, _codRol);
     }
   }

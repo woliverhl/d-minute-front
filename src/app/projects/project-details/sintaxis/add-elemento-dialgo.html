@@ -6,31 +6,31 @@
         <h4 class="h4seleccion">Selecciona el tipo de elemento</h4>
         <div class="campoElemento"> 
             <span class="elementoIconoContainer">
-                    <img [(src)]="desacuerdoSrc" id="desacuerdo" class="elemento-logo" (click)="changeImg($event.target,'DE')" alt=""> 
+                    <img [(src)]="desacuerdoSrc" id="desacuerdo" class="elemento-logo" (click)="changeImg($event.target,'DE')" alt="" #desacuerdo> 
             </span>
             <label for="startElementoDuda">Desacuerdo o Brecha</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [(src)]="dudaSrc" id="duda" class="elemento-logo" (click)="changeImg($event.target,'DU')" alt="">
+                    <img [(src)]="dudaSrc" id="duda" class="elemento-logo" (click)="changeImg($event.target,'DU')" alt="" #duda>
                 </span>
                 <label for="startElementoDuda">Duda o <br>B&uacute;squeda</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [(src)]="acuerdoSrc" id="acuerdo" class="elemento-logo" (click)="changeImg($event.target,'AC')" alt="">
+                    <img [(src)]="acuerdoSrc" id="acuerdo" class="elemento-logo" (click)="changeImg($event.target,'AC')" alt="" #acuerdo>
                 </span>
                 <label for="startElementoDuda">Acuerdo de Coordinación</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [(src)]="compromisoSrc" id="compromiso" class="elemento-logo" (click)="changeImg($event.target,'CO')" alt="">
+                    <img [(src)]="compromisoSrc" id="compromiso" class="elemento-logo" (click)="changeImg($event.target,'CO')" alt="" #compromiso>
                 </span>
                 <label for="startElementoDuda">Compromiso Individual</label>
         </div>
         <div class="campoElemento"> 
                 <span class="elementoIconoContainer">
-                        <img [(src)]="normaSrc" id="norma" class="elemento-logo" (click)="changeImg($event.target,'NO')" alt="" >
+                    <img [(src)]="normaSrc" id="norma" class="elemento-logo" (click)="changeImg($event.target,'NO')" alt="" #norma>
                 </span>
                 <label for="startElementoDuda">Norma <br>Común</label>
         </div>

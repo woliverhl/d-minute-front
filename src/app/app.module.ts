@@ -3,6 +3,7 @@ import { NgModule, ViewContainerRef } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastModule } from 'ng2-toastr';
 
 //Materials Stuff
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -146,7 +147,8 @@ const appRoutes: Routes = [
     CdkTableModule,
     MatTableModule,
     MatPaginatorModule,
-    MatGridListModule
+    MatGridListModule,
+    ToastModule.forRoot()    
   ],
   providers: [
         {
@@ -173,7 +175,8 @@ const appRoutes: Routes = [
           TemaActa,
           ActaDialogica,
           ElementoDialogo,
-          SpinnerService
+          SpinnerService,
+          erroresHandler
       ],
   bootstrap: [AppComponent]
 })
