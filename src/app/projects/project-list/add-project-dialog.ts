@@ -21,17 +21,20 @@ export class AddProjectDialog implements OnInit {
   public selectedMember: Object;
   public saved: EventEmitter<any> = new EventEmitter();
   projectId: String;
+  textoBoton: String;
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectDialog>, private UsersService: UsersService, 
     private fb: FormBuilder, public Project: Project, private projectsService: ProjectsService,
     @Inject(MAT_DIALOG_DATA) public data: String,) { 
+      this.textoBoton = "CREAR NUEVO PROYECTO";
       this.createProjectForm();
       this.Project.usuariosNuevoProyecto = [];
       this.cleanUserForm(this.addProjectForm);
       this.projectId = data;
       this.saved.emit(false);
       if (data != "0"){
+        this.textoBoton = "MODIFICAR PROYECTO";
         this.loadProyectoExistente();
       }
       else{

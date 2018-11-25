@@ -53,6 +53,7 @@ export class ProjectDetailsComponent {
           this.reuniones = this.actaDialogica.listaActa;
           this.selectedMeeting = this.actaDialogica.actaDto;
           console.log(this.actaDialogica);
+          console.log(this.selectedMeeting);
         },(err)=>{
           console.log(err);
         });
@@ -116,7 +117,7 @@ export class ProjectDetailsComponent {
     temaId.actaId = this.selectedMeeting.actaId
     temaId.id = 0;
     let dialogRef = this.dialog.open(AddTemaComponent, {
-        width: '744px',
+        width: '644px',
         data: temaId
     });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -124,7 +125,7 @@ export class ProjectDetailsComponent {
 
   openEditTema(temaId:TemaActa): void{
     let dialogRef = this.dialog.open(AddTemaComponent, {
-        width: '744px',
+        width: '644px',
         data: temaId
     });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));

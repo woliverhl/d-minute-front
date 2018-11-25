@@ -1,5 +1,5 @@
 <div class="container">
-    <h4>AGREGAR PROYECTO</h4>
+    <h4>{{textoBoton}}</h4>
     <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
     <form action="" [formGroup]="addProjectForm" (ngSubmit)="postProject()">
         <div class="campoTexto">
@@ -19,9 +19,9 @@
             <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span><input [(ngModel)]="Project.fechaFin" formControlName="deathLine" type="date">
         </div>
         <div class="miembros">            
-            <h4>Miembros del Equipo</h4>
+            <label>Miembros del Equipo</label>
             <div class="miembro" *ngFor="let member of Project.usuariosNuevoProyecto">
-                <h4>{{ member.nombre }}  {{ member.apellido }}</h4>
+                <label>{{ member.nombre }}  {{ member.apellido }}</label>
                 <mat-icon class="deleteMember" (click)="deleteMember(member)">delete</mat-icon>
                 <p>{{ member.username }}</p>
             </div>
@@ -47,7 +47,7 @@
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-            <button class="crearProyecto" type="submit" [disabled]="!addProjectForm.valid">CREAR NUEVO PROYECTO</button>
+            <button class="crearProyecto" type="submit" [disabled]="!addProjectForm.valid">{{textoBoton}}</button>
         </div>
     </form>
 </div>

@@ -4,7 +4,7 @@
     h4{
         text-align: center;
         display: inline-block;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -12,7 +12,7 @@
         letter-spacing: normal;
         color: #333333;
         width: 95%;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
     .closeModalButton{
         position: relative;
@@ -75,27 +75,23 @@
         }
     }
     .miembros{
-        h4{
-            font-size: 14px;
+        label{
+            display: block;
             font-weight: 600;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            color: #333333;
-            text-align: left;
-            margin-bottom: 4px;
+            font-size: 12px;
         }
         .miembro{
             width: 47%;
             height: 57px;
+            font-size: 12px;
             background-color: #ececec;
             padding: 0px 8px 16px;
             display: inline-block;
             margin-right: 16px;
             margin-bottom: 8px;
-            h4{
+            label{
                 display: inline-block;
+                font-weight: 600;
                 margin-bottom: 4px;
                 width: 89%;
             }
@@ -112,27 +108,23 @@
             }
         }
         .add{
-            font-size: 14px;
             display: block;
             margin-bottom: 10px;
+            font-size: 12px;
             .selectedMember{
                 display: inline-block;
-                width: 23%;
-                height: 48px;
-                border-radius: 6px;
+                width: 47%;
+                height: 32px;
                 border: solid 1px #0081f0;
-                padding: 10px;
             }
             .addMember{
-                font-size: 14px;
+                display: inline-block;
                 margin-left: 16px;
                 width: 161px;
-                height: 48px;
-                border-radius: 6px;
+                height: 32px;
                 border: solid 1px #0081f0;
                 background-color: #ffffff;
-                color: #0081f0;
-                font-weight: 600;
+                color: #0081f0;               
                 cursor: pointer;
             }
         }

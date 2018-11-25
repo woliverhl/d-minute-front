@@ -3,7 +3,7 @@ import { NgModule, ViewContainerRef } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ToastModule } from 'ng2-toastr';
+//import { ToastModule } from 'ng2-toastr';
 
 //Materials Stuff
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,6 +50,7 @@ import { AddElementoDialogoComponent } from './projects/project-details/sintaxis
 import { DelProjectDialog } from './projects/project-list/del-project-dialog';
 import { delMeetingComponent } from './projects/project-details/del-acta-dialog';
 import { delTemaComponent } from './projects/project-details/del-tema-dialog';
+import { MsgErrorDialog } from 'app/interceptors/msg-error-dialog';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -69,7 +70,7 @@ import { SpinnerService } from "app/share/spinner/spinner.service";
 import { TemaService } from './projects/service/tema-service.service';
 import { ActaService } from './projects/service/acta-service.service';
 import { ElementoDialogoService } from './projects/service/elemento-service.service';
-import { erroresHandler } from 'app/interceptors/erroresHandler';
+//import { erroresHandler } from 'app/interceptors/erroresHandler';
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
     AddTemaComponent,
     delMeetingComponent,
     delTemaComponent,
-    AddElementoDialogoComponent
+    AddElementoDialogoComponent,
+    MsgErrorDialog
   ],
   declarations: [
     AppComponent,
@@ -121,7 +123,8 @@ const appRoutes: Routes = [
     CapitalizePipe,
     AddMeetingComponent,
     AddTemaComponent,
-    AddElementoDialogoComponent
+    AddElementoDialogoComponent,
+    MsgErrorDialog
   ],
   imports: [
     BrowserModule,
@@ -148,7 +151,7 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatGridListModule,
-    ToastModule.forRoot()    
+    //ToastModule.forRoot()    
   ],
   providers: [
         {
@@ -176,7 +179,7 @@ const appRoutes: Routes = [
           ActaDialogica,
           ElementoDialogo,
           SpinnerService,
-          erroresHandler
+          //erroresHandler
       ],
   bootstrap: [AppComponent]
 })

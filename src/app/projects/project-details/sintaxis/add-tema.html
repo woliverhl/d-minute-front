@@ -1,5 +1,5 @@
 <div class="container">
-    <h4>AGREGAR TEMA</h4>
+    <h4>{{textoBoton}}</h4>
     <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
     <form action="" [formGroup]="addTemaForm" (ngSubmit)="postTema()">
         <div class="campoTexto">
@@ -13,7 +13,7 @@
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-            <button class="crearReunion" type="submit" [disabled]="!addTemaForm.valid">CREAR NUEVO TEMA</button>
+            <button class="crearReunion" type="submit" [disabled]="!addTemaForm.valid">{{textoBoton}}</button>
         </div>
     </form>
 </div>

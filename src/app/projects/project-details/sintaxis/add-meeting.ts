@@ -20,6 +20,7 @@ import { DatePipe } from '@angular/common';
     public listOfUsers: any;
     Project: Project;
     public saved: EventEmitter<any> = new EventEmitter();
+    textoBoton: String;
     
     constructor(
         public dialogRef: MatDialogRef<AddMeetingComponent>,
@@ -32,8 +33,10 @@ import { DatePipe } from '@angular/common';
           this.createMeetingForm();
           this.Reunion.usuarioActa = [];          
             if (this.data.meet != undefined){
+              this.textoBoton = "MODIFICAR ACTA";
               this.Reunion = this.data.meet;
             }else{
+              this.textoBoton = "CREAR NUEVA ACTA";
               var datePipe = new DatePipe("en-US");
               this.Reunion.fecha = datePipe.transform(Date.now(), 'yyyy-MM-dd');
             }

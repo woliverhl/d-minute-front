@@ -2,7 +2,7 @@
 <app-breadcrumb *ngIf="project !== undefined" [steps]= "['Proyectos activos']" [here]="project.descripcion"></app-breadcrumb>
 <div class="details-container">
   <div *ngIf="project !== undefined" >
-      <h1>PROYECTO {{project.descripcion}}</h1>
+      <h1>PROYECTO: {{project.descripcion}}</h1>
   </div>
   <div class="menu">
       <button class="addMeetingButton" (click)="openAddMeeting()" type="button">
@@ -20,7 +20,7 @@
     <mat-tab-group>
       <mat-tab label="Sintaxis">
         <div class="details-container-mettings">
-          <div class="meeting-detail">
+          <div class="meeting-detail" *ngIf="selectedMeeting !== null">
 
             <div class="meeting-detail-titulo" *ngIf="selectedMeeting !== undefined">
              
@@ -99,7 +99,7 @@
         </div>
       </mat-tab>
       <mat-tab label="TAREAS">
-        <div class="kanban">
+        <div class="kanban" *ngIf="selectedMeeting !== null">
             <div class="barra">
                 <div class="campoaccion">
                     <label for="todo">TODO</label>

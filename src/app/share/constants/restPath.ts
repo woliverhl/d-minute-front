@@ -1,7 +1,7 @@
 export class restPath {
     //public APP: string = 'http://www.a.dminute.pw/api/dminute';
     //public APP: string = 'https://dminutezuul.herokuapp.com/api/dminutems';
-    //public APP: string = 'https://dminuteapi.herokuapp.com';
+    //public APP: string = 'http://127.0.0.1:3333';
     public APP: string = '/api';
 
     /***INICIO GENERICOS***/

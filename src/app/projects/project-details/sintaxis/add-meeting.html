@@ -1,5 +1,5 @@
 <div class="container">
-    <h4>AGREGAR REUNIÓN</h4>
+    <h4>{{textoBoton}}</h4>
     <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
     <form action="" [formGroup]="addMeetingForm" (ngSubmit)="postMeeting()">
         <div class="campoTexto">
@@ -21,9 +21,9 @@
         </div>
 
         <div class="miembros">
-            <h4>Asistentes Reunión</h4>
+            <label>Asistentes Reunión</label>
             <div class="miembro" *ngFor="let member of Reunion.usuarioActa">
-                <h4>{{ member.nombre }}</h4>
+                <label>{{ member.nombre }}</label>
                 <mat-icon class="deleteMember" (click)="deleteMember(member)">delete</mat-icon>
                 <p>{{ member.username }}</p>
             </div>
@@ -49,7 +49,7 @@
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-            <button class="crearReunion" type="submit" [disabled]="!addMeetingForm.valid">CREAR NUEVA REUNIÓN</button>
+            <button class="crearReunion" type="submit" [disabled]="!addMeetingForm.valid">{{textoBoton}}</button>
         </div>
     </form>
 </div>

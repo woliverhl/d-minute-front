@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { TemaActa } from '../../../models/tema';
 import { TemaService } from '../../service/tema-service.service';
+import { EILSEQ } from 'constants';
 
 @Component({
     selector: 'add-tema',
@@ -13,6 +14,7 @@ import { TemaService } from '../../service/tema-service.service';
     
     addTemaForm: FormGroup;
     public saved: EventEmitter<any> = new EventEmitter();
+    textoBoton: String;
     
     constructor(
         public dialogRef: MatDialogRef<AddTemaComponent>, 
@@ -22,6 +24,12 @@ import { TemaService } from '../../service/tema-service.service';
             this.saved.emit(false);
             this.temaActa = data;
             this.createTemaForm();
+            if (this.temaActa.id == 0){
+                this.textoBoton = "CREAR NUEVO TEMA";
+            }
+            else{
+                this.textoBoton = "MODIFICAR TEMA";
+            }
         }
 
     postTema(){

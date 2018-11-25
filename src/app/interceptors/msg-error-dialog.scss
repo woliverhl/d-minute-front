@@ -28,20 +28,12 @@
         cursor: pointer;
     }
     .campoTexto{
-        width: 49%;
+        width: 100%;
         display: inline-block;
         label{
             display: block;
             font-weight: 600;
             font-size: 12px;
-        }
-        input{
-            width: 316px;
-            height: 32px;
-            border: solid 1px #e8e8e8;
-            font-size: 12px;
-            padding:9px 8px 8px 8px;
-            color: #4a4a4a;
         }
         margin-bottom: 24px;
     }
@@ -51,7 +43,7 @@
     .botonera{
         text-align: center;        
         font-size: 14px;
-        .cancelar{
+        .aceptar{
             width: 182px;
             height: 48px;
             border-radius: 6px;
@@ -59,16 +51,6 @@
             background-color: #ffffff;
             color: #0081f0;
             margin-right: 12px;
-            cursor: pointer;
-        }
-        .crearProyecto{
-            width: 223px;
-            height: 48px;
-            border-radius: 6px;
-            border: solid 1px #0081f0;
-            background-color: #0081f0;
-            color: #ffffff;
-            margin-left: 12px;
             cursor: pointer;
         }
     }
