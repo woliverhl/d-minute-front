@@ -1,4 +1,4 @@
-import { Component, Inject, EventEmitter, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import { Component, Inject, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Reunion } from "app/models/reunion";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
     templateUrl: './add-elemento-dialgo.html',
     styleUrls: ['./add-elemento-dialgo.scss']
   })
-  export class AddElementoDialogoComponent implements AfterViewInit {
+  export class AddElementoDialogoComponent {
 
     addElementoForm: FormGroup;
     public saved: EventEmitter<any> = new EventEmitter();
