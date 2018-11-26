@@ -8,5 +8,5 @@ export class ElementoDialogo {
   public temaId:Number;
   public codRol:string;
   public titulo:string;
-  
+  public correlativo: Number;
 }

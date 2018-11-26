@@ -52,8 +52,6 @@ export class ProjectDetailsComponent {
           this.project = this.actaDialogica.proyectoDto;
           this.reuniones = this.actaDialogica.listaActa;
           this.selectedMeeting = this.actaDialogica.actaDto;
-          console.log(this.actaDialogica);
-          console.log(this.selectedMeeting);
         },(err)=>{
           console.log(err);
         });
@@ -84,7 +82,7 @@ export class ProjectDetailsComponent {
   openAddMeeting(): void{
     this.project.meet = undefined;
     let dialogRef = this.dialog.open(AddMeetingComponent, {
-        width: '744px',
+        width: '644px',
         data: this.project
     });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -98,7 +96,7 @@ export class ProjectDetailsComponent {
     this.ActivateMeeting = this.selectedMeeting;
     this.project.meet=this.selectedMeeting;
     let dialogRef = this.dialog.open(AddMeetingComponent, {
-      width: '744px',
+      width: '644px',
       data: this.project
   });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -106,7 +104,7 @@ export class ProjectDetailsComponent {
 
   openDelMeeting(){
     let dialogRef = this.dialog.open(delMeetingComponent, {
-      width: '744px',
+      width: '644px',
       data: this.selectedMeeting
   });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -133,21 +131,22 @@ export class ProjectDetailsComponent {
 
   openDelTema(temaId:TemaActa): void{
     let dialogRef = this.dialog.open(delTemaComponent, {
-      width: '744px',
+      width: '644px',
       data: temaId
     });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
   openElementoDialogo(temaId:TemaActa){
-    temaId.elementoDialogoDto = new Array<ElementoDialogo>();
-    let temasLista: Array<TemaActa> = new Array<TemaActa>(); 
-    temasLista.push(temaId);
-    let nuevoElemento: Reunion = this.selectedMeeting;
+    var nuevoTema: TemaActa = this.retornaTemaSeleccionada(temaId);
+    nuevoTema.elementoDialogoDto = new Array<ElementoDialogo>();
+    var temasLista: Array<TemaActa> = new Array<TemaActa>(); 
+    temasLista.push(nuevoTema);
+    var nuevoElemento: Reunion = this.retornaReunionSeleccionada();
     nuevoElemento.temaActa = temasLista;
 
     let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
-      width: '744px',
+      width: '644px',
      data: nuevoElemento
   });
     dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -158,7 +157,7 @@ export class ProjectDetailsComponent {
     this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
       (response) => {
           dialogRef = this.dialog.open(AddElementoDialogoComponent, {
-          width: '744px',
+          width: '644px',
           data: response
       });
       dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
@@ -177,6 +176,31 @@ export class ProjectDetailsComponent {
         console.log(err);
       }
     );
+    return retorno;
+  }
+
+  retornaReunionSeleccionada(){
+    let retorno: Reunion = new Reunion();
+    let reunion: Reunion = this.selectedMeeting;
+    retorno.actaId = reunion.actaId;
+    retorno.correlativo = reunion.correlativo;
+    retorno.estado = reunion.estado;
+    retorno.fecha = reunion.fecha;
+    retorno.horaFin = reunion.horaFin;
+    retorno.horaInicio = reunion.horaInicio;
+    retorno.proyectoId = reunion.proyectoId;
+    retorno.resumen = reunion.resumen;
+    retorno.username = reunion.username;
+    retorno.usuarioActa = reunion.usuarioActa;
+    return retorno;
+  }
+
+  retornaTemaSeleccionada(tema: TemaActa){
+    let retorno: TemaActa = new TemaActa();
+    retorno.actaId = tema.actaId;
+    retorno.discusion = tema.discusion;
+    retorno.id = tema.id;
+    retorno.nombre = tema.nombre;
     return retorno;
   }
 

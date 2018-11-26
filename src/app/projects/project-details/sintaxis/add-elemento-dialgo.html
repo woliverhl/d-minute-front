@@ -1,9 +1,11 @@
 <div class="container">
-    <h4>AGREGAR ELEMENTO DE DIÁLOGO</h4>
+    <h4>{{textform}}</h4>
     <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
     <form action="" [formGroup]="addElementoForm" (ngSubmit)="postElementoDialogo()">
-
-        <h4 class="h4seleccion">Selecciona el tipo de elemento</h4>
+        <div class="h4seleccion">
+                <label >Selecciona el tipo de elemento</label>
+        </div>
+        
         <div class="campoElemento"> 
             <span class="elementoIconoContainer">
                     <img [(src)]="desacuerdoSrc" id="desacuerdo" class="elemento-logo" (click)="changeImg($event.target,'DE')" alt="" #desacuerdo> 
@@ -74,7 +76,7 @@
         <mat-divider></mat-divider>
         <div class="botonera">
             <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-            <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">CREAR NUEVO ELEMENTO</button>
+            <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">{{textoBoton}}</button>
         </div>
     </form>
 </div>

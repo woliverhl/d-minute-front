@@ -19,6 +19,8 @@ import { DatePipe } from '@angular/common';
     public saved: EventEmitter<any> = new EventEmitter();
     public listaEstado: Array<Estado> = new Array<Estado>();
     public codRol: string;
+    textoBoton: String;
+    textform: String;
 
     @ViewChild('desacuerdo') desacuerdo: ElementRef;
     @ViewChild('duda') duda: ElementRef;
@@ -45,20 +47,22 @@ import { DatePipe } from '@angular/common';
       this.loadReunion();
       this.loadEstadoElemento();
       this.createElementForm();
-      console.log("[constructor] reunion: "+this.Reunion);
+      console.log("[constructor] reunion: "+ this.Reunion);
       if ((this.Reunion.temaActa[0].elementoDialogoDto != undefined) && (this.Reunion.temaActa[0].elementoDialogoDto.length > 0)){
         this.elementoDialogo = this.Reunion.temaActa[0].elementoDialogoDto[0];
+        this.loadImg(this.elementoDialogo.codRol);
+        this.textoBoton = "MODIFICAR ELEMENTO";
+        this.textform = "MODIFICAR ELEMENTO DE DIALOGO";
       }
       else{
+        this.textform = "CREAR ELEMENTO DE DIALOGO";
+        this.textoBoton = "CREAR ELEMENTO";
         var datePipe = new DatePipe("en-US");
         this.elementoDialogo.fechaCompromiso = datePipe.transform(Date.now(), 'yyyy-MM-dd');
         this.elementoDialogo.estado = "TODO";
+        this.elementoDialogo.temaId = this.Reunion.temaActa[0].id;
+        console.log("[constructor] elemento: " + this.elementoDialogo.temaId);
       }
-      console.log(this.elementoDialogo);
-    }
-
-    ngAfterViewInit() {
-      this.loadImg(this.elementoDialogo.codRol);
     }
 
     loadEstadoElemento() {
@@ -94,14 +98,11 @@ import { DatePipe } from '@angular/common';
     }
 
     postElementoDialogo(){
-      console.log(this.codRol);
       this.elementoDialogo.codRol = this.codRol;
-      this.elementoDialogo.temaId = this.Reunion.temaActa[0].id;
         this.elementoService.postElementoDialogo(this.elementoDialogo).subscribe((response) => {
             this.onNoClick();
             this.saved.emit(true);
             this.cleanUserForm(this.addElementoForm);
-            console.log(response);
           }, (err) => {
             console.log(err);
           });
@@ -110,14 +111,15 @@ import { DatePipe } from '@angular/common';
     createElementForm() {
       this.addElementoForm = this.fb.group({
           selectedEstado: [ this.elementoDialogo.estado, Validators.required],
+          descripcion: [ this.elementoDialogo.descripcion, ],
           fechaCompromiso: [ this.elementoDialogo.fechaCompromiso , Validators.required],
-          descripcion: [this.elementoDialogo.descripcion, Validators.required],
           titulo: [this.elementoDialogo.titulo, Validators.required],
           selectedMember: [this.elementoDialogo.username, Validators.required]
         });
       }
 
     changeImg(image: any, _codRol: string){
+        console.log('[changeImg] _codRol: '+_codRol);
         this.codRol = _codRol;
         if(this.selectedImage !== undefined)
           this.selectedImage.src = this.selectedImage.src.replace('_selected', '_unselected');

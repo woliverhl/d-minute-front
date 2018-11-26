@@ -3,15 +3,19 @@
 <div class="details-container">
   <div *ngIf="project !== undefined" >
       <h1>PROYECTO: {{project.descripcion}}</h1>
+       &nbsp;
+        <div class="refrescar">
+         <i class="material-icons" title="Refrescar resultados" (click)="ngOnInit()">refresh</i>
+        </div>
   </div>
   <div class="menu">
       <button class="addMeetingButton" (click)="openAddMeeting()" type="button">
-          Nueva Reuni&oacute;n
+          Nueva Acta
         </button>
     <div *ngIf="project !== undefined" class="meeting-list">
       <div class="meeting-items" *ngFor="let reu of reuniones">
         <a class="meeting-item" (click)="selectMeeting(reu)" [class.selected]="wasClicked">
-          Reuni&oacute;n {{ reu.fecha | date: 'dd/MM/yyyy' }} - {{ reu.horaInicio }} 
+          ACTA N° {{ reu.correlativo }} | {{ reu.fecha | date: 'dd/MM/yyyy' }} {{ reu.horaInicio }} 
         </a>
       </div>
     </div>
@@ -26,7 +30,7 @@
              
             <div class="encabezado">
               <span>
-                  REUNI&Oacute;N {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }} - INICIO {{ selectedMeeting.horaInicio }}hrs. 
+                    ACTA N° {{ selectedMeeting.correlativo }} | {{ selectedMeeting.fecha | date: 'dd/MM/yyyy' }} - INICIO {{ selectedMeeting.horaInicio }}hrs. 
                   - TERMINO {{ selectedMeeting.horaFin }}hrs.
               </span>
                 <div class="interno">
@@ -75,7 +79,8 @@
                               <div *ngIf="e.estado !== 'DELE'">
                                   <span>
                                       <a (click)="openEditElementoDialogo(e.idElemento)" title="">
-                                        {{e.codRol}} - 
+                                        {{selectedMeeting.correlativo}}.{{e.correlativo}} | 
+                                        {{e.codRol}} |
                                         {{e.titulo}}
                                       </a>
                                    </span>
@@ -83,7 +88,8 @@
                               <div *ngIf="e.estado == 'DELE'">
                                       <span class="tachado">
                                           <a (click)="openEditElementoDialogo(e.idElemento)" title="">
-                                            {{e.codRol}} - 
+                                            {{selectedMeeting.correlativo}}.{{e.correlativo}} | 
+                                            {{e.codRol}} |
                                             {{e.titulo}}
                                           </a>
                                        </span>
