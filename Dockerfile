@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:8.13.0-alpine as node
+FROM node:8.13.0-alpine
 
 WORKDIR /usr/src/app
 
