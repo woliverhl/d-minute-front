@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2
-FROM nginx:1.13.12-alpine
+FROM nginx:1.14.1-alpine
 
 COPY --from=node /usr/src/app/dist/angular-docker /usr/share/nginx/html
 
