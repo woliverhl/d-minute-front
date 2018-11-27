@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:9.6.1 as node
+FROM node:8 as node
 
 EXPOSE 8888
 
