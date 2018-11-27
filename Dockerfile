@@ -1,5 +1,7 @@
 # Stage 1
-FROM node:8.13.0-alpine
+FROM node:8
+
+EXPOSE 8888
 
 WORKDIR /usr/src/app
 
