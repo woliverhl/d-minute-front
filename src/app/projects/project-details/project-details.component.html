@@ -47,6 +47,21 @@
             </div>
 
             <div *ngIf="selectedMeeting !== undefined">
+                <div class="pendientes">
+                  <h5>TEMAS PENDIENTES:</h5>
+                    <div *ngIf="selectedMeeting.tareaPendiente !== undefined">
+                        <div  *ngFor="let e of selectedMeeting.tareaPendiente">
+                            <span>
+                                <a (click)="openEditElementoDialogo(e.idElemento)" title="">
+                                  {{selectedMeeting.correlativo}}.{{e.correlativo}} 
+                                </a>
+                             </span>
+                          </div>
+                    </div>
+                  </div>
+            </div> 
+
+            <div *ngIf="selectedMeeting !== undefined">
                 <div class="participantes">
                   <h5>PARTICIPANTES:</h5>
                     <div *ngIf="selectedMeeting.usuarioActa !== undefined">
@@ -123,25 +138,25 @@
                 <div class="detallekanban">
                       <div class="divkanban"> 
                           <div class="todo" *ngFor="let kan of actaDialogica.kanbanTareasTodo" (click)="openEditElementoDialogo(kan.idElemento)"> 
-                              <label for="strtodo">{{kan.codRol}} - {{kan.titulo}}</label>
+                              <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
+                              <label for="strtodo">Tit: {{kan.titulo}}</label>
                               <label for="strtodo">Resp: {{kan.username}}</label>
-                              <label for="strtodo">Fecha: {{kan.fechaCompromiso}}</label>
                           </div>
                       </div>
                       <div class="linea"></div>
                       <div class="divkanban">
                           <div class="doing" *ngFor="let kan of actaDialogica.kanbanTareasDoing" (click)="openEditElementoDialogo(kan.idElemento)"> 
-                              <label for="strtodo">{{kan.codRol}} - {{kan.titulo}}</label>
-                              <label for="strtodo">Resp: {{kan.username}}</label>
-                              <label for="strtodo">Fecha: {{kan.fechaCompromiso}}</label>
+                                <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
+                                <label for="strtodo">Tit: {{kan.titulo}}</label>
+                                <label for="strtodo">Resp: {{kan.username}}</label>
                           </div>
                       </div>
                       <div class="linea"></div>
                       <div class="divkanban">
                           <div class="done" *ngFor="let kan of actaDialogica.kanbanTareasDone" (click)="openEditElementoDialogo(kan.idElemento)"> 
-                              <label for="strtodo">{{kan.codRol}} - {{kan.titulo}}</label>
-                              <label for="strtodo">Resp: {{kan.username}}</label>
-                              <label for="strtodo">Fecha: {{kan.fechaCompromiso}}</label>
+                                <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
+                                <label for="strtodo">Tit: {{kan.titulo}}</label>
+                                <label for="strtodo">Resp: {{kan.username}}</label>
                           </div>
                       </div>
                   </div>

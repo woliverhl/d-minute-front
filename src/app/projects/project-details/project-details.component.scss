@@ -160,6 +160,25 @@ h5{
     }
 }
 
+.pendientes{
+    margin-top: 10px;
+    padding: 0 0 0 17px;
+    font-size: 12px;
+    span{
+        display: inline-block;
+        padding: 8px 0 0 8px;
+        width: 31px;
+        height: 37px;
+        background-color: #ececec;
+        font-size: 12px;
+        font-weight: 600;
+        color: #333333;
+        margin-right: 18px;
+        margin-bottom: 6px;
+        cursor: pointer;
+    }
+}
+
 .acta{
     background-color: #f8f8f8;
     margin: 8px 17px 8px 17px;

@@ -1,4 +1,4 @@
-import { Component, Inject, EventEmitter, ViewChild, ElementRef} from '@angular/core';
+import { Component, Inject, EventEmitter, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Reunion } from "app/models/reunion";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
     templateUrl: './add-elemento-dialgo.html',
     styleUrls: ['./add-elemento-dialgo.scss']
   })
-  export class AddElementoDialogoComponent {
+  export class AddElementoDialogoComponent implements AfterViewInit {
 
     addElementoForm: FormGroup;
     public saved: EventEmitter<any> = new EventEmitter();
@@ -65,6 +65,10 @@ import { DatePipe } from '@angular/common';
       }
     }
 
+    ngAfterViewInit() {
+      this.loadImg(this.elementoDialogo.codRol);
+    }
+    
     loadEstadoElemento() {
       this.elementoService.getEstadoElemento().subscribe(
         (response:Array<Estado>) => {
@@ -148,6 +152,7 @@ import { DatePipe } from '@angular/common';
         break;
       }
       console.log('[loadImg] image: '+image);
-      this.changeImg(image.nativeElement, _codRol);
+      if (image != undefined)
+            this.changeImg(image.nativeElement, _codRol);
     }
   }

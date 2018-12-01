@@ -39,6 +39,7 @@ export class ProjectDetailsComponent {
       private temaService: TemaService, private elementoService: ElementoDialogoService,
       private route: ActivatedRoute, 
     public Reunion: Reunion, private dialog: MatDialog) {
+      this.ActivateMeeting = undefined;
       this.ngOnInit();
     }
 
@@ -51,7 +52,12 @@ export class ProjectDetailsComponent {
           this.projectId = this.actaDialogica.proyectoDto.proyectoId;
           this.project = this.actaDialogica.proyectoDto;
           this.reuniones = this.actaDialogica.listaActa;
-          this.selectedMeeting = this.actaDialogica.actaDto;
+          if (this.ActivateMeeting == undefined){
+            this.selectedMeeting = this.actaDialogica.actaDto;
+          }else{
+            this.getActaById(this.ActivateMeeting['actaId']);
+          }
+          
         },(err)=>{
           console.log(err);
         });
@@ -93,7 +99,7 @@ export class ProjectDetailsComponent {
   }
 
   openEditMeeting(){
-    this.ActivateMeeting = this.selectedMeeting;
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
     this.project.meet=this.selectedMeeting;
     let dialogRef = this.dialog.open(AddMeetingComponent, {
       width: '644px',
@@ -111,6 +117,7 @@ export class ProjectDetailsComponent {
   }
 
   openAddTema(): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
     let temaId:TemaActa = new TemaActa();
     temaId.actaId = this.selectedMeeting.actaId
     temaId.id = 0;
@@ -122,6 +129,7 @@ export class ProjectDetailsComponent {
   }
 
   openEditTema(temaId:TemaActa): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
     let dialogRef = this.dialog.open(AddTemaComponent, {
         width: '644px',
         data: temaId
@@ -138,6 +146,7 @@ export class ProjectDetailsComponent {
   }
 
   openElementoDialogo(temaId:TemaActa){
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
     var nuevoTema: TemaActa = this.retornaTemaSeleccionada(temaId);
     nuevoTema.elementoDialogoDto = new Array<ElementoDialogo>();
     var temasLista: Array<TemaActa> = new Array<TemaActa>(); 
@@ -153,6 +162,7 @@ export class ProjectDetailsComponent {
   }
 
   openEditElementoDialogo(elementoId:String): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
     let dialogRef;
     this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
       (response) => {
@@ -180,8 +190,11 @@ export class ProjectDetailsComponent {
   }
 
   retornaReunionSeleccionada(){
+    return this.retornaReunionActiva(this.selectedMeeting)
+  }
+
+  retornaReunionActiva(reunion: Reunion){
     let retorno: Reunion = new Reunion();
-    let reunion: Reunion = this.selectedMeeting;
     retorno.actaId = reunion.actaId;
     retorno.correlativo = reunion.correlativo;
     retorno.estado = reunion.estado;
@@ -190,6 +203,8 @@ export class ProjectDetailsComponent {
     retorno.horaInicio = reunion.horaInicio;
     retorno.proyectoId = reunion.proyectoId;
     retorno.resumen = reunion.resumen;
+    retorno.tareaPendiente = reunion.tareaPendiente
+    retorno.temaActa = retorno.temaActa
     retorno.username = reunion.username;
     retorno.usuarioActa = reunion.usuarioActa;
     return retorno;

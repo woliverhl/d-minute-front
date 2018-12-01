@@ -9,4 +9,5 @@ export class ElementoDialogo {
   public codRol:string;
   public titulo:string;
   public correlativo: Number;
+  public secuencia:string;
 }
