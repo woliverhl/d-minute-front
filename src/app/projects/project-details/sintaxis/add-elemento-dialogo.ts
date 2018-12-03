@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
     public codRol: string;
     textoBoton: String;
     textform: String;
+    verActa: String;
 
     @ViewChild('desacuerdo') desacuerdo: ElementRef;
     @ViewChild('duda') duda: ElementRef;
@@ -63,10 +64,18 @@ import { DatePipe } from '@angular/common';
         this.elementoDialogo.temaId = this.Reunion.temaActa[0].id;
         console.log("[constructor] elemento: " + this.elementoDialogo.temaId);
       }
+      this.verActa = this.Reunion.verActa;
     }
 
     ngAfterViewInit() {
       this.loadImg(this.elementoDialogo.codRol);
+    }
+
+    verActaClick(){
+      this.onNoClick();
+      this.saved.emit(true);
+      this.cleanUserForm(this.addElementoForm);
+
     }
     
     loadEstadoElemento() {

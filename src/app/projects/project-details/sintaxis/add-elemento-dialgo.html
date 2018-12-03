@@ -75,8 +75,15 @@
        
         <mat-divider></mat-divider>
         <div class="botonera">
-            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
-            <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">{{textoBoton}}</button>
+            <div *ngIf="verActa !== undefined">
+                <button class="cancelar" type="button" (click)="verActaClick()">VER ACTA   </button>
+                <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">{{textoBoton}}</button>
+            </div>
+            <div *ngIf="verActa == undefined">
+                <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+                <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">{{textoBoton}}</button>
+            </div>
+            
         </div>
     </form>
 </div>

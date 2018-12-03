@@ -165,12 +165,39 @@ export class ProjectDetailsComponent {
     this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
     let dialogRef;
     this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
-      (response) => {
+      (response : Reunion) => {
+          response.verActa = undefined;
           dialogRef = this.dialog.open(AddElementoDialogoComponent, {
           width: '644px',
           data: response
       });
       dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+      }, (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  openVerActaElementoDialogo(elementoId:String): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    let dialogRef;
+    let actaResponse: Reunion;
+    this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
+      (response: Reunion) => {
+          actaResponse = response;
+          response.verActa = "1";
+          dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+          width: '644px',
+          data: response
+      });      
+      dialogRef.componentInstance.saved.subscribe(response => {
+        if (response == true){
+          this.ActivateMeeting = actaResponse;
+          this.ActivateMeeting.verActa = undefined;
+          console.log(this.ActivateMeeting);
+        }
+        this.reloadList(response);
+      });
       }, (err) => {
         console.log(err);
       }

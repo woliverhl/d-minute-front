@@ -15,4 +15,5 @@ export class Reunion {
     public tareaPendiente: ElementoDialogo[];
     public actaId: Number;
     public username: string; //Secretario
+    public verActa: any;
 }
