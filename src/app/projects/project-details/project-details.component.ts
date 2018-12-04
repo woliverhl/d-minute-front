@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ProjectsService } from 'app/projects/service/projects-service.service';
 import { ParamMap, ActivatedRoute  } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabGroup } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
 import { Project } from "app/models/project";
 import { Reunion } from "app/models/reunion";
@@ -34,6 +34,8 @@ export class ProjectDetailsComponent {
   addMeetingForm: FormGroup;
   selectedMeeting: Reunion = undefined;
   ActivateMeeting: Reunion = undefined;
+
+  @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
   
   constructor(private projectService: ProjectsService, private actaService: ActaService, 
       private temaService: TemaService, private elementoService: ElementoDialogoService,
@@ -65,6 +67,7 @@ export class ProjectDetailsComponent {
 
   selectMeeting(acta: Reunion = undefined){
     console.log("ingreso selectMeeting: " + this.selectedMeeting['actaId']);
+    this.tabGroup.selectedIndex = 0;
     if(acta === undefined && this.reuniones.length > 0){
       this.selectedMeeting  = this.reuniones[0];
     }else if(acta !== undefined){
