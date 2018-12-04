@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const api_path = '/api';
 
-//const host = 'https://dminuteapi.herokuapp.com';
 const host = 'http://172.17.0.3:3333';
 
 app.post(api_path + '/*', upload.array(), function(req, res) {
