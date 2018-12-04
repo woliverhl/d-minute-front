@@ -1,10 +1,19 @@
+import { TemaActa } from "./tema";
+import { ElementoDialogo } from "./ElementoDialogo";
+
 export class Reunion {
-    public fecha: Date;
+    constructor(){}
+    public fecha: String;
     public resumen: String;
-    public correlativo?: Number;
-    public estado?: any;
-    public proyectoId? : Number;
-    public usuarioActa? : Array<any>;
-    public temaActa?: Object[];
-    public actaId?: any;
+    public horaInicio: String;
+    public horaFin: String;
+    public correlativo: Number;
+    public estado: String;
+    public proyectoId : Number;
+    public usuarioActa : Array<Object>;
+    public temaActa: TemaActa[];
+    public tareaPendiente: ElementoDialogo[];
+    public actaId: Number;
+    public username: string; //Secretario
+    public verActa: any;
 }

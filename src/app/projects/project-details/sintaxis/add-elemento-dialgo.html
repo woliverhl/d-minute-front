@@ -1,0 +1,89 @@
+<div class="container">
+    <h4>{{textform}}</h4>
+    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+    <form action="" [formGroup]="addElementoForm" (ngSubmit)="postElementoDialogo()">
+        <div class="h4seleccion">
+                <label >Selecciona el tipo de elemento</label>
+        </div>
+        
+        <div class="campoElemento"> 
+            <span class="elementoIconoContainer">
+                    <img [(src)]="desacuerdoSrc" id="desacuerdo" class="elemento-logo" (click)="changeImg($event.target,'DE')" alt="" #desacuerdo> 
+            </span>
+            <label for="startElementoDuda">Desacuerdo o Brecha</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                    <img [(src)]="dudaSrc" id="duda" class="elemento-logo" (click)="changeImg($event.target,'DU')" alt="" #duda>
+                </span>
+                <label for="startElementoDuda">Duda o <br>B&uacute;squeda</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                    <img [(src)]="acuerdoSrc" id="acuerdo" class="elemento-logo" (click)="changeImg($event.target,'AC')" alt="" #acuerdo>
+                </span>
+                <label for="startElementoDuda">Acuerdo de Coordinación</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                    <img [(src)]="compromisoSrc" id="compromiso" class="elemento-logo" (click)="changeImg($event.target,'CO')" alt="" #compromiso>
+                </span>
+                <label for="startElementoDuda">Compromiso Individual</label>
+        </div>
+        <div class="campoElemento"> 
+                <span class="elementoIconoContainer">
+                    <img [(src)]="normaSrc" id="norma" class="elemento-logo" (click)="changeImg($event.target,'NO')" alt="" #norma>
+                </span>
+                <label for="startElementoDuda">Norma <br>Común</label>
+        </div>
+
+        <div class="campoTexto">
+            <label for="strEstado">Estado Elemento</label>
+            <mat-select class="selectedEstado" [(ngModel)]="elementoDialogo.estado" formControlName="selectedEstado">
+                    <mat-option *ngFor="let est of listaEstado" [value]="est.estado">
+                        {{ est.detalle }}
+                    </mat-option>
+            </mat-select>
+        </div>
+
+        <div class="campoFecha">
+                <label for="startDate">Fecha de Cierre</label>
+                <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span>
+                <input [(ngModel)]="elementoDialogo.fechaCompromiso" formControlName="fechaCompromiso" type="date">
+        </div>
+
+        <div class="campoTexto">
+                        <label for="startTitulo">Titulo Elemento</label>
+                        <input [(ngModel)]="elementoDialogo.titulo" formControlName="titulo" max="50">
+        </div>
+
+        <div class="miembros">
+                <label for="strResponsable">Responsable Elemento</label>
+                <div class="add">
+                    <mat-select class="selectedMember" [(ngModel)]="elementoDialogo.username" formControlName="selectedMember">
+                        <mat-option *ngFor="let user of Reunion.usuarioActa" [value]="user.username">
+                            {{ user.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </div>
+        </div>
+
+        <div class="campoDiscusion">
+                <label for="strDiscusion">Descripción Elemento (Opcional)</label>
+                <textarea [(ngModel)]="elementoDialogo.descripcion" formControlName="descripcion" rows="5" maxlength="1000" ></textarea>
+        </div>
+       
+        <mat-divider></mat-divider>
+        <div class="botonera">
+            <div *ngIf="verActa !== undefined">
+                <button class="cancelar" type="button" (click)="verActaClick()">VER ACTA   </button>
+                <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">{{textoBoton}}</button>
+            </div>
+            <div *ngIf="verActa == undefined">
+                <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+                <button class="crearElemento" type="submit" [disabled]="!addElementoForm.valid">{{textoBoton}}</button>
+            </div>
+            
+        </div>
+    </form>
+</div>

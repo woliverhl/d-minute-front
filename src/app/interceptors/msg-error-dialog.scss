@@ -1,0 +1,58 @@
+.container{
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-left: 22.5px;
+    h4{
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #333333;
+        width: 95%;
+        margin-bottom: 10px;
+    }
+    .closeModalButton{
+        position: relative;
+        top: 0;
+        right: 0;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #00a1f0;
+        cursor: pointer;
+    }
+    .campoTexto{
+        width: 100%;
+        display: inline-block;
+        label{
+            display: block;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        margin-bottom: 24px;
+    }
+    mat-divider{
+        margin-bottom: 25px;
+    }
+    .botonera{
+        text-align: center;        
+        font-size: 14px;
+        .aceptar{
+            width: 182px;
+            height: 48px;
+            border-radius: 6px;
+            border: solid 1px #0081f0;
+            background-color: #ffffff;
+            color: #0081f0;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+    }
+}
+

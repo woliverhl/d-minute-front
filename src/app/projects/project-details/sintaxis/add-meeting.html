@@ -1,0 +1,55 @@
+<div class="container">
+    <h4>{{textoBoton}}</h4>
+    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+    <form action="" [formGroup]="addMeetingForm" (ngSubmit)="postMeeting()">
+        <div class="campoTexto">
+            <label for="objetivo">Objetivo Reunión</label>
+             <input [(ngModel)]="Reunion.resumen" formControlName="objetivo"  type="text">
+        </div>
+        <div class="campoFecha">
+            <label for="startDate">Fecha Reunión</label>
+            <span class="fechaIconoContainer"><mat-icon class="fechaIcono">event_note</mat-icon></span><input [(ngModel)]="Reunion.fecha" formControlName="fecha" type="date">
+        </div>
+
+        <div class="campoFecha">
+            <label for="startHoraH">Hora Inicio</label>
+            <span class="fechaIconoContainer"><mat-icon class="fechaIcono">query_builder</mat-icon></span><input [(ngModel)]="Reunion.horaInicio" formControlName="horaInicio" type="time">
+        </div>
+        <div class="campoFecha">
+            <label for="startHoraF">Hora Termino</label>
+            <span class="fechaIconoContainer"><mat-icon class="fechaIcono">query_builder</mat-icon></span><input [(ngModel)]="Reunion.horaFin" formControlName="horaFin" type="time">
+        </div>
+
+        <div class="miembros">
+            <label>Asistentes Reunión</label>
+            <div class="miembro" *ngFor="let member of Reunion.usuarioActa">
+                <label>{{ member.nombre }}</label>
+                <mat-icon class="deleteMember" (click)="deleteMember(member)">delete</mat-icon>
+                <p>{{ member.username }}</p>
+            </div>
+            <div class="add">
+                <mat-select class="selectedMember" [(ngModel)]="selectedMember" formControlName="selectedMember">
+                    <mat-option *ngFor="let user of Project.usuariosNuevoProyecto" [value]="user">
+                        {{ user.nombre }}
+                    </mat-option>
+                </mat-select>
+                <button class="addMember" type="button" (click)= "addMember()">Agregar Miembro</button>
+            </div>
+        </div>
+        <div class="secretario" *ngIf="Reunion.usuarioActa.length > 0">
+                <label for="strResponsable">Secretario Reunión</label>
+                <div class="add">
+                    <mat-select class="selectedMember" [(ngModel)]="Reunion.username" formControlName="selectedSecretario">
+                        <mat-option *ngFor="let user of Reunion.usuarioActa" [value]="user.username">
+                            {{ user.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="botonera">
+            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+            <button class="crearReunion" type="submit" [disabled]="!addMeetingForm.valid">{{textoBoton}}</button>
+        </div>
+    </form>
+</div>

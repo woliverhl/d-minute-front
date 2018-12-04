@@ -1,5 +1,5 @@
 import { Injectable, ViewContainerRef, Inject } from '@angular/core';
-import { HttpRequest, HttpHandler , HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler , HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { SessionService } from "app/session/service/session.service";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/do';
@@ -7,12 +7,15 @@ import { HttpObserve } from '@angular/common/http/src/client';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { SpinnerService } from '../share/spinner/spinner.service';
+import { MsgErrorDialog } from './msg-error-dialog';
+import { MatDialog } from '@angular/material';
+//import { erroresHandler } from './erroresHandler';
 
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private auth: SessionService, private route: Router, private spinner: SpinnerService) {
+  constructor(private auth: SessionService, private route: Router, private spinner: SpinnerService, private dialog: MatDialog) {
 
   }
 
@@ -41,13 +44,19 @@ export class AuthInterceptorService implements HttpInterceptor {
         this.spinner.hide();
       }
     }, (err: any) => {
-        this.spinner.hide();
-      //You fuck up
-        if(err['status'] === 401){
+      this.spinner.hide();
+      if(err['status'] === 401){
           console.log('You are banished from the app');
           this.goodByeDude();
-        }
-      
+          return;
+      }
+      if (err instanceof HttpErrorResponse) {
+        console.log('Error de la aplicación: ' + err.message);
+        let dialogRef = this.dialog.open(MsgErrorDialog, {
+          width: '544px',
+          data: err
+        });
+      }
     })
   }
 

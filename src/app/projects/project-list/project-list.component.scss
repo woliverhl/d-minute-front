@@ -1,26 +1,101 @@
-$border-bottom: 1px solid gray ;
 
 mat-card{
-    margin-top: 2em;
+    margin-top: 15px;
+    padding: 15px 10px 15px 10px;
 }
 
 mat-card-title{
-    font-size: 17px!important;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 900;
+    color: #333333;
 }
 
 mat-card-header{
-    border-bottom: $border-bottom;
+    justify-content: center;
+    margin-bottom: 1px;
 }
 
-mat-nav-list :any-link{
-    border-bottom: $border-bottom;
+mat-table{
+    font-family: 'Source Sans Pro', sans-serif;
+    
+    mat-header-row{
+        background-color: #e1e1e1;
+        height: 45px;
+        min-height: 45px;
+        mat-header-cell{
+            font-size: 12px !important;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+    mat-row{
+        height: 40px;
+        min-height: 40px;
+        a{
+            color: black;
+        }
+        i{
+            color: #00a1f0;
+            font-size: 14px;
+            margin: 0px 12px 0px 12px;
+            cursor: pointer;
+        }
+    }
+}
+
+.refrescar{
+    cursor: pointer;
+}
+
+.mat-row:hover{
+    background-color: rgba(216, 216, 216, 0.3);
+    a{
+        color: #00a1f0;
+    }
+}
+.mat-column-nombre {
+    flex: 0 0 40%;
+    font-weight: 600;
+    font-size: 12px !important;
+}
+.mat-column-inicio {
+    flex: 0 0 20%;
+    text-align: center;
+    font-size: 12px !important;
+}
+.mat-column-fin{
+    flex: 0 0 20%;
+    text-align: center;
+    font-size: 12px !important;
+}
+.mat-column-acciones {
+    flex: 0 0 20%;
+    text-align: center;
 }
 
 button{
-    margin-bottom: 1em;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 24px;
     height: auto;
-    padding: 0 1em;
+    padding: 6px 30px 6px 30px;
     width: auto;
-    color: white;
-    background-color: #21B3D8;
+    color: #0081f0;
+    border-radius: 6px;
+    border: solid 1px #0081f0;
+}
+
+.pad-left-zero{
+    padding-left: 0px;
+    text-align: center;
+}
+
+.mat-list-item-text{
+    display: block !important;
+}
+.mat-list-item-date{
+    display: block !important;
 }

@@ -1,0 +1,16 @@
+<div class="container">
+    <h4>ELIMINAR TEMA</h4>
+    <mat-icon aria-label="close" class="closeModalButton" (click)="onNoClick()">close</mat-icon>
+    <form action="" [formGroup]="delTemaForm" (ngSubmit)="delTema()">
+        <div class="campoTexto">
+            <label for="name">Nombre Tema</label>
+            <div class="resumenTema">
+                {{temaActa.nombre}}
+            </div>
+        </div>
+        <div class="botonera">
+            <button class="cancelar" type="button" (click)="onNoClick()">CANCELAR</button>
+            <button class="crearTema" type="submit">ELIMINAR TEMA</button>
+        </div>
+    </form>
+</div>

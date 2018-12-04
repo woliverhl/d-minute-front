@@ -19,7 +19,11 @@ export class SessionComponent implements OnInit {
   getUserData(){
     this.sessionService.getUserProfile().subscribe(
       (response: String) => {
-        this.userName = `${response['nombre']} ${response['apellido']}`;
+        let nombre = `${response['nombre']}`.charAt(0).toUpperCase()
+          +  `${response['nombre']}`.substring(1).toLowerCase();
+        let apellido = `${response['apellido']}`.charAt(0).toUpperCase()
+          +  `${response['apellido']}`.substring(1).toLowerCase();
+        this.userName = nombre + " " + apellido;//`${response['nombre']} ${response['apellido']}`;
       }, (err) => {
         console.log(err);
       });
@@ -32,5 +36,4 @@ export class SessionComponent implements OnInit {
   goHome(){
     this.router.navigate(['project-list']);
   }
-
 }

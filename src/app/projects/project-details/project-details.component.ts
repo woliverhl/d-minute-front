@@ -1,131 +1,70 @@
-import { Component, OnInit, EventEmitter, Inject, DoCheck, NgModule, AfterContentInit, ViewChild } from '@angular/core';
-import { NgSwitch } from '@angular/common';
+import { Component } from '@angular/core';
 import { ProjectsService } from 'app/projects/service/projects-service.service';
-import { UsersService } from "app/user/service/users.service";
-import { Route, ParamMap, ActivatedRoute  } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ParamMap, ActivatedRoute  } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs/Observable';
 import { Project } from "app/models/project";
 import { Reunion } from "app/models/reunion";
-import { User } from "app/models/user";
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { UsersListComponent } from "app/user/users-list/users-list.component";
+import { ActaDialogica } from '../../models/ActaDialogica';
+import { FormGroup } from '@angular/forms';
+import { AddMeetingComponent } from './sintaxis/add-meeting';
+import { AddTemaComponent } from './sintaxis/add-tema';
 import { TemaActa } from '../../models/tema';
+import { ActaService } from '../service/acta-service.service';
+import { TemaService } from '../service/tema-service.service';
+import { AddElementoDialogoComponent } from './sintaxis/add-elemento-dialogo';
+import { delMeetingComponent } from './del-acta-dialog';
+import { delTemaComponent } from './del-tema-dialog';
+import { ElementoDialogoService } from '../service/elemento-service.service';
+import { ElementoDialogo } from '../../models/ElementoDialogo';
+
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss']
 })
-export class ProjectDetailsComponent implements OnInit {
+export class ProjectDetailsComponent {
 
+  actaDialogica: ActaDialogica;
   project: Project;
   projectId: Number;
   reuniones: Reunion [];
-  listOfUsers: Array<Object>;
   public saving: Boolean;
-  public selectedMember: Object;
   addMeetingForm: FormGroup;
-  addThemeForm: FormGroup;
-  activeMeeting: Reunion = undefined;
-  private _differ: any;
-  selectedMeeting: Reunion;
-  temaSelectedActa: FormArray;
-  themeCounter: any = 0;
-  themeList: any[] = [];
-
-
-  constructor(private projectService: ProjectsService, 
-      private userService: UsersService, private route: ActivatedRoute, 
-    public Reunion: Reunion, private fb: FormBuilder, private dialog: MatDialog) {
-        this.Reunion.usuarioActa = [];
-      }
+  selectedMeeting: Reunion = undefined;
+  ActivateMeeting: Reunion = undefined;
+  
+  constructor(private projectService: ProjectsService, private actaService: ActaService, 
+      private temaService: TemaService, private elementoService: ElementoDialogoService,
+      private route: ActivatedRoute, 
+    public Reunion: Reunion, private dialog: MatDialog) {
+      this.ActivateMeeting = undefined;
+      this.ngOnInit();
+    }
 
   ngOnInit() {
     this.saving = false;
     this.route.paramMap.switchMap((params: ParamMap) =>
-      this.projectService.getProjectById(params.get('id'))).subscribe(
-        (response: Project) => {
-          this.projectId = response['proyectoId'];
-          this.project = response;
-          this.project !== undefined ? this.listarReuniones() : undefined;
+      this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
+        (response: ActaDialogica) => {
+          this.actaDialogica = response;
+          this.projectId = this.actaDialogica.proyectoDto.proyectoId;
+          this.project = this.actaDialogica.proyectoDto;
+          this.reuniones = this.actaDialogica.listaActa;
+          if (this.ActivateMeeting == undefined){
+            this.selectedMeeting = this.actaDialogica.actaDto;
+          }else{
+            this.getActaById(this.ActivateMeeting['actaId']);
+          }
+          
         },(err)=>{
           console.log(err);
         });
-    this.getListUsers();
-    this.createMeetingForm();
-  }
-
-  switchPostMeeting(){
-    this.saving = true; 
-  }
-
-  createMeetingForm() {
-    this.addMeetingForm = this.fb.group({
-      fecha: [this.Reunion.fecha, Validators.required],
-      resumen: [this.Reunion.resumen, Validators.required],
-      usuarioActa: [this.Reunion.usuarioActa, Validators.required],
-      selectedMember: [this.selectedMember]
-    });
-  }
-
-  addMember(): void {
-    if (this.selectedMember != undefined && !this.Reunion.usuarioActa.includes(this.selectedMember)) {
-      this.Reunion.usuarioActa.push(this.selectedMember);
-      let index = this.listOfUsers.indexOf(this.selectedMember);
-      this.listOfUsers.splice(index, 1)
-      this.selectedMember = undefined;
-    }
-  }
-
-  deleteMember(miembro: Object): void {
-    let index = this.Reunion.usuarioActa.indexOf(miembro);
-    index > -1 ? this.Reunion.usuarioActa.splice(index, 1) : console.log('Member Not Found');
-  }
-
-  crearReunion(){
-    this.Reunion.usuarioActa = this.Reunion.usuarioActa.map((cv, index) => (
-      Object.assign({secretario: 'N', asiste: 'S'},{username: cv.username})
-    ));
-    var payload = Object.assign({ proyectoId: this.projectId}, this.Reunion);
-    this.projectService.postReunion(payload)
-      .subscribe((response) => {
-        console.log(response);
-        this.saving = false;
-        this.listarReuniones();
-      }), (err) => {
-        console.log(err);
-      };
-  }
-
-  listarReuniones(){
-    this.projectService.listReunion(this.project.proyectoId).subscribe(
-      (response: Reunion[]) => {
-        this.reuniones = response;
-        this.activeMeeting = this.reuniones.length > 0 ? this.reuniones[0] : undefined;
-        this.saving = this.reuniones.length === 0 || this.reuniones.length === undefined ? true : false;
-        this.selectMeeting();
-      },(err) =>{
-        console.log(err);
-      }
-    );
-  }
-
-  getListUsers(){
-    this.userService.getListUsers().subscribe(
-      (response: Array<Object>) => {
-        this.listOfUsers = response.map((cv) => {
-          return Object.assign({ fullName: `${cv['nombre']} ${cv['apellido']}`}, cv);
-        });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   }
 
   selectMeeting(acta: Reunion = undefined){
+    console.log("ingreso selectMeeting: " + this.selectedMeeting['actaId']);
     if(acta === undefined && this.reuniones.length > 0){
       this.selectedMeeting  = this.reuniones[0];
     }else if(acta !== undefined){
@@ -137,7 +76,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   getActaById(actaId:any):void{
-    this.projectService.getReunionById(actaId).subscribe(
+    this.actaService.getReunionById(actaId).subscribe(
       (data: Reunion) => {
         this.selectedMeeting = data;
       }, (err) => {
@@ -146,125 +85,165 @@ export class ProjectDetailsComponent implements OnInit {
     );
   }
 
-  displayAttendants(){
-    let dialogRef = this.dialog.open(Atendants, {
-      width: '80%',
-      height: '80%',
-      data: { id: this.selectedMeeting['actaId']}
+  openAddMeeting(): void{
+    this.project.meet = undefined;
+    let dialogRef = this.dialog.open(AddMeetingComponent, {
+        width: '644px',
+        data: this.project
     });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-  displayAddThemeDialog(){
-    let dialogRef = this.dialog.open(AddTheme, {
-      width: '80%',
-      height: '80%',
-      data: { id: this.selectedMeeting['actaId']}
+  reloadList(isPosted:boolean):void{
+    isPosted ? this.ngOnInit(): undefined;
+  }
+
+  openEditMeeting(){
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    this.project.meet=this.selectedMeeting;
+    let dialogRef = this.dialog.open(AddMeetingComponent, {
+      width: '644px',
+      data: this.project
+  });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openDelMeeting(){
+    let dialogRef = this.dialog.open(delMeetingComponent, {
+      width: '644px',
+      data: this.selectedMeeting
+  });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openAddTema(): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    let temaId:TemaActa = new TemaActa();
+    temaId.actaId = this.selectedMeeting.actaId
+    temaId.id = 0;
+    let dialogRef = this.dialog.open(AddTemaComponent, {
+        width: '644px',
+        data: temaId
     });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-}
-
-@Component({
-  selector: 'atttendants-details-dialog',
-  templateUrl: './atttendants-details-dialog.html',
-  styleUrls: ['./atttendants-details-dialog.scss']
-})
-export class Atendants implements AfterContentInit  {
-
-  projectId: string;
-  actaId: string;
-  listOfAttendants: Object[];
-  edit: Boolean;
-  acta: Array<Reunion>;
-  @ViewChild(UsersListComponent)
-  private userListComponent: UsersListComponent;
-
-  constructor(public dialogRef: MatDialogRef<Atendants>, 
-    private projectService: ProjectsService, private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) data){
-      this.edit = false;
-      this.actaId = data.id;
+  openEditTema(temaId:TemaActa): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    let dialogRef = this.dialog.open(AddTemaComponent, {
+        width: '644px',
+        data: temaId
+    });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-  ngAfterContentInit() {
-    this.getAttendantList();
+  openDelTema(temaId:TemaActa): void{
+    let dialogRef = this.dialog.open(delTemaComponent, {
+      width: '644px',
+      data: temaId
+    });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
   }
 
-  getAttendantList() {
-    //Ugly solution
-    setTimeout(() => {
-      this.projectService.getReunionById(this.actaId).subscribe(
-        (data: Array<Reunion>) => {
-          this.acta = data;
-          this.listOfAttendants = data['usuarioActa'];
-        }, (err) => {
-          console.log(err);
+  openElementoDialogo(temaId:TemaActa){
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    var nuevoTema: TemaActa = this.retornaTemaSeleccionada(temaId);
+    nuevoTema.elementoDialogoDto = new Array<ElementoDialogo>();
+    var temasLista: Array<TemaActa> = new Array<TemaActa>(); 
+    temasLista.push(nuevoTema);
+    var nuevoElemento: Reunion = this.retornaReunionSeleccionada();
+    nuevoElemento.temaActa = temasLista;
+
+    let dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+      width: '644px',
+     data: nuevoElemento
+  });
+    dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+  }
+
+  openEditElementoDialogo(elementoId:String): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    let dialogRef;
+    this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
+      (response : Reunion) => {
+          response.verActa = undefined;
+          dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+          width: '644px',
+          data: response
+      });
+      dialogRef.componentInstance.saved.subscribe(this.reloadList.bind(this));
+      }, (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  openVerActaElementoDialogo(elementoId:String): void{
+    this.ActivateMeeting = this.retornaReunionActiva(this.selectedMeeting) ;
+    let dialogRef;
+    let actaResponse: Reunion;
+    this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
+      (response: Reunion) => {
+          actaResponse = response;
+          response.verActa = "1";
+          dialogRef = this.dialog.open(AddElementoDialogoComponent, {
+          width: '644px',
+          data: response
+      });      
+      dialogRef.componentInstance.saved.subscribe(response => {
+        if (response == true){
+          this.ActivateMeeting = actaResponse;
+          this.ActivateMeeting.verActa = undefined;
+          console.log(this.ActivateMeeting);
         }
-      );
-    }, 0);
-  }
-
-  submitList(event:boolean){
-    if(event){
-      let fixedacta = this.userListComponent.listOfSelectedUsers.map((usuario, index) => {
-          delete usuario['fullName'];
-          return usuario;
+        this.reloadList(response);
       });
-    this.acta['usuarioActa'] = fixedacta;
-    this.projectService.postReunion(this.acta).subscribe(
-      (data) => {
-        this.userListComponent.listOfSelectedUsers = [];
-        console.log(data);
-      },(err) => {
-        console.log(err)
-      });
-    }
-
-  }
-  
-  editAttendants(){
-    this.edit = true;
-  }
-}
-
-@Component({
-  selector: 'add-theme-dialog',
-  templateUrl: './add-theme-dialog.html',
-  styleUrls: ['./add-theme-dialog.scss']
-})
-export class AddTheme implements OnInit  {
-  public addThemeForm: FormGroup;
-  private actaId: any;
-
-  constructor(public dialogRef: MatDialogRef<AddTheme>, 
-    private projectService: ProjectsService, private route: ActivatedRoute,
-    private fb: FormBuilder,  private Tema:TemaActa,
-    @Inject(MAT_DIALOG_DATA) data){
-      this.actaId = data.id;
-    }
-
-  ngOnInit(){
-    this.createThemeForm();
+      }, (err) => {
+        console.log(err);
+      }
+    );
   }
 
-  createThemeForm() {
-    this.addThemeForm = this.fb.group({
-      nombre: [this.Tema.nombre, Validators.required],
-      discusion: [this.Tema.discusion, Validators.required]
-    });
+  getElementoDialogoActaId(elementoId:String):Reunion{
+    let retorno: Reunion = new Reunion();
+    this.elementoService.getFiltroElementoIdActa(elementoId).subscribe(
+      (response) => {
+        return  response;
+      }, (err) => {
+        console.log(err);
+      }
+    );
+    return retorno;
   }
 
-  postTheme(){
-    console.log(this.Tema);
-    this.Tema.actaId = this.actaId;
-    this.Tema.id = 0;
-    this.projectService.postTheme(this.Tema).subscribe(
-      (data) => {
-        this.dialogRef.close();
-      },(err) => {
-        console.log(err)
-      });
+  retornaReunionSeleccionada(){
+    return this.retornaReunionActiva(this.selectedMeeting)
   }
 
+  retornaReunionActiva(reunion: Reunion){
+    let retorno: Reunion = new Reunion();
+    retorno.actaId = reunion.actaId;
+    retorno.correlativo = reunion.correlativo;
+    retorno.estado = reunion.estado;
+    retorno.fecha = reunion.fecha;
+    retorno.horaFin = reunion.horaFin;
+    retorno.horaInicio = reunion.horaInicio;
+    retorno.proyectoId = reunion.proyectoId;
+    retorno.resumen = reunion.resumen;
+    retorno.tareaPendiente = reunion.tareaPendiente
+    retorno.temaActa = retorno.temaActa
+    retorno.username = reunion.username;
+    retorno.usuarioActa = reunion.usuarioActa;
+    return retorno;
+  }
+
+  retornaTemaSeleccionada(tema: TemaActa){
+    let retorno: TemaActa = new TemaActa();
+    retorno.actaId = tema.actaId;
+    retorno.discusion = tema.discusion;
+    retorno.id = tema.id;
+    retorno.nombre = tema.nombre;
+    return retorno;
+  }
 
 }

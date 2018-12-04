@@ -5,20 +5,50 @@
       <mat-card>
         <mat-card-header>
           <div class="row">
-          <div mat-card-avatar></div>
-          <mat-card-title>Projectos Activos</mat-card-title>
-            <div class="col-sm-12">
-              <button mat-raised-button (click)="openProyectDialog()">Agregar Proyecto</button>
-              <button mat-raised-button (click)="openUserDialog()">Agregar Usuario</button>
-            </div>
+              <mat-card-title>PROYECTOS ACTIVOS</mat-card-title>
+              &nbsp; &nbsp;
+              <div class="refrescar">
+                  <i class="material-icons" title="Refrescar resultados" (click)="ngOnInit()">refresh</i>
+              </div>
           </div>
         </mat-card-header>
         <mat-card-content>
+          <mat-table #table [dataSource]="listaProyectos">
+            <ng-container matColumnDef="nombre">
+              <mat-header-cell *matHeaderCellDef> Nombre del proyecto </mat-header-cell>
+              <mat-cell *matCellDef="let e"> 
+                <a [routerLink]="['/project', e.proyectoId]">
+                  {{e.nombre}}
+                </a>
+              </mat-cell>
+            </ng-container>
 
-          <mat-nav-list dense>
-            <a mat-list-item [routerLink]="['/project', project.proyectoId]" *ngFor = "let project of listArray">Nombre Proyecto: {{project.nombre}} / Fecha Inicio: {{project.fechaInicio | date:'dd-MM-yyyy'}} / Fecha Fin: {{project.fechaFin | date:'dd-MM-yyyy'}}</a>
-          </mat-nav-list>
+            <ng-container matColumnDef="inicio">
+              <mat-header-cell *matHeaderCellDef> Fecha de inicio </mat-header-cell>
+              <mat-cell *matCellDef="let e"> {{e.fechaInicio | date: 'dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
 
+            <ng-container matColumnDef="fin">
+              <mat-header-cell *matHeaderCellDef> Fecha de inicio </mat-header-cell>
+              <mat-cell *matCellDef="let e"> {{e.fechaFin | date: 'dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+              <mat-cell *matCellDef="let e">
+                  <i class="material-icons" (click)="editProyectDialog(e.proyectoId)">edit</i>
+                  <i class="material-icons" (click)="deleteProyectDialog(e.proyectoId)">delete</i>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+          <div class="col-sm-12 pad-left-zero">
+              <button mat-raised-button (click)="openProyectDialog()">Agregar Proyecto</button>
+              <button mat-raised-button (click)="openUserDialog()">Agregar Usuario</button>
+            </div>
         </mat-card-content>
         <mat-card-actions>
         </mat-card-actions>
@@ -26,3 +56,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

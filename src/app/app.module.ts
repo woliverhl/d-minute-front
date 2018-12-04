@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ViewContainerRef } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+//import { ToastModule } from 'ng2-toastr';
 
 //Materials Stuff
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,22 +20,37 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 //CDK
 import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
 import { AppComponent } from 'app/app.component';
 import { SessionComponent } from 'app/session/toolbar/session.component';
+import { FooterComponent } from 'app/session/footer/footer.component';
+import { BreadcrumbComponent } from 'app/session/breadcrumb/breadcrumb.component';
 import { SignOnComponent } from 'app/session/sign-on/sign-on.component';
 import { SignInComponent } from 'app/session/sign-in/sign-in.component';
-import { ProjectListComponent, AddProjectDialog } from 'app/projects/project-list/project-list.component';
-import { ProjectDetailsComponent, Atendants, AddTheme } from 'app/projects/project-details/project-details.component';
+import { ProjectListComponent } from 'app/projects/project-list/project-list.component';
+import { ProjectDetailsComponent } from 'app/projects/project-details/project-details.component';
 import { SpinnerComponent } from './share/spinner/spinner.component';
+import { UsersListComponent } from './user/users-list/users-list.component';
+import { AddUserComponent } from './user/create-user/add-user';
+import { AddProjectDialog } from './projects/project-list/add-project-dialog';
+import { AddMeetingComponent } from './projects/project-details/sintaxis/add-meeting';
+import { AddTemaComponent } from './projects/project-details/sintaxis/add-tema';
+import { AddElementoDialogoComponent } from './projects/project-details/sintaxis/add-elemento-dialogo';
+import { DelProjectDialog } from './projects/project-list/del-project-dialog';
+import { delMeetingComponent } from './projects/project-details/del-acta-dialog';
+import { delTemaComponent } from './projects/project-details/del-tema-dialog';
+import { MsgErrorDialog } from 'app/interceptors/msg-error-dialog';
 
 //Modelos
 import { restPath } from "app/share/constants/restPath";
@@ -43,20 +59,27 @@ import { User } from "app/models/user";
 import { Reunion } from "app/models/reunion";
 import { Usuario } from "app/models/usuario";
 import { TemaActa } from 'app/models/tema';
+import { ActaDialogica } from './models/ActaDialogica';
+import { ElementoDialogo } from './models/ElementoDialogo';
 
 //Services
 import { SessionService } from "app/session/service/session.service";
 import { ProjectsService } from "app/projects/service/projects-service.service";
 import { UsersService } from "app/user/service/users.service";
 import { SpinnerService } from "app/share/spinner/spinner.service";
+import { TemaService } from './projects/service/tema-service.service';
+import { ActaService } from './projects/service/acta-service.service';
+import { ElementoDialogoService } from './projects/service/elemento-service.service';
+//import { erroresHandler } from 'app/interceptors/erroresHandler';
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
 
 //Guards
 import { authGuard } from "app/share/guards/authenticate-guard";
-import { UsersListComponent } from './user/users-list/users-list.component';
-import { CreateUserComponent } from './user/create-user/create-user.component';
+
+//pipes
+import { CapitalizePipe } from "./share/pipe/capitalize-pipe";
 
 
 const appRoutes: Routes = [
@@ -69,7 +92,18 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  entryComponents: [AddProjectDialog, Atendants, AddTheme, SpinnerComponent,CreateUserComponent],
+  entryComponents: [
+    AddProjectDialog,
+    DelProjectDialog,
+    SpinnerComponent,
+    AddUserComponent,
+    AddMeetingComponent,
+    AddTemaComponent,
+    delMeetingComponent,
+    delTemaComponent,
+    AddElementoDialogoComponent,
+    MsgErrorDialog
+  ],
   declarations: [
     AppComponent,
     SessionComponent,
@@ -77,17 +111,26 @@ const appRoutes: Routes = [
     SignInComponent,
     ProjectListComponent,
     AddProjectDialog,
+    DelProjectDialog,
+    delMeetingComponent,
+    delTemaComponent,
     SpinnerComponent,
     ProjectDetailsComponent,
-    Atendants,
-    AddTheme,
     UsersListComponent,
-    CreateUserComponent
+    AddUserComponent,
+    FooterComponent,
+    BreadcrumbComponent,
+    CapitalizePipe,
+    AddMeetingComponent,
+    AddTemaComponent,
+    AddElementoDialogoComponent,
+    MsgErrorDialog
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false }),
     MatInputModule,
@@ -103,7 +146,12 @@ const appRoutes: Routes = [
     OverlayModule,
     PortalModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    CdkTableModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatGridListModule,
+    //ToastModule.forRoot()    
   ],
   providers: [
         {
@@ -122,10 +170,16 @@ const appRoutes: Routes = [
           Usuario,
           Reunion,
           ProjectsService,
+          TemaService,
+          ActaService,
           UsersService,
+          ElementoDialogoService,
           authGuard,
           TemaActa,
-          SpinnerService
+          ActaDialogica,
+          ElementoDialogo,
+          SpinnerService,
+          //erroresHandler
       ],
   bootstrap: [AppComponent]
 })
