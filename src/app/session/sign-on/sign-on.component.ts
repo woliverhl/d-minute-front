@@ -18,8 +18,6 @@ export class SignOnComponent implements OnInit {
 
   constructor(private SessionService: SessionService, public User: User, private fb: FormBuilder, private route: Router) { 
     this.createLoginForm();
-    this.User.userName = "ohidalgoleal@gmail.com";
-    this.User.userPass = "dinero123";
   }
 
   createLoginForm(){
@@ -39,6 +37,7 @@ export class SignOnComponent implements OnInit {
       if (this.token != undefined) {
         this.SessionService.setToken(this.token);
         this.route.navigate(['project-list'])
+        this.cleanUserForm(this.loginForm);
       }
     },(err) => {
       console.log(err);
@@ -48,6 +47,12 @@ export class SignOnComponent implements OnInit {
   onSubmit(){
     this.logIn();
   }
+
+  cleanUserForm(formulario: FormGroup) {
+    if(formulario.valid){
+        formulario.reset();
+    }
+}
 
 
 
