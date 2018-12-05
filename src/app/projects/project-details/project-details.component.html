@@ -1,5 +1,5 @@
 <app-session></app-session>
-<app-breadcrumb *ngIf="project !== undefined" [steps]= "['Proyectos activos']" [here]="project.descripcion"></app-breadcrumb>
+<app-breadcrumb *ngIf="project !== undefined" [steps]= "['Proyectos activos']" [here]="project.nombre"></app-breadcrumb>
 <div class="details-container">
   <div *ngIf="project !== undefined" >
       <h1>PROYECTO: {{project.nombre}}</h1>
