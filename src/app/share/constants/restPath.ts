@@ -49,6 +49,7 @@ export class restPath {
     //METODO POST
     public addElementoDialogo = '/elementoDialogo/guardarElementoDialogoTema';
     public delElementoDialogo = '/elementoDialogo/eliminarElementoDialogoTema';
+    public addEstadoElementoKanban = '/bff/updateEstadoElementoKanban';
     //METODO GET
     public listarElementoDialogo = '/elementoDialogo/getElementoDialogoTema';
     //***FIN OPCIONES DE ELEMENTOS DE DIALOGO DE UN ACTA ***//    

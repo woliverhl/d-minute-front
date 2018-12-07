@@ -136,16 +136,16 @@
             </div>
             <div *ngIf="actaDialogica !== undefined">
                 <div class="detallekanban">
-                      <div class="divkanban" (drop)="drop($event)" (dragover)="allowDrop($event)">
+                      <div class="divkanban" (drop)="drop($event,'TODO')" (dragover)="allowDrop($event)" id="todo">
                           <div class="todo" draggable="true" (dragstart)="drag($event)" *ngFor="let kan of actaDialogica.kanbanTareasTodo" id="{{kan.idElemento}}"  (click)="openVerActaElementoDialogo(kan.idElemento)"> 
                               <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
-                              <label for="strtodo">Tit: {{kan.titulo}}</label>
+                              <label for="strtodo">Tit: {{kan.titulo}} </label>
                               <label for="strtodo">Resp: {{kan.username}}</label>
                           </div>
                           <div class="fixdiv">&nbsp;</div>
                       </div>
                       
-                      <div class="divkanban" (drop)="drop($event)" (dragover)="allowDrop($event)">
+                      <div class="divkanban" (drop)="drop($event,'DOING')" (dragover)="allowDrop($event)" id="doing">
                           <div class="doing" draggable="true" (dragstart)="drag($event)" *ngFor="let kan of actaDialogica.kanbanTareasDoing" id="{{kan.idElemento}}" (click)="openVerActaElementoDialogo(kan.idElemento)"> 
                                 <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
                                 <label for="strtodo">Tit: {{kan.titulo}}</label>
@@ -154,7 +154,7 @@
                           <div class="fixdiv">&nbsp;</div>
                       </div>
                       
-                      <div class="divkanban" (drop)="drop($event)" (dragover)="allowDrop($event)">
+                      <div class="divkanban" (drop)="drop($event,'DONE')" (dragover)="allowDrop($event)" id="done">
                           <div class="done" draggable="true" (dragstart)="drag($event)" *ngFor="let kan of actaDialogica.kanbanTareasDone" id="{{kan.idElemento}}" (click)="openVerActaElementoDialogo(kan.idElemento)"> 
                                 <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
                                 <label for="strtodo">Tit: {{kan.titulo}}</label>

@@ -17,6 +17,7 @@ import { delMeetingComponent } from './del-acta-dialog';
 import { delTemaComponent } from './del-tema-dialog';
 import { ElementoDialogoService } from '../service/elemento-service.service';
 import { ElementoDialogo } from '../../models/ElementoDialogo';
+import { ActualizaEstadoKanban } from 'app/models/ActualizaEstadoKanban';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class ProjectDetailsComponent {
   addMeetingForm: FormGroup;
   selectedMeeting: Reunion = undefined;
   ActivateMeeting: Reunion = undefined;
+
 
   @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
   
@@ -54,11 +56,19 @@ export class ProjectDetailsComponent {
       ev.dataTransfer.setData("elementoDialogo", ev.target.id);
     }
   
-    drop(ev) {
+    drop(ev, accion: any) {
       ev.preventDefault();
       var data = ev.dataTransfer.getData("elementoDialogo");
       console.log("[drop] data: " + data);
+      console.log("[drop] accion: " + accion);
       ev.target.appendChild(document.getElementById(data));
+
+      var actualizaEstadoKanban : ActualizaEstadoKanban = new ActualizaEstadoKanban();
+      actualizaEstadoKanban.estado=accion;
+      actualizaEstadoKanban.idElemento = data;
+      actualizaEstadoKanban.proyectoId = this.projectId;
+      this.getUpdateElementoKanban(actualizaEstadoKanban);
+
     }
 
     ngOnInit() {
@@ -98,6 +108,18 @@ export class ProjectDetailsComponent {
     this.actaService.getReunionById(actaId).subscribe(
       (data: Reunion) => {
         this.selectedMeeting = data;
+      }, (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getUpdateElementoKanban(actualizaEstadoKanban:ActualizaEstadoKanban):void{
+    this.elementoService.postActualizaEstadoKanban(actualizaEstadoKanban).subscribe(
+      (response: ActaDialogica) => {
+        this.actaDialogica.kanbanTareasDoing = response.kanbanTareasDoing;
+        this.actaDialogica.kanbanTareasDone = response.kanbanTareasDone;
+        this.actaDialogica.kanbanTareasTodo = response.kanbanTareasTodo;
       }, (err) => {
         console.log(err);
       }

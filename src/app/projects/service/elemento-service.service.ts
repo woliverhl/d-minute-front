@@ -29,4 +29,8 @@ export class ElementoDialogoService {
     return this.http.post(`${this.restPath.APP}${this.restPath.addElementoDialogo}`, payload);
   }
 
+  postActualizaEstadoKanban(payload: Object){
+    return this.http.post(`${this.restPath.APP}${this.restPath.addEstadoElementoKanban}`, payload);
+  }
+
 }
