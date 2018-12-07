@@ -45,10 +45,26 @@ export class ProjectDetailsComponent {
       this.ngOnInit();
     }
 
-  ngOnInit() {
-    this.saving = false;
-    this.route.paramMap.switchMap((params: ParamMap) =>
-      this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
+    allowDrop(ev) {
+      ev.preventDefault();
+    }
+  
+    drag(ev) {
+      console.log("[drag] id: " + ev.target.id);
+      ev.dataTransfer.setData("elementoDialogo", ev.target.id);
+    }
+  
+    drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("elementoDialogo");
+      console.log("[drop] data: " + data);
+      ev.target.appendChild(document.getElementById(data));
+    }
+
+    ngOnInit() {
+      this.saving = false;
+      this.route.paramMap.switchMap((params: ParamMap) =>
+        this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
         (response: ActaDialogica) => {
           this.actaDialogica = response;
           this.projectId = this.actaDialogica.proyectoDto.proyectoId;
@@ -63,7 +79,7 @@ export class ProjectDetailsComponent {
         },(err)=>{
           console.log(err);
         });
-  }
+      }
 
   selectMeeting(acta: Reunion = undefined){
     console.log("ingreso selectMeeting: " + this.selectedMeeting['actaId']);
