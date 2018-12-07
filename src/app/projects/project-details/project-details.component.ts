@@ -17,6 +17,7 @@ import { delMeetingComponent } from './del-acta-dialog';
 import { delTemaComponent } from './del-tema-dialog';
 import { ElementoDialogoService } from '../service/elemento-service.service';
 import { ElementoDialogo } from '../../models/ElementoDialogo';
+import { ActualizaEstadoKanban } from 'app/models/ActualizaEstadoKanban';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class ProjectDetailsComponent {
   selectedMeeting: Reunion = undefined;
   ActivateMeeting: Reunion = undefined;
 
+
   @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
   
   constructor(private projectService: ProjectsService, private actaService: ActaService, 
@@ -45,10 +47,34 @@ export class ProjectDetailsComponent {
       this.ngOnInit();
     }
 
-  ngOnInit() {
-    this.saving = false;
-    this.route.paramMap.switchMap((params: ParamMap) =>
-      this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
+    allowDrop(ev) {
+      ev.preventDefault();
+    }
+  
+    drag(ev) {
+      console.log("[drag] id: " + ev.target.id);
+      ev.dataTransfer.setData("elementoDialogo", ev.target.id);
+    }
+  
+    drop(ev, accion: any) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("elementoDialogo");
+      console.log("[drop] data: " + data);
+      console.log("[drop] accion: " + accion);
+      ev.target.appendChild(document.getElementById(data));
+
+      var actualizaEstadoKanban : ActualizaEstadoKanban = new ActualizaEstadoKanban();
+      actualizaEstadoKanban.estado=accion;
+      actualizaEstadoKanban.idElemento = data;
+      actualizaEstadoKanban.proyectoId = this.projectId;
+      this.getUpdateElementoKanban(actualizaEstadoKanban);
+
+    }
+
+    ngOnInit() {
+      this.saving = false;
+      this.route.paramMap.switchMap((params: ParamMap) =>
+        this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
         (response: ActaDialogica) => {
           this.actaDialogica = response;
           this.projectId = this.actaDialogica.proyectoDto.proyectoId;
@@ -63,7 +89,7 @@ export class ProjectDetailsComponent {
         },(err)=>{
           console.log(err);
         });
-  }
+      }
 
   selectMeeting(acta: Reunion = undefined){
     console.log("ingreso selectMeeting: " + this.selectedMeeting['actaId']);
@@ -82,6 +108,18 @@ export class ProjectDetailsComponent {
     this.actaService.getReunionById(actaId).subscribe(
       (data: Reunion) => {
         this.selectedMeeting = data;
+      }, (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getUpdateElementoKanban(actualizaEstadoKanban:ActualizaEstadoKanban):void{
+    this.elementoService.postActualizaEstadoKanban(actualizaEstadoKanban).subscribe(
+      (response: ActaDialogica) => {
+        this.actaDialogica.kanbanTareasDoing = response.kanbanTareasDoing;
+        this.actaDialogica.kanbanTareasDone = response.kanbanTareasDone;
+        this.actaDialogica.kanbanTareasTodo = response.kanbanTareasTodo;
       }, (err) => {
         console.log(err);
       }
