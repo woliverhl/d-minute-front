@@ -83,8 +83,8 @@ import { CapitalizePipe } from "./share/pipe/capitalize-pipe";
 
 
 const appRoutes: Routes = [
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-on', component: SignOnComponent },
+  { path: 'sign-in', component: SignInComponent, pathMatch: 'full' },
+  { path: 'sign-on', component: SignOnComponent, pathMatch: 'full'},
   { path: '', redirectTo: '/sign-on', pathMatch: 'full' },
   { path: 'project-list', component: ProjectListComponent, canActivate: [authGuard] },
   { path: 'project/:id', component: ProjectDetailsComponent, canActivate: [authGuard] }
