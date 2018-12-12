@@ -1,6 +1,7 @@
+
 <div class="container" style="margin: 0;">
   <div class="row background">
-      <form action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form action="" [formGroup]="loginForm" >
         
         <div class="login-form">
           <img src="../../../assets/img/logos/Logos-01.png" class="meeting-logo" alt="">
@@ -14,8 +15,9 @@
               <label for="userPass">Clave:</label>
               <input placeholder="******" type="password" [(ngModel)]="User.userPass" formControlName="userPass">
             </div>
-            <div class="col-md-12">
-              <button mat-button type="submit" [disabled]="!loginForm.valid">INGRESAR</button>
+            <div class="botonera">
+              <button (click)="onSubmit()" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+              <button class="google" (click)="socialSignIn('google')">Iniciar con Google</button> 
             </div>
           </div>
         </div>

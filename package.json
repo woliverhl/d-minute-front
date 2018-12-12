@@ -26,6 +26,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "angular5-social-login": "^1.0.9",
     "bootstrap-css-only": "^4.0.0",
     "core-js": "^2.4.1",
     "cors": "^2.8.4",

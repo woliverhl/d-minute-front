@@ -43,19 +43,35 @@
             }
         }
     }
-    button{
-        background-color:#0081f0;
-        margin-top: 40px;
-        margin-left: 110px;
-        width: 224px;
-        height: 48px;
-        border-radius: 6px;
-        color: white;
+    .botonera{
+        text-align: center;        
         font-size: 14px;
-        font-weight: 600;
-    }
-    button:disabled{
-        color: gray;
+        margin-top: 27px;
+        margin-left: 80px;
+        button{
+            background-color:#0081f0;
+            width: 150px;
+            height: 45px;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .google{
+            background-color:white;
+            width: 150px;
+            height: 45px;
+            border-radius: 6px;
+            color: #0081f0;
+            border-bottom-color: #0081f0;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:disabled{
+            color: gray;
+        }
     }
     .meeting-logo{
         display: block;
