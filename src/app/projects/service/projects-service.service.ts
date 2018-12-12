@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { restPath } from "../../share/constants/restPath";
 import { ActivatedRoute } from "@angular/router";
+import { Project } from 'app/models/project';
 
 @Injectable()
 export class ProjectsService {
@@ -13,8 +14,8 @@ export class ProjectsService {
 
   constructor(private sessionService: SessionService, private http: HttpClient,private restPath:restPath) {}
 
-  listProjects(): Observable<Object[]>{
-    return this.http.get<Object[]>(`${this.restPath.APP}${this.restPath.listProyects}`);
+  listProjects(): Observable<Project[]>{
+    return this.http.get<Project[]>(`${this.restPath.APP}${this.restPath.listProyects}`);
   }
 
   addProject(project: Object){
