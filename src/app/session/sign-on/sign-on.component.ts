@@ -3,6 +3,7 @@ import { SessionService } from 'app/session/service/session.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from "app/models/user";
 import { Router } from "@angular/router";
+import { GoogleLoginProvider, AuthService } from 'angular5-social-login';
 
 @Component({
   selector: 'app-sign-on',
@@ -16,7 +17,7 @@ export class SignOnComponent implements OnInit {
   private token:  string;
 
 
-  constructor(private SessionService: SessionService, public User: User, private fb: FormBuilder, private route: Router) { 
+  constructor(private SessionService: SessionService, private socialAuthService: AuthService, public User: User, private fb: FormBuilder, private route: Router) { 
     this.createLoginForm();
   }
 
@@ -35,6 +36,7 @@ export class SignOnComponent implements OnInit {
       (response) => {
       response['token'] ? this.token = response['token'] : this.SessionService.throwError('We did not get a token');
       if (this.token != undefined) {
+        this.SessionService.setOrigenToken("DMINUTE");
         this.SessionService.setToken(this.token);
         this.route.navigate(['project-list'])
         this.cleanUserForm(this.loginForm);
@@ -54,6 +56,26 @@ export class SignOnComponent implements OnInit {
     }
 }
 
+public socialSignIn(socialPlatform : string) {
+  let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+  this.socialAuthService.signIn(socialPlatformProvider).then(
+    (userData) => {
+      this.SessionService.logInOauth(userData.email,userData.name).subscribe( 
+        (response) => {
+        response['token'] ? this.token = response['token'] : this.SessionService.throwError('We did not get a token');
+        if (this.token != undefined) {
+          this.SessionService.setOrigenToken("GOOGLE");
+          this.SessionService.setToken(this.token);
+          this.route.navigate(['project-list'])
+          this.cleanUserForm(this.loginForm);
+        }
+      },(err) => {
+        console.log(err);
+      });
+      console.log(socialPlatform+" sign in data : " , userData);
+    }
+  );
+}
 
 
 }

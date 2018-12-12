@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SessionService } from "../../session/service/session.service";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
-import { Observable } from 'rxjs/Observable';
 import { restPath } from "../../share/constants/restPath";
-import { Project } from "../../models/project";
-import { Reunion } from "../../models/reunion";
-import { ParamMap, ActivatedRoute } from "@angular/router";
-import { TemaActa } from '../../models/tema';
-
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable()
 export class ActaService {

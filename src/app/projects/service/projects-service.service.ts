@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { SessionService } from "../../session/service/session.service";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { restPath } from "../../share/constants/restPath";
-import { Project } from "../../models/project";
-import { Reunion } from "../../models/reunion";
-import { ParamMap, ActivatedRoute } from "@angular/router";
-import { TemaActa } from '../../models/tema';
-
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable()
 export class ProjectsService {
@@ -17,15 +13,15 @@ export class ProjectsService {
 
   constructor(private sessionService: SessionService, private http: HttpClient,private restPath:restPath) {}
 
-  listProjects(): Observable<Project[]>{
-    return this.http.get<Project[]>(`${this.restPath.APP}${this.restPath.listProyects}`);
+  listProjects(): Observable<Object[]>{
+    return this.http.get<Object[]>(`${this.restPath.APP}${this.restPath.listProyects}`);
   }
 
-  addProject(project: Project){
+  addProject(project: Object){
     return this.http.post(`${this.restPath.APP}${this.restPath.addProyect}`,project);
   }
 
-  editProject(project: Project){
+  editProject(project: Object){
     return this.http.post(`${this.restPath.APP}${this.restPath.editProyect}`,project);
   }
 

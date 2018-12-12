@@ -10,6 +10,7 @@ export class SessionService {
 
   private token : string;
   private username : String;
+  private origen : string;
 
   constructor(private HttpClient: HttpClient, private restPath: restPath, private router:Router) {
     this.setToken(localStorage['token']);
@@ -20,6 +21,12 @@ export class SessionService {
     this.setUsername(user);
     let param = { 'username': user, 'password': pass}
     return this.HttpClient.post(`${this.restPath.APP}${this.restPath.logIn}`, param);
+  }
+
+  logInOauth(user: string, name: string):Observable<Object>{
+    this.setUsername(user);
+    let param = { 'username': user, 'name': name}
+    return this.HttpClient.post(`${this.restPath.APP}${this.restPath.logInOauth}`, param);
   }
 
   logOut():void{
@@ -34,6 +41,11 @@ export class SessionService {
   setToken(token: string):void{
     localStorage['token'] = token;
     this.token = localStorage['token'];
+  }
+
+  setOrigenToken(origen: string):void{
+    localStorage['origen'] = origen;
+    this.origen = localStorage['origen'];
   }
 
   setUsername(user: string): void {
@@ -51,8 +63,17 @@ export class SessionService {
     this.token = undefined;
   }
 
+  resetOrigenToken():void{
+    delete localStorage['origen'];
+    this.origen = undefined;
+  }
+
   getToken():string{
     return this.token;
+  }
+
+  getOrigenToken():string{
+    return this.origen;
   }
 
   getUserProfile(){

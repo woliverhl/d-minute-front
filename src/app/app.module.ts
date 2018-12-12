@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 //import { ToastModule } from 'ng2-toastr';
 
 //Materials Stuff
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatIconRegistry } from "@angular/material";
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
@@ -28,7 +27,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { OverlayModule, OverlayContainer, FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import {CdkTableModule} from '@angular/cdk/table';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
@@ -70,7 +68,6 @@ import { SpinnerService } from "app/share/spinner/spinner.service";
 import { TemaService } from './projects/service/tema-service.service';
 import { ActaService } from './projects/service/acta-service.service';
 import { ElementoDialogoService } from './projects/service/elemento-service.service';
-//import { erroresHandler } from 'app/interceptors/erroresHandler';
 
 //Interceptors
 import { AuthInterceptorService } from "app/interceptors/auth-interceptor.service";
@@ -81,6 +78,10 @@ import { authGuard } from "app/share/guards/authenticate-guard";
 //pipes
 import { CapitalizePipe } from "./share/pipe/capitalize-pipe";
 
+//Social login
+import { SocialLoginModule, AuthServiceConfig } from 'angular5-social-login';
+import { getAuthServiceConfigs } from './share/constants/socialloginConfig';
+
 
 const appRoutes: Routes = [
   { path: 'sign-in', component: SignInComponent, pathMatch: 'full' },
@@ -89,7 +90,6 @@ const appRoutes: Routes = [
   { path: 'project-list', component: ProjectListComponent, canActivate: [authGuard] },
   { path: 'project/:id', component: ProjectDetailsComponent, canActivate: [authGuard] }
 ];
-
 
 @NgModule({
   entryComponents: [
@@ -151,7 +151,7 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatGridListModule,
-    //ToastModule.forRoot()    
+    SocialLoginModule 
   ],
   providers: [
         {
@@ -162,6 +162,10 @@ const appRoutes: Routes = [
           provide: HTTP_INTERCEPTORS,
           useClass: AuthInterceptorService,
           multi: true
+        },
+        {
+          provide: AuthServiceConfig,
+          useFactory: getAuthServiceConfigs
         },
           SessionService,
           restPath,
@@ -178,8 +182,7 @@ const appRoutes: Routes = [
           TemaActa,
           ActaDialogica,
           ElementoDialogo,
-          SpinnerService,
-          //erroresHandler
+          SpinnerService
       ],
   bootstrap: [AppComponent]
 })

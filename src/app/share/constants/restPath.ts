@@ -6,6 +6,7 @@ export class restPath {
 
     /***INICIO GENERICOS***/
     public logIn: string = '/token/generate-token';
+    public logInOauth: string = '/token/userOauth';
     public listUsers = '/usuario/listaUsuarios';
     public listUsersParam = '/bff/listaUsuarioFiltro';
     public listEstadoElemento = '/bff/estadoElemento';
