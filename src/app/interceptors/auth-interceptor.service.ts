@@ -8,7 +8,6 @@ import { Router } from "@angular/router";
 import { SpinnerService } from '../share/spinner/spinner.service';
 import { MsgErrorDialog } from './msg-error-dialog';
 import { MatDialog } from '@angular/material';
-//import { erroresHandler } from './erroresHandler';
 
 
 @Injectable()

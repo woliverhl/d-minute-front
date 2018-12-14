@@ -77,6 +77,9 @@ export class ProjectDetailsComponent {
         this.projectService.listarMinutaProyecto(params.get('id'))).subscribe(
         (response: ActaDialogica) => {
           this.actaDialogica = response;
+          if (this.actaDialogica == null){
+            this.selectedMeeting = undefined;
+          }
           this.projectId = this.actaDialogica.proyectoDto.proyectoId;
           this.project = this.actaDialogica.proyectoDto;
           this.reuniones = this.actaDialogica.listaActa;
@@ -235,6 +238,7 @@ export class ProjectDetailsComponent {
         if (response == true){
           this.ActivateMeeting = actaResponse;
           this.ActivateMeeting.verActa = undefined;
+          this.tabGroup.selectedIndex = 0;
           console.log(this.ActivateMeeting);
         }
         this.reloadList(response);

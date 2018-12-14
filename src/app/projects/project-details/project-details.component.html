@@ -2,13 +2,14 @@
 <app-breadcrumb *ngIf="project !== undefined" [steps]= "['Proyectos activos']" [here]="project.nombre"></app-breadcrumb>
 <div class="details-container">
   <div *ngIf="project !== undefined" >
-      <h1>PROYECTO: {{project.nombre}}</h1>
-       <!--
-           &nbsp;
-<div class="refrescar">
-         <i class="material-icons" title="Refrescar resultados" (click)="ngOnInit()">refresh</i>
-        </div>
-       -->
+      <div class="titulo">  
+          <h1>PROYECTO: {{project.nombre}}</h1>
+          <div class="refrescar">
+              &nbsp; &nbsp;
+            <i class="material-icons" title="Refrescar resultados" (click)="ngOnInit()">refresh</i>
+          </div>
+      </div>
+        
   </div>
   <div class="menu">
       <button class="addMeetingButton" (click)="openAddMeeting()" type="button">
@@ -76,7 +77,7 @@
                 <div class="acta" *ngFor="let theme of selectedMeeting.temaActa">
                   <div class="nombreTema">
                       <span>
-                          {{theme.nombre}}
+                          TEMA: {{theme.nombre}}
                     </span>
                     <div class="interno">
                         <a class="agregarElemento" (click)="openElementoDialogo(theme)" [class.selected]="wasClicked">[+] AGREGAR ELEMENTOS</a>

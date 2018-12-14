@@ -93,6 +93,7 @@ import { DatePipe } from '@angular/common';
           });
           if (this.Project.meet != undefined){
             this.Reunion.actaId = this.Project.meet.actaId;
+            this.Reunion.correlativo = this.Project.meet.correlativo;
           }
           let postObject = Object.assign({ proyectoId: this.Project.proyectoId}, this.Reunion);
           this.actaService.postReunion(postObject).subscribe((response) => {

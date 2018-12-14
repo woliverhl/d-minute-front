@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'app/session/service/session.service';
 import { Router } from "@angular/router";
+import { AuthService } from 'angular5-social-login';
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
@@ -8,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class SessionComponent implements OnInit {
 
-  constructor(private sessionService: SessionService, private router:Router) { }
+  constructor(private sessionService: SessionService, private socialAuthService: AuthService, private router:Router) { }
 
   userName : String 
 
@@ -30,6 +31,11 @@ export class SessionComponent implements OnInit {
   }
 
   closeSession(){
+    
+    if (this.sessionService.getOrigenToken() == "GOOGLE"){
+      this.socialAuthService.signOut();
+      console.log(this.socialAuthService);
+    }
     this.sessionService.logOut();
   }
 
