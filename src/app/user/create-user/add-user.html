@@ -4,11 +4,11 @@
   <form action="" [formGroup]="addUserForm" (ngSubmit)="postUser()">
       <div class="campoTexto">
           <label for="nombre">Nombre usuario</label>
-          <input [(ngModel)]="Usuario.nombre" formControlName="nombre"  type="text">
+          <input [(ngModel)]="Usuario.nombre" formControlName="nombre"  maxlength="50" type="text">
       </div>
       <div class="campoTexto">
           <label for="apellido">Apellido usuario</label>
-          <input [(ngModel)]="Usuario.apellido" formControlName="apellido" type="text">
+          <input [(ngModel)]="Usuario.apellido" formControlName="apellido"  maxlength="50" type="text">
       </div>
       <div class="campoTexto">
           <label for="username">Usuario</label>
@@ -16,7 +16,7 @@
       </div>
       <div class="campoTexto">
           <label for="password">Contraseña</label>
-          <input [(ngModel)]="Usuario.password" formControlName="password" type="password">
+          <input [(ngModel)]="Usuario.password" formControlName="password" maxlength="50" type="password">
       </div>
       <mat-divider></mat-divider>
         <div class="botonera">

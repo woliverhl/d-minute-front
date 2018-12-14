@@ -18,6 +18,9 @@ export class SignOnComponent implements OnInit {
 
 
   constructor(private SessionService: SessionService, private socialAuthService: AuthService, public User: User, private fb: FormBuilder, private route: Router) { 
+    if (this.SessionService.getOrigenToken() == "GOOGLE"){
+      this.socialAuthService.signOut();
+    }
     this.createLoginForm();
   }
 
@@ -76,6 +79,5 @@ public socialSignIn(socialPlatform : string) {
     }
   );
 }
-
 
 }

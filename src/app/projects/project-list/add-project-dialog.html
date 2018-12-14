@@ -4,11 +4,11 @@
     <form action="" [formGroup]="addProjectForm" (ngSubmit)="postProject()">
         <div class="campoTexto">
             <label for="name">Nombre del proyecto</label>
-            <input [(ngModel)]="Project.nombre" formControlName="name"  type="text">
+            <input [(ngModel)]="Project.nombre" formControlName="name" maxlength="50" type="text">
         </div>
         <div class="campoTexto">
             <label for="description">Descripci&oacute;n del proyecto</label>
-            <input [(ngModel)]="Project.descripcion" formControlName="description" type="text">
+            <input [(ngModel)]="Project.descripcion" formControlName="description" maxlength="255" type="text">
         </div>
         <div class="campoFecha">
             <label for="startDate">Fecha Inicio</label>

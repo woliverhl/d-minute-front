@@ -9,11 +9,11 @@
             <div class="col-md-12">
                 <div class="tit-text">INGRESA A TU CUENTA</div>
                 <label for="userName">Mail:</label>
-                <input placeholder="mail@mail.com" type="email" [(ngModel)]="User.userName" formControlName="userName">
+                <input placeholder="mail@mail.com" type="email" [(ngModel)]="User.userName" formControlName="userName" maxlength="255">
             </div>
             <div class="col-md-12">
               <label for="userPass">Clave:</label>
-              <input placeholder="******" type="password" [(ngModel)]="User.userPass" formControlName="userPass">
+              <input placeholder="******" type="password" [(ngModel)]="User.userPass" formControlName="userPass" maxlength="255">
             </div>
             <div class="botonera">
               <button (click)="onSubmit()" [disabled]="!loginForm.valid">Iniciar Sesión</button>

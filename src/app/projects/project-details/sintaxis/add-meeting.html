@@ -4,7 +4,7 @@
     <form action="" [formGroup]="addMeetingForm" (ngSubmit)="postMeeting()">
         <div class="campoTexto">
             <label for="objetivo">Objetivo Reunión</label>
-             <input [(ngModel)]="Reunion.resumen" formControlName="objetivo"  type="text">
+             <input [(ngModel)]="Reunion.resumen" formControlName="objetivo" maxlength="50" type="text">
         </div>
         <div class="campoFecha">
             <label for="startDate">Fecha Reunión</label>

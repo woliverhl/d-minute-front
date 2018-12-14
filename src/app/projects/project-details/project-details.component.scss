@@ -2,9 +2,6 @@ h5{
     font-size: 12px;
 }
 
-.refrescar{
-    cursor: pointer;
-}
 
 .details-container{
     display: block;
@@ -12,6 +9,20 @@ h5{
     border-radius: 5px;
     width: 80%;
     font-family: 'Source Sans Pro', sans-serif;
+
+.titulo{
+    h1{
+        display: inline-block;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .refrescar{
+        position: absolute;
+        left: 65%;
+        display: inline-block;
+        cursor: pointer;
+    }
+}
     h1{
         font-size: 20px;
         font-weight: bold;
