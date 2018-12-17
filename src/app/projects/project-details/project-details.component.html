@@ -154,15 +154,17 @@
                           </div>
                           <div class="fixdiv">&nbsp;</div>
                       </div>
-                      
-                      <div class="divkanban" (drop)="drop($event,'DONE')" (dragover)="allowDrop($event)" id="done">
-                          <div class="done" draggable="true" (dragstart)="drag($event)" *ngFor="let kan of actaDialogica.kanbanTareasDone" id="{{kan.idElemento}}" (click)="openVerActaElementoDialogo(kan.idElemento)"> 
-                                <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
-                                <label for="strtodo">{{kan.titulo}}</label>
-                                <label for="strtodo">{{kan.username}}</label>
+                          <div class="divkanban" (drop)="drop($event,'DONE')" (dragover)="allowDrop($event)" id="done">
+                              <div class="done" draggable="true" (dragstart)="drag($event)" *ngFor="let kan of actaDialogica.kanbanTareasDone" id="{{kan.idElemento}}"> 
+                                    <!-- <i class="material-icons"  title="Archivar Tarea">archive</i> --> 
+                                    <div class="detalledone" (click)="openVerActaElementoDialogo(kan.idElemento)">
+                                        <label for="strtodo">{{kan.secuencia}} | {{kan.codRol}} | {{kan.fechaCompromiso}}</label>
+                                        <label for="strtodo">{{kan.titulo}}</label>
+                                        <label for="strtodo">{{kan.username}}</label>
+                                    </div> 
+                              </div>
+                              <div class="fixdiv">&nbsp;</div>
                           </div>
-                          <div class="fixdiv">&nbsp;</div>
-                      </div>
                   </div>
             </div>
         </div>
