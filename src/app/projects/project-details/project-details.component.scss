@@ -18,7 +18,7 @@ h5{
     }
     .refrescar{
         position: absolute;
-        left: 65%;
+        
         display: inline-block;
         cursor: pointer;
     }
@@ -334,15 +334,25 @@ h5{
             cursor: pointer;
         }
         .done {
-            display: block;
-            text-align: center;
-            height: 57px;
-            margin-top: 4px;
-            margin-left: 3px;
-            margin-right: 3px;
-            background-color: #d1ffc3;
-            border-radius: 5px;
+            .detalledone{
+                display: block;
+                text-align: center;
+                height: 57px;
+                margin-top: 4px;
+                margin-left: 3px;
+                margin-right: 3px;
+                background-color: #d1ffc3;
+                border-radius: 5px;
+            }
             cursor: pointer;
+            i{
+                display: inline-block;
+                color: #00a1f0;
+                font-size: 20px;
+                margin: 0px 12px 0px 12px;
+                cursor: pointer;
+                position: absolute;
+            }
         }
         label{
             display: block;
