@@ -48,7 +48,7 @@ import { DatePipe } from '@angular/common';
           objetivo: [this.Reunion.resumen, Validators.required],
           horaInicio: [this.Reunion.horaInicio, Validators.required],
           usuarioActa: [this.Reunion.usuarioActa, ],
-          horaFin: [this.Reunion.horaFin, ],
+          horaFin: [this.Reunion.horaFin, Validators.required],
           selectedSecretario: [this.Reunion.username, Validators.required],
           selectedMember: [this.selectedMember]
         });
