@@ -23,9 +23,9 @@ export class SessionService {
     return this.HttpClient.post(`${this.restPath.APP}${this.restPath.logIn}`, param);
   }
 
-  logInOauth(user: string, name: string):Observable<Object>{
+  logInOauth(user: string, token: string):Observable<Object>{
     this.setUsername(user);
-    let param = { 'username': user, 'name': name}
+    let param = { 'username': user, 'token': token}
     return this.HttpClient.post(`${this.restPath.APP}${this.restPath.logInOauth}`, param);
   }
 

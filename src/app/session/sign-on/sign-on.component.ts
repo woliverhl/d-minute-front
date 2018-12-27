@@ -63,7 +63,7 @@ public socialSignIn(socialPlatform : string) {
   let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
   this.socialAuthService.signIn(socialPlatformProvider).then(
     (userData) => {
-      this.SessionService.logInOauth(userData.email,userData.name).subscribe( 
+      this.SessionService.logInOauth(userData.email,userData.token).subscribe( 
         (response) => {
         response['token'] ? this.token = response['token'] : this.SessionService.throwError('We did not get a token');
         if (this.token != undefined) {
@@ -75,7 +75,6 @@ public socialSignIn(socialPlatform : string) {
       },(err) => {
         console.log(err);
       });
-      console.log(socialPlatform+" sign in data : " , userData);
     }
   );
 }
